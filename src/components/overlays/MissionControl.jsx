@@ -4,7 +4,7 @@
 // Click a thumbnail to bring that window to focus.
 // ─────────────────────────────────────────────────────────────
 
-import { colors, font, blur } from "../../styles/tokens";
+import { font, blur } from "../../styles/tokens";
 
 export default function MissionControl({ windows, apps, onClose, onFocus }) {
   const visibleWindows = windows.filter(w => !w.minimized);

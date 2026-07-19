@@ -6,7 +6,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { SPOTLIGHT_ITEMS } from "../../data/profile";
-import { colors, font, blur } from "../../styles/tokens";
+import { font, blur } from "../../styles/tokens";
 
 export default function Spotlight({ onClose, onOpen }) {
   const [query,    setQuery]    = useState("");
@@ -132,7 +132,7 @@ function SpotlightRow({ item, isSelected, onHover, onPick }) {
       }}
     >
       {
-        (item.type == "App") ? 
+        (item.type === "App") ? 
               <img
                 src={item.icon}
                 alt={`${item.label} icon`}

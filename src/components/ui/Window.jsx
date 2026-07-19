@@ -140,7 +140,7 @@ export default function Window({
 
 // ── Sub-component: Traffic light buttons ─────────────────────
 function TrafficLights({ focused, onClose, onMinimize, onFullscreen }) {
-  const [hovered, setHovered] = useState(false);
+  const [,setHovered] = useState(false);
 
   const buttons = [
     { color: colors.red,    action: onClose      },

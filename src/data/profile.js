@@ -4,8 +4,8 @@
 // links, terminal boot sequence, spotlight search index.
 // ─────────────────────────────────────────────────────────────
 // Spotlight search index — built from real data so it's always in sync
-import Contacts from "../icons/contacts.png";
-import File from "../icons/file-manager.png";
+// import Contacts from "../icons/contacts.png";
+// import File from "../icons/file-manager.png";
 
 
 import { APPS } from "./apps";

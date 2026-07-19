@@ -5,7 +5,7 @@
 // ─────────────────────────────────────────────────────────────
 
 import { useTime } from "../../hooks/useTime";
-import { colors, font, blur } from "../../styles/tokens";
+import { font, blur } from "../../styles/tokens";
 
 export default function NotificationCenter({ notifications, onClose, onDismiss, onClearAll }) {
   const time = useTime();
