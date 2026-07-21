@@ -17,7 +17,10 @@ export default function ProjectsApp() {
 
 function ProjectCard({ project: p }) {
   return (
-    <div
+    <a
+      href={p.href}
+      target="_blank"
+      rel="noreferrer"
       style={{
         background:   "rgba(255,255,255,0.04)",
         border:       "0.5px solid rgba(255,255,255,0.08)",
@@ -26,6 +29,8 @@ function ProjectCard({ project: p }) {
         cursor:       "pointer",
         transition:   "all 0.15s",
         fontFamily:   font.family,
+        display:      "block",
+        textDecoration: "none",
       }}
       onMouseEnter={e => {
         e.currentTarget.style.borderColor = p.color + "55";
@@ -57,6 +62,6 @@ function ProjectCard({ project: p }) {
           </span>
         ))}
       </div>
-    </div>
+    </a>
   );
 }

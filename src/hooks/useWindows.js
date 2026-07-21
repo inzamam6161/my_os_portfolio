@@ -16,8 +16,10 @@
 import { useState, useCallback } from "react";
 
 export function useWindows() {
-  const [windows, setWindows]   = useState([]);
-  const [focused, setFocused]   = useState(null);
+  const [windows, setWindows]   = useState([
+    { id: "about", position: { x: 72, y: 50 }, minimized: false },
+  ]);
+  const [focused, setFocused]   = useState("about");
   const [fullscreenId, setFullscreenId] = useState(null);
 
   const openApp = useCallback((id) => {

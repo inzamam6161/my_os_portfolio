@@ -84,7 +84,7 @@ export default function MenuBar({
 
         {/* Fake menu items */}
         {["File", "Edit", "View", "Go", "Window", "Help"].map(item => (
-          <span key={item} style={{ color: "rgba(255,255,255,0.65)", cursor: "default" }}>
+          <span className="desktop-menu-item" key={item} style={{ color: "rgba(255,255,255,0.65)", cursor: "default" }}>
             {item}
           </span>
         ))}
