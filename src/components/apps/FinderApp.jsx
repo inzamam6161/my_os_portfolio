@@ -16,20 +16,15 @@ const FILES = {
     { name: "Portfolio.fig", icon: "🎨", size: "2.1 MB", date: "May 22" },
   ],
   projects: [
-    { name: "NovaPay",  icon: "💳", size: "—", date: "May 20", folder: true },
-    { name: "AtlasDB",  icon: "🗄",  size: "—", date: "May 18", folder: true },
-    { name: "LensAI",   icon: "👁",  size: "—", date: "May 15", folder: true },
-    { name: "Vanta",    icon: "🔒", size: "—", date: "May 10", folder: true },
+    { name: "macOS Portfolio", icon: "🖥", size: "React", date: "Current", folder: true },
   ],
   mobile: [
-    { name: "PulseRun.xcodeproj", icon: "🏃", size: "—", date: "May 21", folder: true },
-    { name: "BudgetBuddy",        icon: "💰", size: "—", date: "May 19", folder: true },
-    { name: "SnapMed",            icon: "🩺", size: "—", date: "May 17", folder: true },
+    { name: "React Native Experience", icon: "⚛️", size: "5 years", date: "Current", folder: true },
   ],
   docs: [
-    { name: "System Design.md", icon: "📐", size: "18 KB", date: "May 23" },
-    { name: "API Reference.md", icon: "📋", size: "32 KB", date: "May 21" },
-    { name: "Roadmap.md",       icon: "🗺",  size: "8 KB",  date: "May 19" },
+    { name: "React Native.md", icon: "📱", size: "Core skill", date: "Current" },
+    { name: "JavaScript.md", icon: "📋", size: "Core skill", date: "Current" },
+    { name: "Career Roadmap.md", icon: "🗺", size: "UAE", date: "Current" },
   ],
 };
 

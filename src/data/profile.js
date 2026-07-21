@@ -11,14 +11,16 @@
 import { APPS } from "./apps";
 export const PROFILE = {
   name:     "Inzamamul Haque",
-  title:    "Software Developer",
+  title:    "React Native Developer | Mobile & Frontend Engineer",
   location: "Al Ain, UAE",
   email:    "inzamam6161@gmail.com",
-  github:   "https://github.com/alexchen",
-  linkedin: "https://linkedin.com/in/alexchen",
+  phone:    "+971 52 144 1657",
+  portfolio:"https://inzamam-dev.vercel.app/",
+  github:   "https://github.com/inzamam6161",
+  linkedin: "https://www.linkedin.com/in/inzamamul-haque-099207113/",
   bio: [
-    "React Native and Mobile Application Developer with 5 years of software development experience, specializing in React Native, JavaScript, React.js, Android, iOS, and Node.js.",
-    "Experienced in the complete application lifecycle—from UI development and API integration to testing, deployment, and publishing on the Google Play Store and Apple App Store. Currently based in the UAE and seeking opportunities to build reliable, user-friendly mobile and web applications."
+    "React Native developer with 5 years of software development experience across mobile and web applications, specializing in React Native, JavaScript, React.js, Android, iOS, and Node.js.",
+    "Experienced across the complete application lifecycle—from UI development and API integration to testing, deployment, and publishing on Google Play and the Apple App Store. Based in the UAE and open to React Native, mobile, and frontend opportunities."
   ],
   badges: []
   // badges: ["Open Source Contributor", "Conference Speaker", "4x App Store Featured", "3x Startup Founder"],
@@ -30,11 +32,10 @@ export const SKILL_SECTIONS = [
     icon:     "📱",
     color:    "#5E5CE6",
     skills: [
-      { name: "Swift / SwiftUI",         level: 95 },
-      { name: "Kotlin / Jetpack Compose",level: 90 },
-      { name: "React Native",            level: 88 },
-      { name: "Flutter / Dart",          level: 80 },
-      { name: "Objective-C",             level: 70 },
+      { name: "React Native",            level: 92 },
+      { name: "Android / Kotlin / Java", level: 82 },
+      { name: "iOS / Swift",             level: 78 },
+      { name: "App Store & Play Store",  level: 88 },
     ],
   },
   {
@@ -42,11 +43,10 @@ export const SKILL_SECTIONS = [
     icon:     "🌐",
     color:    "#30D158",
     skills: [
-      { name: "TypeScript / JavaScript", level: 96 },
-      { name: "React / Next.js",         level: 94 },
-      { name: "WebGL / Three.js",        level: 75 },
-      { name: "CSS / Tailwind",          level: 90 },
-      { name: "Framer Motion",           level: 82 },
+      { name: "JavaScript",              level: 92 },
+      { name: "React.js",                level: 86 },
+      { name: "HTML / CSS",              level: 84 },
+      { name: "Responsive UI",           level: 86 },
     ],
   },
   {
@@ -54,11 +54,10 @@ export const SKILL_SECTIONS = [
     icon:     "⚙️",
     color:    "#FF9F0A",
     skills: [
-      { name: "Go",                      level: 88 },
-      { name: "Rust",                    level: 78 },
-      { name: "Python",                  level: 85 },
-      { name: "Node.js / GraphQL",       level: 91 },
-      { name: "PostgreSQL / Redis",      level: 86 },
+      { name: "Node.js",                 level: 80 },
+      { name: "REST API Integration",    level: 90 },
+      { name: "MongoDB",                 level: 74 },
+      { name: "Firebase",                level: 78 },
     ],
   },
   {
@@ -66,20 +65,17 @@ export const SKILL_SECTIONS = [
     icon:     "☁️",
     color:    "#FF6B6B",
     skills: [
-      { name: "AWS / GCP",               level: 84 },
-      { name: "Kubernetes / Docker",     level: 88 },
-      { name: "CI/CD (GitHub Actions)",  level: 90 },
-      { name: "Terraform",               level: 76 },
-      { name: "Firebase / Supabase",     level: 87 },
+      { name: "Git / GitHub",             level: 86 },
+      { name: "CI/CD",                    level: 72 },
+      { name: "App Deployment",           level: 88 },
+      { name: "Technical Support",        level: 82 },
     ],
   },
 ];
 
 export const EXPERIENCE = [
-  { role: "Staff Software Engineer", company: "Vercel",  period: "2022 — Present", desc: "Led Edge Runtime team. V8 isolate scheduling cut cold-start latency 63%.",               dot: "#5E5CE6" },
-  { role: "Senior iOS Engineer",     company: "Spotify", period: "2021 — 2022",    desc: "Rebuilt Now Playing with SwiftUI, led Combine adoption across iOS codebase.",            dot: "#1DB954" },
-  { role: "Software Engineer II",    company: "Stripe",  period: "2019 — 2021",    desc: "Built fraud ML pipeline serving 100M+ API calls/day. Reduced false-positive rate 41%.", dot: "#635BFF" },
-  { role: "Mobile Engineer",         company: "Figma",   period: "2017 — 2019",    desc: "Shipped Figma iOS app from 0→1. Built real-time collaboration layer for mobile.",        dot: "#F24E1E" },
+  { role: "Admin / Helpdesk Operator", company: "Etihad International Hospitality", period: "Sep 2025 — Present", desc: "Provide day-to-day administrative and technical support while continuing professional software development and upskilling.", dot: "#30D158" },
+  { role: "Software Developer", company: "India", period: "5 years", desc: "Built and maintained mobile and web applications using React Native, React.js, Android, iOS, JavaScript, and Node.js, including store-release workflows.", dot: "#5E5CE6" },
 ];
 
 // export const WALLPAPERS = [
@@ -228,39 +224,26 @@ export const WALLPAPERS = [
 ];
 
 export const NOTIFICATIONS_INIT = [
-  // { id: 1, app: "Messages",  icon: "💬", title: "New message",           body: "Hey! Loved your portfolio 🔥",       time: "now",    read: false },
-  // { id: 2, app: "GitHub",    icon: "🐙", title: "Star received",         body: "NovaPay just hit 1,000 stars ⭐",   time: "2m ago", read: false },
-  // { id: 3, app: "App Store", icon: "🍎", title: "App featured",          body: "PulseRun featured in Apps We Love", time: "1h ago", read: true  },
-  // { id: 4, app: "LinkedIn",  icon: "💼", title: "New connection request",body: "Sarah Chen wants to connect",        time: "3h ago", read: true  },
 ];
 
 export const TERMINAL_LINES = [
-  { t: 0,    text: "Last login: Mon May 25 09:00:00 on ttys000",                        color: "rgba(255,255,255,0.4)" },
-  { t: 300,  text: "alex@macbook ~ % whoami",                                            color: "#30D158" },
-  { t: 600,  text: "alex chen — staff engineer · mobile & systems",                      color: "rgba(255,255,255,0.85)" },
-  { t: 900,  text: "alex@macbook ~ % cat skills.txt",                                    color: "#30D158" },
-  { t: 1200, text: "Swift ████████████████████ 95%",                                     color: "#5E5CE6" },
-  { t: 1350, text: "TypeScript ██████████████████████ 96%",                              color: "#5E5CE6" },
-  { t: 1500, text: "Go ████████████████ 88%",                                            color: "#5E5CE6" },
-  { t: 1650, text: "React Native ██████████████████ 88%",                                color: "#5E5CE6" },
-  { t: 1800, text: "alex@macbook ~ % ls projects/",                                      color: "#30D158" },
-  { t: 2100, text: "NovaPay/  AtlasDB/  LensAI/  Vanta/  BudgetBuddy/  PulseRun/",     color: "#FF9F0A" },
-  { t: 2400, text: "alex@macbook ~ % git log --oneline -5",                              color: "#30D158" },
-  { t: 2700, text: "a3f91bc feat: add WebGPU renderer to LensAI",                       color: "rgba(255,255,255,0.7)" },
-  { t: 2850, text: "7c82d1e fix: memory leak in AtlasDB LSM tree",                      color: "rgba(255,255,255,0.7)" },
-  { t: 3000, text: "e109f4a chore: bump react-native to 0.74",                          color: "rgba(255,255,255,0.7)" },
-  { t: 3150, text: "51a89cc feat: SwiftUI animations in PulseRun",                      color: "rgba(255,255,255,0.7)" },
-  { t: 3300, text: "22b7d3f perf: reduce cold-start latency 63%",                       color: "rgba(255,255,255,0.7)" },
-  { t: 3600, text: "alex@macbook ~ % _",                                                 color: "#30D158" },
+  { t: 0, text: "Welcome to Inzamamul Haque's developer portfolio", color: "rgba(255,255,255,0.4)" },
+  { t: 300, text: "inzamam@portfolio ~ % whoami", color: "#30D158" },
+  { t: 600, text: "React Native developer · mobile & frontend engineer", color: "rgba(255,255,255,0.85)" },
+  { t: 900, text: "inzamam@portfolio ~ % cat skills.txt", color: "#30D158" },
+  { t: 1200, text: "React Native · JavaScript · React.js", color: "#5E5CE6" },
+  { t: 1450, text: "Android · Kotlin/Java · iOS · Swift", color: "#5E5CE6" },
+  { t: 1700, text: "Node.js · REST APIs · Git · CI/CD", color: "#5E5CE6" },
+  { t: 2000, text: "inzamam@portfolio ~ % cat status.txt", color: "#30D158" },
+  { t: 2300, text: "Based in Al Ain, UAE · Open to opportunities", color: "#FF9F0A" },
+  { t: 2700, text: "inzamam@portfolio ~ % _", color: "#30D158" },
 ];
 
 
 export const SPOTLIGHT_ITEMS = [
   ...APPS.map(a => ({ type: "App",     label: a.label,              icon: a.icon, id: a.id       })),
-  { type: "Project", label: "NovaPay",           icon: "💳", id: "projects" },
-  { type: "Project", label: "BudgetBuddy",        icon: "💰", id: "mobile"   },
-  { type: "Project", label: "PulseRun",           icon: "🏃", id: "mobile"   },
-  { type: "Skill",   label: "Swift / SwiftUI",    icon: "📱", id: "skills"   },
-  { type: "Skill",   label: "React / Next.js",    icon: "⚛️", id: "skills"   },
+  { type: "Project", label: "macOS Portfolio", icon: "🖥", id: "projects" },
+  { type: "Skill", label: "React Native", icon: "📱", id: "skills" },
+  { type: "Skill", label: "React.js", icon: "⚛️", id: "skills" },
   { type: "Resume",  label: "Download Resume",    icon: "📄", id: "resume"   },
 ];

@@ -5,10 +5,10 @@ import { font } from "../../styles/tokens";
 
 const COMMANDS = {
   help:    "Commands: help, whoami, ls, skills, experience, clear",
-  whoami:  "alex chen — staff engineer · mobile & systems",
+  whoami:  "inzamamul haque — react native developer · mobile & frontend",
   ls:      "projects/  mobile/  resume.pdf  skills.txt  contact.md",
-  skills:  "Swift 95% | TypeScript 96% | Go 88% | React Native 88% | Rust 78%",
-  experience: "Vercel → Spotify → Stripe → Figma (2017–present)",
+  skills:  "React Native | JavaScript | React.js | Android | iOS | Node.js",
+  experience: "5 years software development · currently based in Al Ain, UAE",
 };
 
 export default function TerminalApp() {
@@ -72,14 +72,14 @@ export default function TerminalApp() {
       {/* User command history */}
       {history.map((entry, i) => (
         <div key={"h" + i}>
-          <div style={{ color: "#30D158" }}>alex@macbook ~ % {entry.cmd}</div>
+          <div style={{ color: "#30D158" }}>inzamam@portfolio ~ % {entry.cmd}</div>
           <div style={{ color: "rgba(255,255,255,0.75)", marginBottom: 4 }}>{entry.response}</div>
         </div>
       ))}
 
       {/* Interactive input line */}
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 4 }}>
-        <span style={{ color: "#30D158", whiteSpace: "nowrap" }}>alex@macbook ~ %</span>
+        <span style={{ color: "#30D158", whiteSpace: "nowrap" }}>inzamam@portfolio ~ %</span>
         <input
           ref={inputRef}
           value={input}

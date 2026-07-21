@@ -62,7 +62,7 @@ export default function Dock({ apps, windows, onOpen, onMissionCtrl, missionCtrl
   const [hovered, setHovered] = useState(null); // id of hovered icon
 
   return (
-    <div style={{
+    <div className="portfolio-dock" style={{
       position:       "fixed",
       bottom:         12,
       left:           "50%",

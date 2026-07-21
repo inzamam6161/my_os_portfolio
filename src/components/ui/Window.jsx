@@ -59,6 +59,7 @@ export default function Window({
   // ── Render ──────────────────────────────────────────────────
   return (
     <div
+      className="portfolio-window"
       onMouseDown={onFocus}
       style={{
         position:   "fixed",
@@ -103,7 +104,9 @@ export default function Window({
         {/* Centered title */}
         <span style={{
           flex:       1,
-          justifyItems:"center",
+          display:    "flex",
+          alignItems: "center",
+          justifyContent: "center",
           textAlign:  "center",
           fontSize:   font.sizes.base,
           fontWeight: font.weights.medium,
@@ -112,7 +115,7 @@ export default function Window({
         }}>
             <img
               src={icon}
-              alt={`$icon`}
+              alt=""
               draggable={false}
               style={{
                 width: 20,

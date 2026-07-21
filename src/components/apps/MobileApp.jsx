@@ -10,8 +10,14 @@ export default function MobileApp() {
   return (
     <div>
       <p style={{ margin: "0 0 18px", fontSize: 13, color: "rgba(255,255,255,0.4)", fontFamily: font.family }}>
-        iOS & Android apps · {MOBILE_PROJECTS.length} shipped · 2M+ total downloads
+        Mobile application case studies
       </p>
+
+      {MOBILE_PROJECTS.length === 0 && (
+        <div style={{ padding: 24, border: "1px solid rgba(255,255,255,.1)", borderRadius: 12, background: "rgba(255,255,255,.04)", color: "rgba(255,255,255,.65)", lineHeight: 1.7 }}>
+          I have professional experience delivering React Native, Android, and iOS applications through production release. Employer and client source code is confidential, so public case studies will be added here as independent projects are completed.
+        </div>
+      )}
 
       {/* Expanded detail panel */}
       {selected && (
@@ -22,7 +28,7 @@ export default function MobileApp() {
       )}
 
       {/* 3-column grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 10 }}>
         {MOBILE_PROJECTS.map((p, i) => (
           <MobileCard
             key={p.title}
