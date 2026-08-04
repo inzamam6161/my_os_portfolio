@@ -16,6 +16,7 @@ const FILES = {
     { name: "Portfolio.fig", icon: "🎨", size: "2.1 MB", date: "May 22" },
   ],
   projects: [
+    { name: "SignalDesk AI", icon: "✦", size: "Next.js", date: "Today", folder: true },
     { name: "PulseBoard iOS", icon: "📱", size: "SwiftUI", date: "Today", folder: true },
     { name: "macOS Portfolio", icon: "🖥", size: "React", date: "Current", folder: true },
   ],

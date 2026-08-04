@@ -53,6 +53,33 @@ code {
   gap: 12px;
 }
 
+.project-desktop-preview {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.project-desktop-preview img {
+  position: absolute;
+  display: block;
+  border: 0.5px solid rgba(255,255,255,0.16);
+  border-radius: 6px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.38);
+}
+
+.project-desktop-preview-light {
+  width: 72%;
+  top: 29px;
+  right: 8px;
+  opacity: 0.74;
+}
+
+.project-desktop-preview-dark {
+  width: 82%;
+  top: 13px;
+  left: 8px;
+}
+
 .mobile-detail {
   display: flex;
   gap: 24px;
