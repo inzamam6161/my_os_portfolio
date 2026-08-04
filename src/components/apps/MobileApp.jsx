@@ -22,6 +22,7 @@ export default function MobileApp() {
       {/* Expanded detail panel */}
       {selected && (
         <MobileDetail
+          key={selected.title}
           project={selected}
           onClose={() => setSelectedIndex(null)}
         />
@@ -53,7 +54,7 @@ function MobileDetail({ project: p, onClose }) {
         <div className="mobile-phone-frame">
           <img src={screenshot.src} alt={screenshot.alt} />
         </div>
-        <div className="mobile-screenshot-tabs" aria-label="PulseBoard screenshots">
+        <div className="mobile-screenshot-tabs" aria-label={`${p.title} screenshots`}>
           {p.screenshots.map((shot, index) => (
             <button
               key={shot.src}
