@@ -44,47 +44,34 @@ export default function MobileApp() {
 
 // ── Expanded detail with phone mockup ────────────────────────
 function MobileDetail({ project: p, onClose }) {
+  const [activeScreenshot, setActiveScreenshot] = useState(0);
+  const screenshot = p.screenshots[activeScreenshot];
+
   return (
-    <div style={{
-      display:      "flex",
-      gap:          20,
-      marginBottom: 20,
-      background:   "rgba(255,255,255,0.03)",
-      border:       `0.5px solid ${p.color}44`,
-      borderRadius: 12,
-      padding:      "16px 20px",
-      alignItems:   "center",
-      fontFamily:   font.family,
-    }}>
-      {/* Phone mockup */}
-      <div style={{
-        width:      80,
-        flexShrink: 0,
-        background: "#1c1c22",
-        borderRadius: 16,
-        border:     "2px solid rgba(255,255,255,0.12)",
-        padding:    "10px 6px",
-        boxShadow:  "0 12px 32px rgba(0,0,0,0.5)",
-      }}>
-        <div style={{
-          background:     p.color + "22",
-          borderRadius:   10,
-          height:         110,
-          display:        "flex",
-          flexDirection:  "column",
-          alignItems:     "center",
-          justifyContent: "center",
-          gap: 6,
-        }}>
-          <span style={{ fontSize: 28 }}>{p.icon}</span>
-          <span style={{ fontSize: 8, color: p.color, fontWeight: 600 }}>{p.title}</span>
+    <div className="mobile-detail" style={{ borderColor: p.color + "44", fontFamily: font.family }}>
+      <div className="mobile-detail-media">
+        <div className="mobile-phone-frame">
+          <img src={screenshot.src} alt={screenshot.alt} />
         </div>
-        {/* Home bar */}
-        <div style={{ margin: "8px auto 0", width: 28, height: 3, background: "rgba(255,255,255,0.2)", borderRadius: 2 }} />
+        <div className="mobile-screenshot-tabs" aria-label="PulseBoard screenshots">
+          {p.screenshots.map((shot, index) => (
+            <button
+              key={shot.src}
+              type="button"
+              aria-label={`Show ${shot.label} screenshot`}
+              aria-pressed={activeScreenshot === index}
+              onClick={() => setActiveScreenshot(index)}
+              style={{
+                background: activeScreenshot === index ? p.color : "rgba(255,255,255,0.1)",
+                boxShadow: activeScreenshot === index ? `0 0 0 3px ${p.color}22` : "none",
+              }}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Info */}
-      <div style={{ flex: 1 }}>
+      <div className="mobile-detail-copy">
         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
           <div>
             <span style={{ fontWeight: 700, fontSize: 17, color: "#fff" }}>{p.icon} {p.title}</span>
@@ -100,14 +87,18 @@ function MobileDetail({ project: p, onClose }) {
 
         <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 1.65, color: "rgba(255,255,255,0.65)" }}>{p.desc}</p>
 
-        <div style={{ display: "flex", gap: 18, marginBottom: 12 }}>
-          {Object.entries(p.stats).map(([k, v]) => (
-            <div key={k}>
-              <div style={{ fontSize: 15, fontWeight: 700, color: "#fff" }}>{v}</div>
-              <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", textTransform: "capitalize" }}>{k}</div>
+        <div className="mobile-stats">
+          {p.stats.map(stat => (
+            <div key={stat.label}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: "#fff" }}>{stat.value}</div>
+              <div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)" }}>{stat.label}</div>
             </div>
           ))}
         </div>
+
+        <ul className="mobile-highlights">
+          {p.highlights.map(highlight => <li key={highlight}>{highlight}</li>)}
+        </ul>
 
         <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
           {p.tags.map(tag => (
@@ -119,6 +110,10 @@ function MobileDetail({ project: p, onClose }) {
             </span>
           ))}
         </div>
+
+        <a className="mobile-source-link" href={p.href} target="_blank" rel="noreferrer" style={{ color: p.color, borderColor: p.color + "55" }}>
+          View source on GitHub <span aria-hidden="true">↗</span>
+        </a>
       </div>
     </div>
   );
@@ -127,7 +122,9 @@ function MobileDetail({ project: p, onClose }) {
 // ── Small grid card ───────────────────────────────────────────
 function MobileCard({ project: p, isSelected, onClick }) {
   return (
-    <div
+    <button
+      type="button"
+      aria-expanded={isSelected}
       onClick={onClick}
       style={{
         background:   isSelected ? p.color + "18" : "rgba(255,255,255,0.04)",
@@ -137,6 +134,8 @@ function MobileCard({ project: p, isSelected, onClick }) {
         cursor:       "pointer",
         transition:   "all 0.15s",
         fontFamily:   font.family,
+        textAlign:    "left",
+        width:        "100%",
       }}
       onMouseEnter={e => {
         if (!isSelected) {
@@ -154,7 +153,7 @@ function MobileCard({ project: p, isSelected, onClick }) {
       <div style={{ fontSize: 26, marginBottom: 6 }}>{p.icon}</div>
       <div style={{ fontWeight: 600, fontSize: 14, color: "#fff",                   marginBottom: 3 }}>{p.title}</div>
       <div style={{ fontSize: 11,                  color: p.color,                  marginBottom: 6 }}>{p.platform}</div>
-      <div style={{ fontSize: 11,                  color: "rgba(255,255,255,0.4)" }}>{p.stats.downloads} · {p.stats.rating}</div>
-    </div>
+      <div style={{ fontSize: 11,                  color: "rgba(255,255,255,0.4)" }}>{p.tags.slice(0, 3).join(" · ")}</div>
+    </button>
   );
 }
