@@ -47,6 +47,109 @@ code {
   gap: 16px;
 }
 
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.mobile-detail {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 20px;
+  padding: 18px 20px;
+  align-items: center;
+  background: rgba(255,255,255,0.03);
+  border: 0.5px solid;
+  border-radius: 12px;
+}
+
+.mobile-detail-media {
+  width: 168px;
+  flex: 0 0 168px;
+}
+
+.mobile-phone-frame {
+  overflow: hidden;
+  padding: 5px;
+  background: #0c0c10;
+  border: 2px solid rgba(255,255,255,0.16);
+  border-radius: 24px;
+  box-shadow: 0 16px 38px rgba(0,0,0,0.56);
+}
+
+.mobile-phone-frame img {
+  display: block;
+  width: 100%;
+  border-radius: 18px;
+}
+
+.mobile-screenshot-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.mobile-screenshot-tabs button {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+
+.mobile-screenshot-tabs button:hover {
+  transform: scale(1.3);
+}
+
+.mobile-detail-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.mobile-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.mobile-stats > div {
+  padding: 9px 10px;
+  background: rgba(255,255,255,0.04);
+  border: 0.5px solid rgba(255,255,255,0.07);
+  border-radius: 7px;
+}
+
+.mobile-highlights {
+  margin: 0 0 14px;
+  padding-left: 18px;
+  color: rgba(255,255,255,0.58);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.mobile-highlights li + li {
+  margin-top: 4px;
+}
+
+.mobile-source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 15px;
+  padding: 7px 10px;
+  border: 0.5px solid;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  background: rgba(94,92,230,0.08);
+}
+
 @media (max-width: 760px) {
   .desktop-menu-item { display: none; }
   .portfolio-window {
@@ -64,4 +167,8 @@ code {
   .about-hero { align-items: flex-start; gap: 15px; }
   .avatar { width: 64px; height: 64px; font-size: 28px; }
   .resume-header, .experience-title { align-items: flex-start; flex-direction: column; gap: 6px; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .mobile-detail { align-items: flex-start; flex-direction: column; padding: 16px; }
+  .mobile-detail-media { width: 150px; flex-basis: auto; align-self: center; }
+  .mobile-stats { grid-template-columns: 1fr; }
 }

@@ -16,9 +16,11 @@ const FILES = {
     { name: "Portfolio.fig", icon: "🎨", size: "2.1 MB", date: "May 22" },
   ],
   projects: [
+    { name: "PulseBoard iOS", icon: "📱", size: "SwiftUI", date: "Today", folder: true },
     { name: "macOS Portfolio", icon: "🖥", size: "React", date: "Current", folder: true },
   ],
   mobile: [
+    { name: "PulseBoard", icon: "◉", size: "Native iOS", date: "Today", folder: true },
     { name: "React Native Experience", icon: "⚛️", size: "5 years", date: "Current", folder: true },
   ],
   docs: [
