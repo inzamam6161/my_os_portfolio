@@ -55,4 +55,31 @@ export const MOBILE_PROJECTS = [
       { src: "/projects/pulseboard/home-dark.png", alt: "PulseBoard home dashboard in dark mode", label: "Dark" },
     ],
   },
+  {
+    title: "SignalOps Mobile",
+    platform: "iOS & Android",
+    category: "React Native",
+    icon: "⚡",
+    previewType: "phone",
+    color: "#FF5B5F",
+    href: "https://github.com/inzamam6161/signalops-mobile",
+    desc: "A cross-platform incident-operations dashboard for monitoring service health, triaging live incidents, and managing resolution workflows from mobile devices.",
+    tags: ["React Native", "TypeScript", "Redux Toolkit", "React Navigation", "Async Storage"],
+    stats: [
+      { label: "Interface", value: "React Native" },
+      { label: "State", value: "Redux Toolkit" },
+      { label: "Platforms", value: "iOS + Android" },
+    ],
+    highlights: [
+      "Searchable, priority-filtered incidents with acknowledgement and resolution actions",
+      "Real-time monitoring simulation, service health, and incident activity timelines",
+      "Persisted preferences, type-safe navigation, and optimized FlatList rendering",
+    ],
+    screenshots: [
+      { src: "/projects/signalops/overview.png", alt: "SignalOps service-health overview", label: "Overview" },
+      { src: "/projects/signalops/activity.png", alt: "SignalOps incident activity timeline", label: "Activity" },
+      { src: "/projects/signalops/details.png", alt: "SignalOps incident details and status timeline", label: "Details" },
+      { src: "/projects/signalops/incidents.png", alt: "SignalOps searchable and filterable incidents", label: "Incidents" },
+    ],
+  },
 ];

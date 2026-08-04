@@ -17,10 +17,12 @@ const FILES = {
   ],
   projects: [
     { name: "SignalDesk AI", icon: "✦", size: "Next.js", date: "Today", folder: true },
+    { name: "SignalOps Mobile", icon: "⚡", size: "React Native", date: "Today", folder: true },
     { name: "PulseBoard iOS", icon: "📱", size: "SwiftUI", date: "Today", folder: true },
     { name: "macOS Portfolio", icon: "🖥", size: "React", date: "Current", folder: true },
   ],
   mobile: [
+    { name: "SignalOps Mobile", icon: "⚡", size: "iOS + Android", date: "Today", folder: true },
     { name: "PulseBoard", icon: "◉", size: "Native iOS", date: "Today", folder: true },
     { name: "React Native Experience", icon: "⚛️", size: "5 years", date: "Current", folder: true },
   ],
