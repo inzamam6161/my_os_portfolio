@@ -1,10 +1,25 @@
 export const WEB_PROJECTS = [
   {
+    title: "SignalDesk AI",
+    desc: "An AI customer-intelligence dashboard for analysing feedback, surfacing sentiment trends, and turning customer signals into actionable recommendations.",
+    tags: ["Next.js", "React", "TypeScript", "AI Workflows", "Responsive UI"],
+    category: "AI Web Application",
+    symbol: "S",
+    previewType: "desktop",
+    color: "#B7FF2A",
+    href: "https://github.com/inzamam6161/signaldesk-ai",
+    screenshots: [
+      { src: "/projects/signaldesk/dashboard-dark.png", alt: "SignalDesk AI customer-intelligence dashboard in dark mode" },
+      { src: "/projects/signaldesk/dashboard-light.png", alt: "SignalDesk AI customer-intelligence dashboard in light mode" },
+    ],
+  },
+  {
     title: "macOS Developer Portfolio",
     desc: "An interactive desktop-style portfolio built with React, featuring draggable windows, Spotlight search, Mission Control, themes, and responsive layouts.",
     tags: ["React", "JavaScript", "Responsive UI", "Vercel"],
     category: "Web Application",
     symbol: "⌘",
+    previewType: "symbol",
     color: "#5E5CE6",
     href: "https://inzamam-dev.vercel.app/",
   },
@@ -17,6 +32,7 @@ export const MOBILE_PROJECTS = [
     platform: "Native iOS",
     category: "Native iOS",
     icon: "◉",
+    previewType: "phone",
     color: "#5E5CE6",
     href: "https://github.com/inzamam6161/pulseboard-ios",
     desc: "A native focus and productivity dashboard with configurable sessions, persistent activity history, live analytics, and adaptive light and dark themes.",

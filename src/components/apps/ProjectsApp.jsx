@@ -54,7 +54,12 @@ function ProjectCard({ project: p }) {
         background: `radial-gradient(circle at 50% 110%, ${p.color}66, transparent 62%), linear-gradient(145deg, ${p.color}22, rgba(255,255,255,0.025))`,
         border: "0.5px solid rgba(255,255,255,0.06)",
       }}>
-        {p.screenshots?.length ? (
+        {p.previewType === "desktop" ? (
+          <div className="project-desktop-preview">
+            <img className="project-desktop-preview-light" src={p.screenshots[1].src} alt="" />
+            <img className="project-desktop-preview-dark" src={p.screenshots[0].src} alt="" />
+          </div>
+        ) : p.screenshots?.length ? (
           <img
             src={p.screenshots[0].src}
             alt=""
