@@ -1,156 +1,87 @@
-// src/components/overlays/Spotlight.jsx
-// ─────────────────────────────────────────────────────────────
-// Full-screen Spotlight search overlay.
-// Keyboard: ↑↓ to navigate, Enter to open, Escape to close.
-// ─────────────────────────────────────────────────────────────
-
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { SPOTLIGHT_ITEMS } from "../../data/profile";
-import { font, blur } from "../../styles/tokens";
+import { colors, font, shadows } from "../../styles/tokens";
 
 export default function Spotlight({ onClose, onOpen }) {
-  const [query,    setQuery]    = useState("");
+  const [query, setQuery] = useState("");
   const [selected, setSelected] = useState(0);
-  const inputRef = useRef();
+  const inputRef = useRef(null);
 
-  // Auto-focus the input when modal opens
-  useEffect(() => { inputRef.current?.focus(); }, []);
+  const results = useMemo(() => {
+    const normalized = query.trim().toLowerCase();
+    return SPOTLIGHT_ITEMS.filter(item => !normalized || `${item.label} ${item.type}`.toLowerCase().includes(normalized));
+  }, [query]);
 
-  // Reset selection when query changes
-  useEffect(() => { setSelected(0); }, [query]);
+  useEffect(() => inputRef.current?.focus(), []);
+  useEffect(() => setSelected(0), [query]);
 
-  const results = query.trim()
-    ? SPOTLIGHT_ITEMS.filter(item =>
-        item.label.toLowerCase().includes(query.toLowerCase()) ||
-        item.type.toLowerCase().includes(query.toLowerCase())
-      )
-    : SPOTLIGHT_ITEMS.slice(0, 7);
-
-  const handleKeyDown = (e) => {
-    if (e.key === "ArrowDown") { e.preventDefault(); setSelected(s => Math.min(s + 1, results.length - 1)); }
-    if (e.key === "ArrowUp")   { e.preventDefault(); setSelected(s => Math.max(s - 1, 0)); }
-    if (e.key === "Enter")     { if (results[selected]) { onOpen(results[selected].id); onClose(); } }
-    if (e.key === "Escape")    onClose();
+  const openResult = item => {
+    if (!item) return;
+    onOpen(item.id);
+    onClose();
   };
 
   return (
-    <div
-      style={{
-        position:       "fixed",
-        inset:          0,
-        zIndex:         4000,
-        background:     "rgba(0,0,0,0.45)",
-        backdropFilter: blur.overlay,
-        display:        "flex",
-        alignItems:     "flex-start",
-        justifyContent: "center",
-        paddingTop:     140,
-      }}
-      onClick={e => e.target === e.currentTarget && onClose()}
-    >
-      <div style={{
-        width:          580,
-        background:     "rgba(28,28,34,0.97)",
-        backdropFilter:       blur.window,
-        WebkitBackdropFilter: blur.window,
-        borderRadius:   14,
-        border:         "0.5px solid rgba(255,255,255,0.16)",
-        boxShadow:      "0 32px 80px rgba(0,0,0,0.7)",
-        overflow:       "hidden",
-        fontFamily:     font.family,
-      }}>
-        {/* Search input row */}
-        <div style={{
-          display:      "flex",
-          alignItems:   "center",
-          padding:      "0 16px",
-          borderBottom: "0.5px solid rgba(255,255,255,0.07)",
-        }}>
-          <span style={{ fontSize: 18, marginRight: 10, opacity: 0.45 }}>🔍</span>
+    <div onPointerDown={onClose} style={backdropStyle}>
+      <section
+        onPointerDown={event => event.stopPropagation()}
+        onKeyDown={event => {
+          if (event.key === "ArrowDown") { event.preventDefault(); setSelected(index => Math.min(index + 1, results.length - 1)); }
+          if (event.key === "ArrowUp") { event.preventDefault(); setSelected(index => Math.max(index - 1, 0)); }
+          if (event.key === "Enter") openResult(results[selected]);
+          if (event.key === "Escape") onClose();
+        }}
+        style={panelStyle}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "15px 17px", borderBottom: colors.border }}>
+          <span aria-hidden="true" style={{ color: colors.textMuted, fontSize: 25 }}>⌕</span>
           <input
             ref={inputRef}
             value={query}
-            onChange={e => setQuery(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Spotlight Search"
-            style={{
-              flex:       1,
-              background: "none",
-              border:     "none",
-              outline:    "none",
-              color:      "#fff",
-              fontSize:   20,
-              padding:    "14px 0",
-              fontFamily: font.family,
-            }}
+            onChange={event => setQuery(event.target.value)}
+            placeholder="Search apps, projects and skills"
+            aria-label="Spotlight search"
+            style={{ flex: 1, minWidth: 0, border: 0, outline: 0, background: "transparent", color: "#fff", fontSize: 18 }}
           />
-          {query && (
-            <span onClick={() => setQuery("")} style={{ cursor: "pointer", opacity: 0.4, fontSize: 14 }}>✕</span>
-          )}
+          <kbd style={{ padding: "3px 6px", borderRadius: 5, background: "rgba(255,255,255,.08)", color: colors.textMuted, fontSize: 10 }}>ESC</kbd>
         </div>
 
-        {/* Results list */}
-        {results.length > 0 && (
-          <div style={{ padding: "6px 0", maxHeight: 320, overflow: "auto" }}>
-            {results.map((item, i) => (
-              <SpotlightRow
-                key={item.label + i}
-                item={item}
-                isSelected={selected === i}
-                onHover={() => setSelected(i)}
-                onPick={() => { onOpen(item.id); onClose(); }}
-              />
-            ))}
-          </div>
-        )}
-
-        {/* Empty state */}
-        {results.length === 0 && (
-          <div style={{ padding: "24px 16px", textAlign: "center", color: "rgba(255,255,255,0.3)", fontSize: 14 }}>
-            No results for "{query}"
-          </div>
-        )}
-      </div>
+        <div style={{ maxHeight: 330, overflow: "auto", padding: 8 }}>
+          {results.length === 0 ? (
+            <p style={{ padding: 24, textAlign: "center", color: colors.textMuted, fontSize: 13 }}>No matching results</p>
+          ) : results.map((item, index) => (
+            <button
+              key={`${item.type}-${item.label}`}
+              type="button"
+              onMouseEnter={() => setSelected(index)}
+              onClick={() => openResult(item)}
+              style={{
+                width: "100%",
+                display: "grid",
+                gridTemplateColumns: "36px 1fr auto",
+                alignItems: "center",
+                gap: 10,
+                padding: "9px 10px",
+                border: 0,
+                borderRadius: 8,
+                background: selected === index ? colors.accentHover : "transparent",
+                color: "#fff",
+                cursor: "pointer",
+                textAlign: "left",
+              }}
+            >
+              {typeof item.icon === "string" && /\.(png|jpe?g|svg|webp)$/i.test(item.icon) ? (
+                <img src={item.icon} alt="" style={{ width: 30, height: 30, objectFit: "contain" }} />
+              ) : <span style={{ fontSize: 24 }}>{item.icon}</span>}
+              <span style={{ fontSize: 13 }}>{item.label}</span>
+              <span style={{ color: colors.textMuted, fontSize: 11 }}>{item.type}</span>
+            </button>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
 
-function SpotlightRow({ item, isSelected, onHover, onPick }) {
-  console.log("item", item)
-  return (
-    <div
-      onClick={onPick}
-      onMouseEnter={onHover}
-      style={{
-        display:    "flex",
-        alignItems: "center",
-        gap:        12,
-        padding:    "8px 16px",
-        cursor:     "default",
-        background: isSelected ? "rgba(94,92,230,0.3)" : "transparent",
-        transition: "background 0.1s",
-      }}
-    >
-      {
-        (item.type === "App") ? 
-              <img
-                src={item.icon}
-                alt={`${item.label} icon`}
-                draggable={false}
-                style={{
-                  width: 20,
-                  height: 20,
-                  objectFit: "contain",
-                  display: "block",
-                  pointerEvents: "none",
-                }}
-              />
-        : <span style={{ fontSize: 20 }}>{item.icon}</span>
-      }
-      <div>
-        <div style={{ fontSize: 14, color: "#fff", fontWeight: font.weights.medium }}>{item.label}</div>
-        <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>{item.type}</div>
-      </div>
-    </div>
-  );
-}
+const backdropStyle = { position: "absolute", inset: 0, zIndex: 2000, paddingTop: "11vh", display: "flex", alignItems: "flex-start", justifyContent: "center", background: "rgba(0,0,0,.34)", backdropFilter: "blur(5px)", fontFamily: font.family };
+const panelStyle = { width: "min(620px, calc(100vw - 32px))", overflow: "hidden", border: colors.borderFocused, borderRadius: 16, background: "rgba(26,26,32,.94)", boxShadow: shadows.overlay };

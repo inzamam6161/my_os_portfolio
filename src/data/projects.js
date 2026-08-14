@@ -28,6 +28,44 @@ export const WEB_PROJECTS = [
 // Confidential employer and client applications are intentionally excluded.
 export const MOBILE_PROJECTS = [
   {
+    title: "LifeOS",
+    platform: "iOS & Android",
+    category: "React Native",
+    icon: "◉",
+    previewType: "phone",
+    featured: true,
+    color: "#7C5CFF",
+    href: "https://github.com/inzamam6161/lifeos-mobile",
+    desc: "An offline-first personal intelligence platform combining daily planning, tasks, reminders, finance, shopping, workouts, study, goals, habits and private on-device AI in one React Native application.",
+    tags: [
+      "React Native",
+      "TypeScript",
+      "Redux Toolkit",
+      "SQLite / SQLCipher",
+      "On-device AI",
+      "Local RAG",
+    ],
+    stats: [
+      { label: "Architecture", value: "Offline-first" },
+      { label: "Persistence", value: "SQLCipher" },
+      { label: "AI", value: "Local RAG" },
+    ],
+    highlights: [
+      "SQLite-backed source-of-truth architecture with repositories, schema migrations, encrypted persistence and offline-first domain workflows",
+      "Deterministic assistant commands plus optional on-device GGUF inference, Personal Memory, local embeddings and retrieval-augmented responses",
+      "Cross-domain Work, Gym, Shopping and Study modes with notifications, encrypted backups, biometric security, diagnostics, tests and CI foundations",
+    ],
+    screenshots: [
+      { src: "/projects/lifeos/today.jpg", alt: "LifeOS adaptive Today dashboard", label: "Today" },
+      { src: "/projects/lifeos/life.jpg", alt: "LifeOS Life modules dashboard", label: "Life" },
+      { src: "/projects/lifeos/assistant.jpg", alt: "LifeOS offline AI assistant", label: "Assistant" },
+      { src: "/projects/lifeos/work-mode.jpg", alt: "LifeOS Work Mode focus timer", label: "Work" },
+      { src: "/projects/lifeos/gym-mode.jpg", alt: "LifeOS Gym Mode workout routines", label: "Gym" },
+      { src: "/projects/lifeos/shopping-mode.jpg", alt: "LifeOS Shopping Mode grocery list and budget", label: "Shopping" },
+      { src: "/projects/lifeos/study-mode.jpg", alt: "LifeOS Study Mode knowledge workspace", label: "Study" },
+    ],
+  },
+  {
     title: "PulseBoard",
     platform: "Native iOS",
     category: "Native iOS",

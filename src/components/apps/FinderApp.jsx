@@ -1,127 +1,59 @@
-// src/components/apps/FinderApp.jsx
 import { useState } from "react";
-import { font } from "../../styles/tokens";
+import { MOBILE_PROJECTS, WEB_PROJECTS } from "../../data/projects";
+import { PROFILE, SKILL_SECTIONS } from "../../data/profile";
+import { colors, font } from "../../styles/tokens";
 
-const SIDEBAR_FOLDERS = [
-  { id: "portfolio", icon: "🗂",  label: "Portfolio" },
-  { id: "projects",  icon: "💻",  label: "Projects"  },
-  { id: "mobile",    icon: "📱",  label: "Mobile"    },
-  { id: "docs",      icon: "📝",  label: "Docs"      },
-];
-
-const FILES = {
-  portfolio: [
-    { name: "About Me.md",   icon: "👤", size: "4 KB",   date: "Today"  },
-    { name: "Resume.pdf",    icon: "📄", size: "156 KB", date: "May 24" },
-    { name: "Portfolio.fig", icon: "🎨", size: "2.1 MB", date: "May 22" },
-  ],
-  projects: [
-    { name: "SignalDesk AI", icon: "✦", size: "Next.js", date: "Today", folder: true },
-    { name: "SignalOps Mobile", icon: "⚡", size: "React Native", date: "Today", folder: true },
-    { name: "PulseBoard iOS", icon: "📱", size: "SwiftUI", date: "Today", folder: true },
-    { name: "macOS Portfolio", icon: "🖥", size: "React", date: "Current", folder: true },
-  ],
-  mobile: [
-    { name: "SignalOps Mobile", icon: "⚡", size: "iOS + Android", date: "Today", folder: true },
-    { name: "PulseBoard", icon: "◉", size: "Native iOS", date: "Today", folder: true },
-    { name: "React Native Experience", icon: "⚛️", size: "5 years", date: "Current", folder: true },
-  ],
-  docs: [
-    { name: "React Native.md", icon: "📱", size: "Core skill", date: "Current" },
-    { name: "JavaScript.md", icon: "📋", size: "Core skill", date: "Current" },
-    { name: "Career Roadmap.md", icon: "🗺", size: "UAE", date: "Current" },
-  ],
-};
+const LOCATIONS = ["Overview", "Projects", "Skills", "Links"];
 
 export default function FinderApp() {
-  const [activeSidebar, setActiveSidebar] = useState("portfolio");
+  const [location, setLocation] = useState("Overview");
 
   return (
-    <div style={{
-      display:  "flex",
-      height:   "100%",
-      margin:   "-22px -26px",
-      fontFamily: font.family,
-    }}>
-      {/* Sidebar */}
-      <div style={{
-        width:        160,
-        background:   "rgba(255,255,255,0.03)",
-        borderRight:  "0.5px solid rgba(255,255,255,0.07)",
-        padding:      "16px 10px",
-        flexShrink:   0,
-      }}>
-        <p style={{ margin: "0 0 8px 6px", fontSize: 10, fontWeight: 600, letterSpacing: 1, color: "rgba(255,255,255,0.25)", textTransform: "uppercase" }}>
-          Favourites
-        </p>
-        {SIDEBAR_FOLDERS.map(f => (
-          <div
-            key={f.id}
-            onClick={() => setActiveSidebar(f.id)}
-            style={{
-              display:    "flex",
-              alignItems: "center",
-              gap:        8,
-              padding:    "6px 8px",
-              borderRadius: 6,
-              cursor:     "default",
-              background: activeSidebar === f.id ? "rgba(94,92,230,0.25)" : "transparent",
-              color:      activeSidebar === f.id ? "#fff"                  : "rgba(255,255,255,0.6)",
-              fontSize:   13,
-              marginBottom: 2,
-              transition: "all 0.1s",
-            }}
-          >
-            {f.icon} {f.label}
-          </div>
+    <div style={{ display: "grid", gridTemplateColumns: "150px minmax(0, 1fr)", minHeight: "100%", margin: -24, fontFamily: font.family }}>
+      <aside style={{ padding: "18px 10px", borderRight: colors.border, background: "rgba(255,255,255,.025)" }}>
+        <p style={{ padding: "0 9px 8px", color: colors.textDim, fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: ".1em" }}>Favorites</p>
+        {LOCATIONS.map(item => (
+          <button key={item} type="button" onClick={() => setLocation(item)} style={{ width: "100%", padding: "8px 9px", border: 0, borderRadius: 7, background: location === item ? colors.accentHover : "transparent", color: location === item ? "#fff" : colors.textSecondary, cursor: "pointer", textAlign: "left", fontSize: 12 }}>{item}</button>
         ))}
-      </div>
+      </aside>
 
-      {/* File list */}
-      <div style={{ flex: 1, padding: "16px 20px", overflow: "auto" }}>
-        {/* Column headers */}
-        <div style={{
-          display:        "grid",
-          gridTemplateColumns: "auto 1fr 80px 80px",
-          gap:            "0 16px",
-          marginBottom:   8,
-          fontSize:       11,
-          color:          "rgba(255,255,255,0.3)",
-          borderBottom:   "0.5px solid rgba(255,255,255,0.06)",
-          paddingBottom:  8,
-        }}>
-          <span />
-          <span>Name</span>
-          <span style={{ textAlign: "right" }}>Size</span>
-          <span style={{ textAlign: "right" }}>Modified</span>
-        </div>
+      <main style={{ padding: 22, overflow: "auto" }}>
+        <h2 style={{ margin: "0 0 17px", fontSize: 17 }}>{location}</h2>
+        {location === "Overview" && <Overview />}
+        {location === "Projects" && <FolderGrid items={[...MOBILE_PROJECTS.map(p => ({ label: p.title, detail: p.category, symbol: p.icon })), ...WEB_PROJECTS.map(p => ({ label: p.title, detail: p.category, symbol: p.symbol }))]} />}
+        {location === "Skills" && <FolderGrid items={SKILL_SECTIONS.map(section => ({ label: section.category, detail: `${section.skills.length} technologies`, symbol: section.icon }))} />}
+        {location === "Links" && <FolderGrid items={[{ label: "GitHub", detail: PROFILE.github, symbol: "⌘", href: PROFILE.github }, { label: "LinkedIn", detail: "Professional profile", symbol: "in", href: PROFILE.linkedin }, { label: "Email", detail: PROFILE.email, symbol: "@", href: `mailto:${PROFILE.email}` }]} />}
+      </main>
+    </div>
+  );
+}
 
-        {/* File rows */}
-        {(FILES[activeSidebar] || []).map((file, i) => (
-          <div
-            key={i}
-            style={{
-              display:        "grid",
-              gridTemplateColumns: "auto 1fr 80px 80px",
-              gap:            "0 16px",
-              padding:        "7px 4px",
-              borderRadius:   6,
-              fontSize:       13,
-              color:          "rgba(255,255,255,0.75)",
-              transition:     "background 0.1s",
-              cursor:         "default",
-              alignItems:     "center",
-            }}
-            onMouseEnter={e => e.currentTarget.style.background = "rgba(255,255,255,0.06)"}
-            onMouseLeave={e => e.currentTarget.style.background = "transparent"}
-          >
-            <span style={{ fontSize: 18 }}>{file.icon}</span>
-            <span>{file.name}</span>
-            <span style={{ textAlign: "right", color: "rgba(255,255,255,0.35)", fontSize: 12 }}>{file.size}</span>
-            <span style={{ textAlign: "right", color: "rgba(255,255,255,0.35)", fontSize: 12 }}>{file.date}</span>
-          </div>
-        ))}
+function Overview() {
+  return (
+    <div>
+      <div style={{ padding: 18, border: colors.border, borderRadius: 12, background: "linear-gradient(135deg, rgba(94,92,230,.16), rgba(100,210,255,.06))" }}>
+        <p style={{ color: colors.cyan, fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: ".08em" }}>Developer workspace</p>
+        <h3 style={{ margin: "7px 0", fontSize: 21 }}>{PROFILE.name}</h3>
+        <p style={{ color: colors.textSecondary, fontSize: 12, lineHeight: 1.65 }}>{PROFILE.title}</p>
       </div>
+      <FolderGrid items={[{ label: "Mobile Work", detail: `${MOBILE_PROJECTS.length} public case studies`, symbol: "◉" }, { label: "Web Projects", detail: `${WEB_PROJECTS.length} featured projects`, symbol: "⌘" }, { label: "Resume", detail: "Experience and capabilities", symbol: "▤" }]} />
+    </div>
+  );
+}
+
+function FolderGrid({ items }) {
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(145px, 1fr))", gap: 10, marginTop: 14 }}>
+      {items.map(item => {
+        const Wrapper = item.href ? "a" : "div";
+        return (
+          <Wrapper key={item.label} href={item.href} target={item.href ? "_blank" : undefined} rel={item.href ? "noreferrer" : undefined} style={{ minWidth: 0, padding: 13, border: colors.border, borderRadius: 10, background: "rgba(255,255,255,.035)", color: "#fff", textDecoration: "none" }}>
+            <span style={{ display: "grid", placeItems: "center", width: 38, height: 38, marginBottom: 10, borderRadius: 9, background: colors.accentSubtle, color: "#b6b5ff", fontSize: 20, fontWeight: 700 }}>{item.symbol}</span>
+            <strong style={{ display: "block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontSize: 12 }}>{item.label}</strong>
+            <span style={{ display: "block", marginTop: 4, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", color: colors.textMuted, fontSize: 10 }}>{item.detail}</span>
+          </Wrapper>
+        );
+      })}
     </div>
   );
 }
