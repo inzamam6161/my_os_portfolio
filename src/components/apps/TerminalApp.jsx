@@ -1,106 +1,44 @@
-// src/components/apps/TerminalApp.jsx
-import { useState, useEffect, useRef } from "react";
-import { TERMINAL_LINES } from "../../data/profile";
-import { font } from "../../styles/tokens";
-
-const COMMANDS = {
-  help:    "Commands: help, whoami, ls, skills, experience, clear",
-  whoami:  "inzamamul haque — react native developer · mobile & frontend",
-  ls:      "projects/  mobile/  resume.pdf  skills.txt  contact.md",
-  skills:  "React Native | JavaScript | React.js | Android | iOS | Node.js",
-  experience: "5 years software development · currently based in Al Ain, UAE",
-};
+import { useEffect, useState } from "react";
+import { PROFILE, TERMINAL_LINES } from "../../data/profile";
+import { colors, font } from "../../styles/tokens";
 
 export default function TerminalApp() {
-  const [booted,  setBooted]  = useState([]);   // auto-typed boot lines
-  const [history, setHistory] = useState([]);   // user command history
-  const [input,   setInput]   = useState("");
-  const bottomRef = useRef();
-  const inputRef  = useRef();
+  const [visibleLines, setVisibleLines] = useState([]);
+  const [command, setCommand] = useState("");
 
-  // Boot sequence — reveal lines one by one using their timestamps
   useEffect(() => {
-    const timers = TERMINAL_LINES.map(line =>
-      setTimeout(() => setBooted(prev => [...prev, line]), line.t)
-    );
-    return () => timers.forEach(clearTimeout);
+    const timers = TERMINAL_LINES.map((line, index) => window.setTimeout(() => {
+      setVisibleLines(current => [...current, { ...line, key: index }]);
+    }, line.t));
+    return () => timers.forEach(timer => window.clearTimeout(timer));
   }, []);
 
-  // Auto-scroll to bottom whenever output changes
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [booted, history]);
+  const runCommand = event => {
+    event.preventDefault();
+    const normalized = command.trim().toLowerCase();
+    if (!normalized) return;
+    const response = normalized === "help"
+      ? "Commands: help · contact · github · clear"
+      : normalized === "contact"
+        ? `${PROFILE.email} · ${PROFILE.phone}`
+        : normalized === "github"
+          ? PROFILE.github
+          : normalized === "clear"
+            ? null
+            : `command not found: ${command}`;
 
-  const handleKeyDown = (e) => {
-    if (e.key !== "Enter") return;
-    const cmd = input.trim().toLowerCase();
-    if (!cmd) return;
-
-    if (cmd === "clear") {
-      setHistory([]);
-      setInput("");
-      return;
-    }
-
-    const response = COMMANDS[cmd] || `command not found: ${cmd}  (try 'help')`;
-    setHistory(h => [...h, { cmd, response }]);
-    setInput("");
+    if (normalized === "clear") setVisibleLines([]);
+    else setVisibleLines(lines => [...lines, { key: `command-${Date.now()}`, text: `inzamam@portfolio ~ % ${command}`, color: colors.success }, { key: `response-${Date.now()}`, text: response, color: colors.textSecondary }]);
+    setCommand("");
   };
 
   return (
-    <div
-      style={{
-        background:  "#0a0a0e",
-        borderRadius: 8,
-        padding:     16,
-        margin:      "-22px -26px",
-        height:      "calc(100% + 44px)",
-        overflow:    "auto",
-        fontFamily:  font.mono,
-        fontSize:    13,
-        cursor:      "text",
-      }}
-      onClick={() => inputRef.current?.focus()}
-    >
-      {/* Boot sequence lines */}
-      {booted.map((line, i) => (
-        <div key={i} style={{ color: line.color, lineHeight: 1.7, whiteSpace: "pre-wrap" }}>
-          {line.text}
-        </div>
-      ))}
-
-      {/* User command history */}
-      {history.map((entry, i) => (
-        <div key={"h" + i}>
-          <div style={{ color: "#30D158" }}>inzamam@portfolio ~ % {entry.cmd}</div>
-          <div style={{ color: "rgba(255,255,255,0.75)", marginBottom: 4 }}>{entry.response}</div>
-        </div>
-      ))}
-
-      {/* Interactive input line */}
-      <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 4 }}>
-        <span style={{ color: "#30D158", whiteSpace: "nowrap" }}>inzamam@portfolio ~ %</span>
-        <input
-          ref={inputRef}
-          value={input}
-          onChange={e => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          autoFocus
-          style={{
-            background: "none",
-            border:     "none",
-            outline:    "none",
-            color:      "#fff",
-            fontSize:   13,
-            flex:       1,
-            fontFamily: font.mono,
-            caretColor: "#30D158",
-          }}
-        />
-      </div>
-
-      {/* Scroll anchor */}
-      <div ref={bottomRef} />
+    <div style={{ minHeight: "100%", padding: 16, border: colors.border, borderRadius: 9, background: "#08090d", color: "#fff", fontFamily: font.mono, fontSize: 12, lineHeight: 1.7 }}>
+      {visibleLines.map(line => <div key={line.key} style={{ color: line.color }}>{line.text}</div>)}
+      <form onSubmit={runCommand} style={{ display: "flex", gap: 7, marginTop: 8 }}>
+        <label htmlFor="terminal-command" style={{ color: colors.success }}>inzamam@portfolio ~ %</label>
+        <input id="terminal-command" value={command} onChange={event => setCommand(event.target.value)} autoComplete="off" aria-label="Terminal command" style={{ flex: 1, border: 0, outline: 0, background: "transparent", color: "#fff", fontFamily: font.mono, fontSize: 12 }} />
+      </form>
     </div>
   );
 }

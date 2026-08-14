@@ -1,98 +1,54 @@
-// src/components/apps/ProjectsApp.jsx
-import { MOBILE_PROJECTS, WEB_PROJECTS } from "../../data/projects";
-import { font } from "../../styles/tokens";
+import { useState } from "react";
+import { WEB_PROJECTS } from "../../data/projects";
+import { colors, font } from "../../styles/tokens";
 
 export default function ProjectsApp() {
-  const projects = [...MOBILE_PROJECTS, ...WEB_PROJECTS];
+  const [selected, setSelected] = useState(0);
+  const project = WEB_PROJECTS[selected];
 
   return (
-    <div>
-      <p style={{ margin: "0 0 18px", fontSize: 13, color: "rgba(255,255,255,0.4)", fontFamily: font.family }}>
-        Selected engineering projects — {projects.length} featured
-      </p>
-      <div className="projects-grid">
-        {projects.map(p => <ProjectCard key={p.title} project={p} />)}
+    <div style={{ fontFamily: font.family }}>
+      <div style={{ marginBottom: 18 }}>
+        <h1 style={{ margin: "0 0 5px", fontSize: 21 }}>Web & Product Projects</h1>
+        <p style={{ color: colors.textMuted, fontSize: 12 }}>Selected public work and product-focused interfaces.</p>
       </div>
+
+      <div className="projects-grid">
+        {WEB_PROJECTS.map((item, index) => (
+          <button key={item.title} type="button" onClick={() => setSelected(index)} style={{ minHeight: 225, overflow: "hidden", padding: 0, border: selected === index ? `1px solid ${item.color}` : colors.border, borderRadius: 12, background: "rgba(255,255,255,.035)", color: "#fff", cursor: "pointer", textAlign: "left" }}>
+            <ProjectPreview project={item} />
+            <span style={{ display: "block", padding: 14 }}>
+              <strong style={{ display: "block", marginBottom: 5, fontSize: 14 }}>{item.title}</strong>
+              <span style={{ color: item.color, fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: ".06em" }}>{item.category}</span>
+            </span>
+          </button>
+        ))}
+      </div>
+
+      {project && (
+        <section style={{ marginTop: 16, padding: 18, border: `0.5px solid ${project.color}55`, borderRadius: 12, background: "rgba(255,255,255,.025)" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 12, alignItems: "flex-start" }}>
+            <div>
+              <h2 style={{ fontSize: 17 }}>{project.title}</h2>
+              <p style={{ marginTop: 8, maxWidth: 650, color: colors.textSecondary, fontSize: 12, lineHeight: 1.65 }}>{project.desc}</p>
+            </div>
+            <a href={project.href} target="_blank" rel="noreferrer" style={{ flexShrink: 0, padding: "7px 10px", border: `0.5px solid ${project.color}77`, borderRadius: 7, color: project.color, textDecoration: "none", fontSize: 11, fontWeight: 700 }}>Open ↗</a>
+          </div>
+          <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 14 }}>{project.tags.map(tag => <span key={tag} style={{ padding: "4px 7px", borderRadius: 5, background: `${project.color}18`, color: project.color, fontSize: 10 }}>{tag}</span>)}</div>
+        </section>
+      )}
     </div>
   );
 }
 
-function ProjectCard({ project: p }) {
-  return (
-    <a
-      href={p.href}
-      target="_blank"
-      rel="noreferrer"
-      style={{
-        background:   "rgba(255,255,255,0.04)",
-        border:       "0.5px solid rgba(255,255,255,0.08)",
-        borderRadius: 10,
-        padding:      16,
-        cursor:       "pointer",
-        transition:   "all 0.15s",
-        fontFamily:   font.family,
-        display:      "block",
-        textDecoration: "none",
-      }}
-      onMouseEnter={e => {
-        e.currentTarget.style.borderColor = p.color + "55";
-        e.currentTarget.style.background  = "rgba(255,255,255,0.07)";
-      }}
-      onMouseLeave={e => {
-        e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
-        e.currentTarget.style.background  = "rgba(255,255,255,0.04)";
-      }}
-    >
-      <div style={{
-        height: 112,
-        margin: "-4px -4px 14px",
-        borderRadius: 8,
-        overflow: "hidden",
-        display: "flex",
-        alignItems: "flex-start",
-        justifyContent: "center",
-        background: `radial-gradient(circle at 50% 110%, ${p.color}66, transparent 62%), linear-gradient(145deg, ${p.color}22, rgba(255,255,255,0.025))`,
-        border: "0.5px solid rgba(255,255,255,0.06)",
-      }}>
-        {p.previewType === "desktop" ? (
-          <div className="project-desktop-preview">
-            <img className="project-desktop-preview-light" src={p.screenshots[1].src} alt="" />
-            <img className="project-desktop-preview-dark" src={p.screenshots[0].src} alt="" />
-          </div>
-        ) : p.screenshots?.length ? (
-          <img
-            src={p.screenshots[0].src}
-            alt=""
-            style={{ width: 92, marginTop: 8, borderRadius: "13px 13px 0 0", boxShadow: "0 12px 30px rgba(0,0,0,0.55)" }}
-          />
-        ) : (
-          <span style={{ alignSelf: "center", fontSize: 46, fontWeight: 500, color: p.color }}>{p.symbol}</span>
-        )}
-      </div>
-      <div style={{ marginBottom: 7, color: p.color, fontSize: 10, fontWeight: 700, letterSpacing: 0.8, textTransform: "uppercase" }}>
-        {p.category}
-      </div>
-      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-        <span style={{ fontWeight: 600, fontSize: 15, color: "#fff" }}>{p.title}</span>
-        <span style={{ color: p.color, fontSize: 15 }}>↗</span>
-      </div>
-      <p style={{ margin: "0 0 12px", fontSize: 13, lineHeight: 1.6, color: "rgba(255,255,255,0.55)" }}>
-        {p.desc}
-      </p>
-      <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-        {p.tags.map(tag => (
-          <span key={tag} style={{
-            fontSize:   11,
-            padding:    "2px 8px",
-            borderRadius: 4,
-            background: p.color + "22",
-            color:      p.color,
-            border:     `0.5px solid ${p.color}44`,
-          }}>
-            {tag}
-          </span>
-        ))}
-      </div>
-    </a>
-  );
+function ProjectPreview({ project }) {
+  if (project.screenshots?.length) {
+    return (
+      <span className="project-desktop-preview" style={{ display: "block", height: 142, background: `linear-gradient(145deg, ${project.color}2b, rgba(5,5,10,.7))` }}>
+        <img className="project-desktop-preview-light" src={project.screenshots[1]?.src || project.screenshots[0].src} alt="" />
+        <img className="project-desktop-preview-dark" src={project.screenshots[0].src} alt={project.screenshots[0].alt} />
+      </span>
+    );
+  }
+  return <span style={{ height: 142, display: "grid", placeItems: "center", background: `radial-gradient(circle at 50% 50%, ${project.color}44, transparent 65%), #0c0c13`, color: project.color, fontSize: 58, fontWeight: 700 }}>{project.symbol}</span>;
 }

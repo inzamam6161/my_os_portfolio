@@ -1,185 +1,127 @@
-// src/components/ui/Window.jsx
-// ─────────────────────────────────────────────────────────────
-// The macOS-style draggable window chrome.
-// Handles: drag-to-move, traffic-light buttons, fullscreen,
-//          focus ring, glass blur backdrop.
-//
-// PROPS:
-//   title, icon, focused, position, wide, fullscreen
-//   onClose, onMinimize, onFullscreen, onFocus
-//   children  ← the app content rendered inside
-// ─────────────────────────────────────────────────────────────
-
-import { useState, useEffect, useRef } from "react";
-import { colors, shadows, blur, font, radii } from "../../styles/tokens";
+import { useEffect, useRef, useState } from "react";
+import { blur, colors, font, radii, shadows } from "../../styles/tokens";
 
 export default function Window({
-  title, icon,
-  onClose, onMinimize, onFullscreen, onFocus,
-  focused, position, wide, fullscreen,
+  title,
+  icon,
+  focused,
+  position,
+  wide,
+  fullscreen,
+  onClose,
+  onMinimize,
+  onFullscreen,
+  onFocus,
   children,
 }) {
-  const [pos, setPos] = useState(position);
-  const dragging   = useRef(false);
-  const dragOffset = useRef({ x: 0, y: 0 });
+  const [localPosition, setLocalPosition] = useState(position);
+  const dragRef = useRef(null);
 
-  // Width/height change when fullscreen
-  const width  = fullscreen ? "100vw" : wide ? 800 : 700;
-  const height = fullscreen ? "100vh" : 530;
-  const left   = fullscreen ? 0 : pos.x;
-  const top    = fullscreen ? 0 : pos.y;
-
-  // ── Drag logic ──────────────────────────────────────────────
-  const handleTitleMouseDown = (e) => {
-    if (fullscreen) return;
-    dragging.current   = true;
-    dragOffset.current = { x: e.clientX - pos.x, y: e.clientY - pos.y };
-    onFocus();
-    e.preventDefault(); // prevent text selection while dragging
-  };
+  useEffect(() => setLocalPosition(position), [position]);
 
   useEffect(() => {
-    const onMouseMove = (e) => {
-      if (!dragging.current) return;
-      setPos({
-        x: e.clientX - dragOffset.current.x,
-        y: e.clientY - dragOffset.current.y,
+    const handleMove = event => {
+      if (!dragRef.current || fullscreen) return;
+      const nextX = dragRef.current.startX + event.clientX - dragRef.current.pointerX;
+      const nextY = dragRef.current.startY + event.clientY - dragRef.current.pointerY;
+      setLocalPosition({
+        x: Math.max(8, Math.min(nextX, window.innerWidth - 160)),
+        y: Math.max(32, Math.min(nextY, window.innerHeight - 100)),
       });
     };
-    const onMouseUp = () => { dragging.current = false; };
-
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseup",   onMouseUp);
+    const handleUp = () => { dragRef.current = null; };
+    window.addEventListener("pointermove", handleMove);
+    window.addEventListener("pointerup", handleUp);
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseup",   onMouseUp);
+      window.removeEventListener("pointermove", handleMove);
+      window.removeEventListener("pointerup", handleUp);
     };
-  }, []);
+  }, [fullscreen]);
 
-  // ── Render ──────────────────────────────────────────────────
+  const windowStyle = fullscreen ? {
+    inset: "30px 0 0",
+    width: "100%",
+    height: "calc(100vh - 30px)",
+    borderRadius: 0,
+  } : {
+    left: localPosition.x,
+    top: localPosition.y,
+    width: wide ? "min(880px, calc(100vw - 40px))" : "min(680px, calc(100vw - 40px))",
+    height: "min(600px, calc(100vh - 150px))",
+    borderRadius: radii.window,
+  };
+
   return (
-    <div
+    <section
       className="portfolio-window"
-      onMouseDown={onFocus}
+      onPointerDown={onFocus}
       style={{
-        position:   "fixed",
-        left, top, width, height,
+        position: "absolute",
+        zIndex: focused ? 500 : 300,
+        display: "flex",
+        flexDirection: "column",
+        overflow: "hidden",
+        color: colors.textPrimary,
         background: colors.surface,
-        backdropFilter:         blur.window,
-        WebkitBackdropFilter:   blur.window,
-        borderRadius: fullscreen ? 0 : radii.window,
-        border:    focused ? colors.borderFocused : colors.border,
+        backdropFilter: blur.window,
+        border: focused ? colors.borderFocused : colors.border,
         boxShadow: focused ? shadows.window : shadows.windowBlurred,
-        zIndex:    focused ? 100 : 10,
-        display:        "flex",
-        flexDirection:  "column",
-        overflow:       "hidden",
-        fontFamily:     font.family,
-        transition:     "box-shadow 0.2s, border-color 0.2s, border-radius 0.25s",
+        fontFamily: font.family,
+        transition: "box-shadow .16s ease, opacity .16s ease",
+        opacity: focused ? 1 : .94,
+        ...windowStyle,
       }}
     >
-      {/* ── Title bar ── */}
       <div
-        onMouseDown={handleTitleMouseDown}
+        onDoubleClick={onFullscreen}
+        onPointerDown={event => {
+          if (event.button !== 0 || fullscreen) return;
+          dragRef.current = {
+            pointerX: event.clientX,
+            pointerY: event.clientY,
+            startX: localPosition.x,
+            startY: localPosition.y,
+          };
+        }}
         style={{
-          height:      44,
-          background:  colors.titleBar,
+          height: 44,
+          flex: "0 0 44px",
+          display: "grid",
+          gridTemplateColumns: "100px 1fr 100px",
+          alignItems: "center",
+          padding: "0 14px",
+          background: colors.titleBar,
           borderBottom: colors.borderSubtle,
-          display:     "flex",
-          alignItems:  "center",
-          padding:     "0 14px",
-          cursor:      fullscreen ? "default" : "grab",
-          flexShrink:  0,
-          userSelect:  "none",
+          cursor: fullscreen ? "default" : "grab",
+          userSelect: "none",
         }}
       >
-        {/* Traffic lights */}
-        <TrafficLights
-          focused={focused}
-          onClose={onClose}
-          onMinimize={onMinimize}
-          onFullscreen={onFullscreen}
-        />
-
-        {/* Centered title */}
-        <span style={{
-          flex:       1,
-          display:    "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign:  "center",
-          fontSize:   font.sizes.base,
-          fontWeight: font.weights.medium,
-          color:      focused ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.35)",
-          transition: "color 0.2s",
-        }}>
-            <img
-              src={icon}
-              alt=""
-              draggable={false}
-              style={{
-                width: 20,
-                height: 20,
-                marginRight:5,
-                objectFit: "contain",
-                display: "block",
-                pointerEvents: "none",
-              }}
-            /> 
-            {title}
-        </span>
-
-        {/* Spacer to balance traffic lights */}
-        <div style={{ width: 52 }} />
+        <div style={{ display: "flex", gap: 8 }}>
+          <TrafficButton color={colors.red} label={`Close ${title}`} onClick={onClose} />
+          <TrafficButton color={colors.yellow} label={`Minimize ${title}`} onClick={onMinimize} />
+          <TrafficButton color={colors.green} label={`${fullscreen ? "Exit" : "Enter"} fullscreen`} onClick={onFullscreen} />
+        </div>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 7, minWidth: 0, fontSize: 12, fontWeight: 600 }}>
+          {icon && <img src={icon} alt="" style={{ width: 18, height: 18, objectFit: "contain" }} />}
+          <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{title}</span>
+        </div>
       </div>
 
-      {/* ── Scrollable content area ── */}
-      <div style={{ flex: 1, overflow: "auto", padding: "22px 26px" }}>
+      <div style={{ flex: 1, minHeight: 0, overflow: "auto", padding: 24 }}>
         {children}
       </div>
-    </div>
+    </section>
   );
 }
 
-// ── Sub-component: Traffic light buttons ─────────────────────
-function TrafficLights({ focused, onClose, onMinimize, onFullscreen }) {
-  const [,setHovered] = useState(false);
-
-  const buttons = [
-    { color: colors.red,    action: onClose      },
-    { color: colors.yellow, action: onMinimize   },
-    { color: colors.green,  action: onFullscreen },
-  ];
-
+function TrafficButton({ color, label, onClick }) {
   return (
-    <div
-      style={{ display: "flex", gap: 8 }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      {buttons.map(({ color, action }, i) => (
-        <button
-          key={i}
-          onClick={(e) => { e.stopPropagation(); action(); }}
-          style={{
-            width:        12,
-            height:       12,
-            borderRadius: "50%",
-            background:   focused ? color : "#444",
-            border:       "none",
-            cursor:       "pointer",
-            padding:      0,
-            fontSize:     8,
-            display:      "flex",
-            alignItems:   "center",
-            justifyContent: "center",
-            color:        "rgba(0,0,0,0.5)",
-            transition:   "transform 0.1s",
-          }}
-          onMouseEnter={e => e.currentTarget.style.transform = "scale(1.2)"}
-          onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}
-        />
-      ))}
-    </div>
+    <button
+      type="button"
+      aria-label={label}
+      onPointerDown={event => event.stopPropagation()}
+      onClick={onClick}
+      style={{ width: 12, height: 12, padding: 0, border: 0, borderRadius: "50%", background: color, cursor: "pointer" }}
+    />
   );
 }
