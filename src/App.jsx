@@ -31,6 +31,7 @@ import { font }                         from "./styles/tokens";
 import MenuBar                          from "./components/ui/MenuBar";
 import Dock                             from "./components/ui/Dock";
 import Window                           from "./components/ui/Window";
+import HomeDesktop                      from "./components/ui/HomeDesktop";
 import { Wallpaper, WallpaperPicker }   from "./components/ui/Wallpaper";
 
 // Overlays
@@ -61,6 +62,7 @@ export default function App() {
   // ── App data ──────────────────────────────────────────────────
   const [notifications, setNotifications] = useState(NOTIFICATIONS_INIT);
   const [wallpaperId,   setWallpaperId]   = useState("aurora");
+  const [selectedProjectId, setSelectedProjectId] = useState(null);
 
   const unreadCount = notifications.filter(n => !n.read).length;
 
@@ -93,6 +95,11 @@ export default function App() {
     setMissionCtrlOpen(false);
   }, [restoreApp]);
 
+  const handleOpenProject = useCallback((projectId, appId) => {
+    setSelectedProjectId(projectId);
+    openApp(appId);
+  }, [openApp]);
+
   // ──────────────────────────────────────────────────────────────
   return (
     <div
@@ -121,8 +128,8 @@ export default function App() {
         onWallpaper={() => setWallpaperOpen(true)}
       />
 
-      {/* ── Layer 3: Empty desktop hint ── */}
-      {windows.length === 0 && <DesktopHint />}
+      {/* ── Layer 3: Recruiter-first homepage ── */}
+      <HomeDesktop onOpenProject={handleOpenProject} onOpenApp={openApp} />
 
       {/* ── Layer 4: Windows ── */}
       {windows
@@ -144,7 +151,7 @@ export default function App() {
               onFullscreen={()   => toggleFullscreen(w.id)}
               onFocus={()        => focusApp(w.id)}
             >
-              <ContentComponent />
+              <ContentComponent selectedProjectId={selectedProjectId} />
             </Window>
           );
         })
@@ -166,27 +173,6 @@ export default function App() {
       {wallpaperOpen   && <WallpaperPicker current={wallpaperId} onSelect={setWallpaperId} onClose={() => setWallpaperOpen(false)} />}
       {contextMenu     && <ContextMenu x={contextMenu.x} y={contextMenu.y} onClose={() => setContextMenu(null)} onAction={handleContextAction} />}
       {toast           && <Toast message={toast} onDone={() => setToast(null)} />}
-    </div>
-  );
-}
-
-// ── Desktop empty-state hint ──────────────────────────────────
-function DesktopHint() {
-  return (
-    <div style={{
-      position:      "absolute",
-      top:           "50%",
-      left:          "50%",
-      transform:     "translate(-50%, -50%)",
-      textAlign:     "center",
-      color:         "rgba(255,255,255,0.18)",
-      fontSize:      13,
-      pointerEvents: "none",
-      fontFamily:    font.family,
-    }}>
-      <div style={{ fontSize: 52, marginBottom: 14, opacity: 0.3 }}>🖥</div>
-      <div>Click an app in the Dock · Right-click for options</div>
-      <div style={{ marginTop: 8, fontSize: 12, opacity: 0.7 }}>⌘F Spotlight · ⌘M Mission Control</div>
     </div>
   );
 }

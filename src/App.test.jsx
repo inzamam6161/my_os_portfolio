@@ -3,13 +3,17 @@ import "@testing-library/jest-dom";
 import App from "./App";
 
 describe("macOS portfolio desktop", () => {
-  test("opens dock apps and desktop overlays", () => {
+  test("shows featured work and opens project case studies and overlays", () => {
     render(<App />);
 
-    expect(screen.getAllByText("Inzamamul Haque").length).toBeGreaterThan(0);
+    expect(screen.getByRole("heading", { name: "Inzamamul Haque" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Featured Projects" })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Open LifeOS case study" }));
+    expect(screen.getByText("Mobile engineering case study")).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: "Projects" }));
-    expect(screen.getByRole("heading", { name: "Web & Product Projects" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "SignalDesk AI" })).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: "Open Spotlight search" }));
     expect(screen.getByRole("textbox", { name: "Spotlight search" })).toBeInTheDocument();

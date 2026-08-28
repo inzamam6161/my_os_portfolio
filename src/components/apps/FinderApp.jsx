@@ -3,7 +3,7 @@ import { MOBILE_PROJECTS, WEB_PROJECTS } from "../../data/projects";
 import { PROFILE, SKILL_SECTIONS } from "../../data/profile";
 import { colors, font } from "../../styles/tokens";
 
-const LOCATIONS = ["Overview", "Projects", "Skills", "Links"];
+const LOCATIONS = ["Overview", "Skills", "Links"];
 
 export default function FinderApp() {
   const [location, setLocation] = useState("Overview");
@@ -20,7 +20,6 @@ export default function FinderApp() {
       <main style={{ padding: 22, overflow: "auto" }}>
         <h2 style={{ margin: "0 0 17px", fontSize: 17 }}>{location}</h2>
         {location === "Overview" && <Overview />}
-        {location === "Projects" && <FolderGrid items={[...MOBILE_PROJECTS.map(p => ({ label: p.title, detail: p.category, symbol: p.icon })), ...WEB_PROJECTS.map(p => ({ label: p.title, detail: p.category, symbol: p.symbol }))]} />}
         {location === "Skills" && <FolderGrid items={SKILL_SECTIONS.map(section => ({ label: section.category, detail: `${section.skills.length} technologies`, symbol: section.icon }))} />}
         {location === "Links" && <FolderGrid items={[{ label: "GitHub", detail: PROFILE.github, symbol: "⌘", href: PROFILE.github }, { label: "LinkedIn", detail: "Professional profile", symbol: "in", href: PROFILE.linkedin }, { label: "Email", detail: PROFILE.email, symbol: "@", href: `mailto:${PROFILE.email}` }]} />}
       </main>
