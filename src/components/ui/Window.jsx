@@ -73,9 +73,9 @@ export default function Window({
       }}
     >
       <div
-        onDoubleClick={onFullscreen}
+        onDoubleClick={() => { if (window.innerWidth > 760) onFullscreen(); }}
         onPointerDown={event => {
-          if (event.button !== 0 || fullscreen) return;
+          if (event.button !== 0 || fullscreen || window.innerWidth <= 760) return;
           dragRef.current = {
             pointerX: event.clientX,
             pointerY: event.clientY,

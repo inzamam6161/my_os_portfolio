@@ -1,5 +1,6 @@
 export const WEB_PROJECTS = [
   {
+    id: "signaldesk-ai",
     title: "SignalDesk AI",
     desc: "An AI customer-intelligence dashboard for analysing feedback, surfacing sentiment trends, and turning customer signals into actionable recommendations.",
     tags: ["Next.js", "React", "TypeScript", "AI Workflows", "Responsive UI"],
@@ -13,21 +14,12 @@ export const WEB_PROJECTS = [
       { src: "/projects/signaldesk/dashboard-light.png", alt: "SignalDesk AI customer-intelligence dashboard in light mode" },
     ],
   },
-  {
-    title: "macOS Developer Portfolio",
-    desc: "An interactive desktop-style portfolio built with React, featuring draggable windows, Spotlight search, Mission Control, themes, and responsive layouts.",
-    tags: ["React", "JavaScript", "Responsive UI", "Vercel"],
-    category: "Web Application",
-    symbol: "⌘",
-    previewType: "symbol",
-    color: "#5E5CE6",
-    href: "https://inzamam-dev.vercel.app/",
-  },
 ];
 
 // Confidential employer and client applications are intentionally excluded.
 export const MOBILE_PROJECTS = [
   {
+    id: "lifeos",
     title: "LifeOS",
     platform: "iOS & Android",
     category: "React Native",
@@ -66,6 +58,7 @@ export const MOBILE_PROJECTS = [
     ],
   },
   {
+    id: "pulseboard",
     title: "PulseBoard",
     platform: "Native iOS",
     category: "Native iOS",
@@ -94,6 +87,7 @@ export const MOBILE_PROJECTS = [
     ],
   },
   {
+    id: "signalops-mobile",
     title: "SignalOps Mobile",
     platform: "iOS & Android",
     category: "React Native",
