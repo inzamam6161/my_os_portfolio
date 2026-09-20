@@ -5,6 +5,7 @@ import MobileApp from "./MobileApp";
 import NexoraApp from "./NexoraApp";
 import ProjectsApp from "./ProjectsApp";
 import ResumeApp from "./ResumeApp";
+import SignalDeskApp from "./SignalDeskApp";
 import SkillsApp from "./SkillsApp";
 import TerminalApp from "./TerminalApp";
 
@@ -13,6 +14,7 @@ const APP_COMPONENTS = {
   about: AboutApp,
   projects: ProjectsApp,
   mobile: MobileApp,
+  signaldesk: SignalDeskApp,
   nexora: NexoraApp,
   skills: SkillsApp,
   resume: ResumeApp,

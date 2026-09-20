@@ -1,17 +1,47 @@
 export const WEB_PROJECTS = [
   {
     id: "signaldesk-ai",
-    title: "SignalDesk AI",
-    desc: "An AI customer-intelligence dashboard for analysing feedback, surfacing sentiment trends, and turning customer signals into actionable recommendations.",
-    tags: ["Next.js", "React", "TypeScript", "AI Workflows", "Responsive UI"],
-    category: "AI Web Application",
+    title: "SignalDesk",
+    desc: "A customer-intelligence dashboard for collecting feedback, classifying sentiment, tracking follow-ups, detecting recurring topics and generating evidence-based product insights from the current workspace.",
+    tags: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Customer Intelligence",
+      "Local Persistence",
+      "Evidence Analysis",
+      "Vitest",
+      "GitHub Actions",
+    ],
+    category: "Customer Intelligence Web App",
     symbol: "S",
     previewType: "desktop",
-    color: "#B7FF2A",
+    featured: true,
+    color: "#79B300",
     href: "https://github.com/inzamam6161/signaldesk-ai",
+    stats: [
+      { label: "Workspace", value: "Local + persistent" },
+      { label: "Analysis", value: "Evidence-based" },
+      { label: "Quality", value: "Tests + CI" },
+    ],
+    highlights: [
+      "Add Feedback workflow with automatic local sentiment classification, manual override, browser persistence and per-conversation follow-up tracking.",
+      "Evidence-based analysis calculates real sentiment counts, recurring topic mentions, priority and supporting customer quotes without inventing unsupported platform or usage claims.",
+      "Functional Overview, Feedback and Insights workspaces with search, sentiment filters, command palette, CSV export, responsive layouts and light/dark themes.",
+      "Reusable pure analysis modules covered by Vitest, with GitHub Actions running lint, tests and production builds for maintainable portfolio-quality engineering.",
+    ],
+    portfolioNote: "The current portfolio build uses transparent deterministic classification and analysis rather than a generative LLM. The architecture keeps analysis logic separate so a grounded production model provider can be introduced later without rewriting the dashboard.",
     screenshots: [
-      { src: "/projects/signaldesk/dashboard-dark.png", alt: "SignalDesk AI customer-intelligence dashboard in dark mode" },
-      { src: "/projects/signaldesk/dashboard-light.png", alt: "SignalDesk AI customer-intelligence dashboard in light mode" },
+      {
+        src: "/projects/signaldesk/dashboard-light.png",
+        alt: "SignalDesk customer-intelligence overview in light mode",
+        label: "Overview",
+      },
+      {
+        src: "/projects/signaldesk/dashboard-dark.png",
+        alt: "SignalDesk customer-intelligence dashboard in dark mode",
+        label: "Dark Mode",
+      },
     ],
   },
   {
@@ -45,6 +75,7 @@ export const WEB_PROJECTS = [
       "Social Post Studio uses browser Canvas APIs for image measurement, crop and export, while Data Q&A provides focused natural-language-style analysis over uploaded datasets.",
       "Shareable hash routes, built-in examples, automated tests and GitHub Actions CI improve the project from a demo into a maintainable portfolio engineering build.",
     ],
+    portfolioNote: "Nexora processes data locally in the browser. Its deterministic tools are described as deterministic; generative-model capabilities are not claimed where no model is involved.",
     screenshots: [
       { src: "/projects/nexora/hero.png", alt: "Nexora AI Lab local-first intelligence homepage", label: "Home" },
       { src: "/projects/nexora/tools.png", alt: "Nexora AI Lab quick workflows and tools section", label: "Workflows" },

@@ -5,7 +5,12 @@ const FEATURED_PROJECTS = [
   ...MOBILE_PROJECTS.map(project => ({ ...project, appId: "mobile" })),
   ...WEB_PROJECTS.map(project => ({
     ...project,
-    appId: project.id === "nexora-ai-lab" ? "nexora" : "projects",
+    appId:
+      project.id === "signaldesk-ai"
+        ? "signaldesk"
+        : project.id === "nexora-ai-lab"
+          ? "nexora"
+          : "projects",
   })),
 ].sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
 

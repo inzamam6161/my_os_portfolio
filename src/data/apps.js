@@ -2,6 +2,7 @@ import Contacts from "../icons/contacts.png";
 import File from "../icons/file-manager.png";
 import Code from "../icons/code-editor.png";
 import Mobile from "../icons/messages.png";
+import SignalDesk from "../icons/signaldesk.svg";
 import Nexora from "../icons/nexora.svg";
 import Notes from "../icons/notes.png";
 import Skills from "../icons/activity-monitor.png";
@@ -13,6 +14,7 @@ export const APPS = [
   { id: "about", icon: Contacts, label: "About Me" },
   { id: "projects", icon: Code, label: "Projects" },
   { id: "mobile", icon: Mobile, label: "Mobile Work" },
+  { id: "signaldesk", icon: SignalDesk, label: "SignalDesk" },
   { id: "nexora", icon: Nexora, label: "Nexora AI Lab" },
   { id: "skills", icon: Skills, label: "Skills" },
   { id: "resume", icon: Notes, label: "Resume" },
@@ -25,6 +27,7 @@ export const WINDOW_TITLES = {
   about: "About Me",
   projects: "Projects",
   mobile: "Mobile Work",
+  signaldesk: "SignalDesk",
   nexora: "Nexora AI Lab",
   skills: "Skills",
   resume: "Resume",
@@ -37,5 +40,6 @@ export const WIDE_WINDOWS = [
   "resume",
   "finder",
   "projects",
+  "signaldesk",
   "nexora",
 ];

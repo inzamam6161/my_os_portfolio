@@ -115,10 +115,8 @@ export default function ProjectsApp({ selectedProjectId, fixedProjectId }) {
           <div className="project-showcase__note">
             <strong>Portfolio note</strong>
             <p style={{ color: colors.textSecondary }}>
-              The implementation is intentionally transparent about which
-              features are deterministic browser-side analysis and which
-              capabilities would require a generative model in a production
-              version.
+              {project.portfolioNote ||
+                "The implementation is intentionally transparent about which capabilities are deterministic and which would require additional production services or model integration."}
             </p>
           </div>
         </aside>
