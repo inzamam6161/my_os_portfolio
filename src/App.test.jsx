@@ -13,7 +13,7 @@ describe("macOS portfolio desktop", () => {
     expect(screen.getByText("Mobile engineering case study")).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: "Projects" }));
-    expect(screen.getByRole("heading", { name: "SignalDesk AI" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "SignalDesk" })).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: "Open Spotlight search" }));
     expect(screen.getByRole("textbox", { name: "Spotlight search" })).toBeInTheDocument();
