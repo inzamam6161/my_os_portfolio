@@ -1,0 +1,508 @@
+.recruiter-assistant {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 14px;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(94, 92, 230, 0.14),
+      transparent 32%
+    ),
+    rgba(10, 10, 16, 0.52);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* ─────────────────────────────────────────────
+   Header
+───────────────────────────────────────────── */
+
+.recruiter-assistant-header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.recruiter-assistant-identity {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.recruiter-assistant-avatar,
+.recruiter-message-avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  font-weight: 700;
+  color: white;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(94, 92, 230, 1),
+      rgba(124, 92, 255, 1)
+    );
+  box-shadow:
+    0 8px 24px rgba(94, 92, 230, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.recruiter-assistant-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+.recruiter-message-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  font-size: 10px;
+  margin-top: 2px;
+}
+
+.recruiter-assistant-title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.recruiter-assistant-title-row h2 {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.recruiter-assistant-identity p {
+  margin: 4px 0 0;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.recruiter-assistant-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 7px;
+  border-radius: 999px;
+  border: 1px solid rgba(48, 209, 88, 0.18);
+  color: rgba(220, 255, 229, 0.78);
+  background: rgba(48, 209, 88, 0.08);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.recruiter-assistant-status > span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #30d158;
+  box-shadow: 0 0 8px rgba(48, 209, 88, 0.6);
+}
+
+.recruiter-assistant-reset {
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  padding: 7px 10px;
+  color: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.04);
+  font: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease,
+    color 0.16s ease;
+}
+
+.recruiter-assistant-reset:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ─────────────────────────────────────────────
+   Messages
+───────────────────────────────────────────── */
+
+.recruiter-assistant-messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 22px 20px 28px;
+  scroll-behavior: smooth;
+}
+
+.recruiter-assistant-messages::-webkit-scrollbar {
+  width: 7px;
+}
+
+.recruiter-assistant-messages::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.recruiter-message {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+  animation: recruiter-message-in 0.22s ease;
+}
+
+@keyframes recruiter-message-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.recruiter-message-user {
+  justify-content: flex-end;
+}
+
+.recruiter-message-content {
+  min-width: 0;
+  max-width: min(700px, 86%);
+}
+
+.recruiter-message-user .recruiter-message-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.recruiter-message-bubble {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 12.5px;
+  line-height: 1.65;
+}
+
+.recruiter-message-assistant .recruiter-message-bubble {
+  color: rgba(255, 255, 255, 0.86);
+  padding: 1px 0;
+}
+
+.recruiter-message-user .recruiter-message-bubble {
+  padding: 10px 13px;
+  border-radius: 14px 14px 4px 14px;
+  color: #fff;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(94, 92, 230, 0.95),
+      rgba(124, 92, 255, 0.88)
+    );
+  box-shadow: 0 8px 20px rgba(94, 92, 230, 0.16);
+}
+
+/* ─────────────────────────────────────────────
+   Source chips
+───────────────────────────────────────────── */
+
+.recruiter-message-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 9px;
+}
+
+.recruiter-message-sources span {
+  padding: 4px 7px;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 9px;
+  font-weight: 500;
+}
+
+/* ─────────────────────────────────────────────
+   Action buttons
+───────────────────────────────────────────── */
+
+.recruiter-message-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.recruiter-message-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border: 1px solid rgba(94, 92, 230, 0.28);
+  border-radius: 8px;
+  color: rgba(235, 234, 255, 0.9);
+  background: rgba(94, 92, 230, 0.1);
+  font: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease,
+    transform 0.16s ease;
+}
+
+.recruiter-message-actions button:hover {
+  border-color: rgba(124, 92, 255, 0.5);
+  background: rgba(94, 92, 230, 0.18);
+  transform: translateY(-1px);
+}
+
+/* ─────────────────────────────────────────────
+   Suggested questions
+───────────────────────────────────────────── */
+
+.recruiter-assistant-suggestions {
+  margin: 24px 0 8px 40px;
+}
+
+.recruiter-assistant-suggestions > p {
+  margin: 0 0 10px;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+.recruiter-suggestion-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.recruiter-suggestion-grid button {
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.035);
+  font: inherit;
+  font-size: 10.5px;
+  line-height: 1.4;
+  cursor: pointer;
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease,
+    color 0.16s ease,
+    transform 0.16s ease;
+}
+
+.recruiter-suggestion-grid button span {
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.recruiter-suggestion-grid button:hover {
+  color: #fff;
+  border-color: rgba(94, 92, 230, 0.32);
+  background: rgba(94, 92, 230, 0.1);
+  transform: translateY(-1px);
+}
+
+/* ─────────────────────────────────────────────
+   Composer
+───────────────────────────────────────────── */
+
+.recruiter-assistant-composer {
+  flex: 0 0 auto;
+  padding: 12px 18px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(8, 8, 13, 0.58);
+  backdrop-filter: blur(20px);
+}
+
+.recruiter-assistant-input-shell {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 7px 8px 7px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.045);
+  transition:
+    border-color 0.16s ease,
+    box-shadow 0.16s ease,
+    background 0.16s ease;
+}
+
+.recruiter-assistant-input-shell:focus-within {
+  border-color: rgba(94, 92, 230, 0.5);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 3px rgba(94, 92, 230, 0.08);
+}
+
+.recruiter-assistant-input-shell textarea {
+  flex: 1;
+  min-width: 0;
+  min-height: 34px;
+  max-height: 110px;
+  padding: 7px 0;
+  border: 0;
+  outline: none;
+  resize: none;
+  overflow-y: auto;
+  color: #fff;
+  background: transparent;
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.recruiter-assistant-input-shell textarea::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.recruiter-assistant-send {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 9px;
+  color: white;
+  background: #5e5ce6;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 5px 16px rgba(94, 92, 230, 0.24);
+  transition:
+    opacity 0.16s ease,
+    transform 0.16s ease,
+    background 0.16s ease;
+}
+
+.recruiter-assistant-send:hover:not(:disabled) {
+  background: #706df0;
+  transform: translateY(-1px);
+}
+
+.recruiter-assistant-send:disabled {
+  opacity: 0.28;
+  cursor: default;
+  box-shadow: none;
+}
+
+.recruiter-assistant-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 7px;
+  color: rgba(255, 255, 255, 0.28);
+  font-size: 8.5px;
+  line-height: 1.4;
+}
+
+/* ─────────────────────────────────────────────
+   Responsive
+───────────────────────────────────────────── */
+
+@media (max-width: 720px) {
+  .recruiter-assistant-header {
+    padding: 13px 14px;
+  }
+
+  .recruiter-assistant-identity p {
+    display: none;
+  }
+
+  .recruiter-assistant-status {
+    display: none;
+  }
+
+  .recruiter-assistant-reset {
+    padding: 6px 8px;
+  }
+
+  .recruiter-assistant-messages {
+    padding: 18px 14px 24px;
+  }
+
+  .recruiter-message-content {
+    max-width: 90%;
+  }
+
+  .recruiter-assistant-suggestions {
+    margin-left: 40px;
+  }
+
+  .recruiter-suggestion-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recruiter-assistant-composer {
+    padding: 10px 12px 12px;
+  }
+
+  .recruiter-assistant-footer {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .recruiter-assistant-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+
+  .recruiter-assistant-title-row h2 {
+    font-size: 13px;
+  }
+
+  .recruiter-message-avatar {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    font-size: 9px;
+  }
+
+  .recruiter-assistant-suggestions {
+    margin-left: 36px;
+  }
+
+  .recruiter-message-content {
+    max-width: 92%;
+  }
+
+  .recruiter-message-bubble {
+    font-size: 11.5px;
+  }
+
+  .recruiter-suggestion-grid button {
+    min-height: 48px;
+  }
+}

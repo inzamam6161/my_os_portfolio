@@ -151,7 +151,11 @@ export default function App() {
               onFullscreen={()   => toggleFullscreen(w.id)}
               onFocus={()        => focusApp(w.id)}
             >
-              <ContentComponent selectedProjectId={selectedProjectId} />
+              <ContentComponent
+                  selectedProjectId={selectedProjectId}
+                  onOpenApp={openApp}
+                  onOpenProject={handleOpenProject}
+                />
             </Window>
           );
         })

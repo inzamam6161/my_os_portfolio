@@ -3,8 +3,11 @@ import { PROFILE } from "../../data/profile";
 
 const FEATURED_PROJECTS = [
   ...MOBILE_PROJECTS.map(project => ({ ...project, appId: "mobile" })),
-  ...WEB_PROJECTS.map(project => ({ ...project, appId: "projects" })),
-];
+  ...WEB_PROJECTS.map(project => ({
+    ...project,
+    appId: project.id === "nexora-ai-lab" ? "nexora" : "projects",
+  })),
+].sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
 
 export default function HomeDesktop({ onOpenProject, onOpenApp }) {
   return (
@@ -27,13 +30,36 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
           </div>
 
           <div className="desktop-home-actions">
-            <button type="button" className="desktop-primary-action" onClick={() => onOpenApp("resume")}>
+            <button
+              type="button"
+              className="desktop-primary-action"
+              onClick={() => onOpenApp("assistant")}
+            >
+              ✨ Ask About Me
+            </button>
+
+            <button
+              type="button"
+              className="desktop-secondary-action"
+              onClick={() => onOpenApp("resume")}
+            >
               View Résumé
             </button>
-            <button type="button" className="desktop-secondary-action" onClick={() => onOpenApp("contact")}>
+
+            <button
+              type="button"
+              className="desktop-secondary-action"
+              onClick={() => onOpenApp("contact")}
+            >
               Contact Me
             </button>
-            <a className="desktop-secondary-action" href={PROFILE.github} target="_blank" rel="noreferrer">
+
+            <a
+              className="desktop-secondary-action"
+              href={PROFILE.github}
+              target="_blank"
+              rel="noreferrer"
+            >
               GitHub ↗
             </a>
           </div>

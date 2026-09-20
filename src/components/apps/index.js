@@ -2,6 +2,7 @@ import AboutApp from "./AboutApp";
 import ContactApp from "./ContactApp";
 import FinderApp from "./FinderApp";
 import MobileApp from "./MobileApp";
+import NexoraApp from "./NexoraApp";
 import ProjectsApp from "./ProjectsApp";
 import ResumeApp from "./ResumeApp";
 import SkillsApp from "./SkillsApp";
@@ -12,6 +13,7 @@ const APP_COMPONENTS = {
   about: AboutApp,
   projects: ProjectsApp,
   mobile: MobileApp,
+  nexora: NexoraApp,
   skills: SkillsApp,
   resume: ResumeApp,
   terminal: TerminalApp,

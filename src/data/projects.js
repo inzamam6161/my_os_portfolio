@@ -14,6 +14,43 @@ export const WEB_PROJECTS = [
       { src: "/projects/signaldesk/dashboard-light.png", alt: "SignalDesk AI customer-intelligence dashboard in light mode" },
     ],
   },
+  {
+    id: "nexora-ai-lab",
+    title: "Nexora AI Lab",
+    desc: "A local-first browser intelligence workspace with nine practical tools for data analysis, dataset cleaning, document and meeting intelligence, resume matching, expense analysis, developer logs and browser-side image processing.",
+    tags: [
+      "React 19",
+      "TypeScript",
+      "Vite",
+      "Local-first",
+      "Data Analysis",
+      "Browser Canvas",
+      "Vitest",
+    ],
+    category: "Local Intelligence Web App",
+    symbol: "N",
+    previewType: "desktop",
+    featured: true,
+    color: "#8B7CFF",
+    href: "https://github.com/inzamam6161/nexora-ai-lab",
+    live: "https://nexora-ai-lab-psi.vercel.app/",
+    stats: [
+      { label: "Tools", value: "9" },
+      { label: "Processing", value: "Browser-local" },
+      { label: "Paid AI APIs", value: "0" },
+    ],
+    highlights: [
+      "Reusable React and TypeScript architecture with dedicated engines for profiling, statistics, anomalies, trends, chart recommendations, filtering and aggregation.",
+      "Local-first processing for spreadsheets, text and images, with transparent deterministic logic instead of presenting every rule-based calculation as generative AI.",
+      "Social Post Studio uses browser Canvas APIs for image measurement, crop and export, while Data Q&A provides focused natural-language-style analysis over uploaded datasets.",
+      "Shareable hash routes, built-in examples, automated tests and GitHub Actions CI improve the project from a demo into a maintainable portfolio engineering build.",
+    ],
+    screenshots: [
+      { src: "/projects/nexora/hero.png", alt: "Nexora AI Lab local-first intelligence homepage", label: "Home" },
+      { src: "/projects/nexora/tools.png", alt: "Nexora AI Lab quick workflows and tools section", label: "Workflows" },
+      { src: "/projects/nexora/grid.png", alt: "Nexora AI Lab nine-tool workspace grid", label: "Tools" },
+    ],
+  },
 ];
 
 // Confidential employer and client applications are intentionally excluded.

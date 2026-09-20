@@ -1,48 +1,128 @@
 import { WEB_PROJECTS } from "../../data/projects";
 import { colors, font } from "../../styles/tokens";
 
-export default function ProjectsApp({ selectedProjectId }) {
+export default function ProjectsApp({ selectedProjectId, fixedProjectId }) {
+  const resolvedProjectId = fixedProjectId || selectedProjectId;
   const project =
-    WEB_PROJECTS.find(item => item.id === selectedProjectId) || WEB_PROJECTS[0];
+    WEB_PROJECTS.find(item => item.id === resolvedProjectId) || WEB_PROJECTS[0];
 
   if (!project) return null;
 
   return (
-    <div style={{ fontFamily: font.family }}>
-      <div style={{ marginBottom: 18 }}>
-        <p style={{ margin: 0, color: project.color, fontSize: 10, fontWeight: 800, letterSpacing: ".09em", textTransform: "uppercase" }}>
-          {project.category}
-        </p>
-        <h1 style={{ margin: "6px 0", fontSize: 24 }}>{project.title}</h1>
-        <p style={{ maxWidth: 680, color: colors.textSecondary, fontSize: 13, lineHeight: 1.7 }}>
-          {project.desc}
-        </p>
-      </div>
-
-      {project.screenshots?.length > 0 && (
-        <div className="web-project-gallery">
-          {project.screenshots.map(screenshot => (
-            <img key={screenshot.src} src={screenshot.src} alt={screenshot.alt} />
-          ))}
+    <div className="project-showcase" style={{ fontFamily: font.family }}>
+      <header className="project-showcase__header">
+        <div>
+          <p
+            className="project-showcase__category"
+            style={{ color: project.color }}
+          >
+            {project.category}
+          </p>
+          <h1>{project.title}</h1>
+          <p className="project-showcase__description">{project.desc}</p>
         </div>
+
+        <div className="project-showcase__actions">
+          {project.live && (
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noreferrer"
+              className="project-showcase__primary"
+              style={{
+                background: project.color,
+                boxShadow: `0 10px 28px ${project.color}33`,
+              }}
+            >
+              Open Live App ↗
+            </a>
+          )}
+
+          <a
+            href={project.href}
+            target="_blank"
+            rel="noreferrer"
+            className="project-showcase__secondary"
+            style={{
+              borderColor: `${project.color}66`,
+              color: project.color,
+            }}
+          >
+            GitHub ↗
+          </a>
+        </div>
+      </header>
+
+      {project.stats?.length > 0 && (
+        <section className="project-showcase__stats">
+          {project.stats.map(stat => (
+            <div key={stat.label}>
+              <span>{stat.label}</span>
+              <strong>{stat.value}</strong>
+            </div>
+          ))}
+        </section>
       )}
 
-      <div style={{ display: "flex", gap: 7, flexWrap: "wrap", marginTop: 18 }}>
-        {project.tags.map(tag => (
-          <span key={tag} style={{ padding: "5px 8px", borderRadius: 6, background: `${project.color}18`, color: project.color, fontSize: 11 }}>
-            {tag}
-          </span>
-        ))}
-      </div>
+      {project.screenshots?.length > 0 && (
+        <section className="project-showcase__gallery">
+          {project.screenshots.map((screenshot, index) => (
+            <figure
+              key={screenshot.src}
+              className={index === 0 ? "is-featured" : ""}
+            >
+              <img src={screenshot.src} alt={screenshot.alt} />
+              {screenshot.label && <figcaption>{screenshot.label}</figcaption>}
+            </figure>
+          ))}
+        </section>
+      )}
 
-      <a
-        href={project.href}
-        target="_blank"
-        rel="noreferrer"
-        style={{ display: "inline-flex", marginTop: 20, padding: "9px 12px", border: `1px solid ${project.color}66`, borderRadius: 8, color: project.color, textDecoration: "none", fontSize: 12, fontWeight: 700 }}
-      >
-        View project on GitHub ↗
-      </a>
+      <section className="project-showcase__content-grid">
+        <div>
+          <p className="project-showcase__section-label">ENGINEERING</p>
+          <h2>What this project demonstrates</h2>
+
+          <div className="project-showcase__highlights">
+            {(project.highlights || []).map((highlight, index) => (
+              <article key={highlight}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <p>{highlight}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <aside>
+          <p className="project-showcase__section-label">STACK</p>
+          <h2>Technology</h2>
+
+          <div className="project-showcase__tags">
+            {project.tags.map(tag => (
+              <span
+                key={tag}
+                style={{
+                  background: `${project.color}16`,
+                  borderColor: `${project.color}30`,
+                  color: project.color,
+                }}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <div className="project-showcase__note">
+            <strong>Portfolio note</strong>
+            <p style={{ color: colors.textSecondary }}>
+              The implementation is intentionally transparent about which
+              features are deterministic browser-side analysis and which
+              capabilities would require a generative model in a production
+              version.
+            </p>
+          </div>
+        </aside>
+      </section>
     </div>
   );
 }
