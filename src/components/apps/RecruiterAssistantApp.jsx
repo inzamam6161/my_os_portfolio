@@ -3,7 +3,7 @@ import {
   ASSISTANT_SUGGESTIONS,
   ASSISTANT_WELCOME,
   getPortfolioAnswer,
-} from "../../data/assistantKnowledge";
+} from "../../data/recruiterKnowledge";
 import "./RecruiterAssistantApp.css";
 
 export default function RecruiterAssistantApp({

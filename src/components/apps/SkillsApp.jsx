@@ -1,34 +1,76 @@
-import { SKILL_SECTIONS } from "../../data/profile";
 import { colors, font } from "../../styles/tokens";
+
+const GROUPS = [
+  {
+    title: "Primary",
+    note: "Strongest portfolio and professional positioning",
+    items: [
+      ["React Native", "LifeOS · SignalOps Mobile"],
+      ["JavaScript / TypeScript", "Mobile + web projects"],
+      ["Mobile architecture", "Offline-first · state · navigation"],
+    ],
+  },
+  {
+    title: "Native Mobile",
+    note: "Direct iOS portfolio evidence + Android professional skills",
+    items: [
+      ["Swift / SwiftUI", "PulseBoard · LumaHome"],
+      ["iOS platform APIs", "WidgetKit · ActivityKit · App Intents"],
+      ["Android / Kotlin / Java", "Professional skill set · RN Android delivery"],
+    ],
+  },
+  {
+    title: "Frontend & Product",
+    note: "Modern responsive product interfaces",
+    items: [
+      ["React", "SignalDesk · Nexora AI Lab"],
+      ["Responsive UI", "Desktop · tablet · mobile"],
+      ["Product thinking", "Evidence-based case studies"],
+    ],
+  },
+  {
+    title: "Data, Backend & Delivery",
+    note: "Integration and production-supporting skills",
+    items: [
+      ["Node.js / REST APIs", "Backend integration experience"],
+      ["SQLite / SQLCipher", "LifeOS offline source of truth"],
+      ["Git / GitHub / CI", "Automated test + build workflows"],
+      ["MongoDB / Firebase", "Backend & systems skill set"],
+    ],
+  },
+];
 
 export default function SkillsApp() {
   return (
-    <div style={{ fontFamily: font.family }}>
-      <h1 style={{ margin: "0 0 6px", fontSize: 21 }}>Engineering Skills</h1>
-      <p style={{ marginBottom: 20, color: colors.textMuted, fontSize: 12 }}>Production experience across mobile, frontend, backend integrations, and delivery.</p>
+    <div className="evidence-skills" style={{ fontFamily: font.family }}>
+      <div className="evidence-skills-head">
+        <p>ENGINEERING SKILLS</p>
+        <h1>Evidence over percentages.</h1>
+        <span>Skills are grouped by where they are demonstrated rather than arbitrary proficiency scores.</span>
+      </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))", gap: 12 }}>
-        {SKILL_SECTIONS.map(section => (
-          <section key={section.category} style={{ padding: 16, border: colors.border, borderRadius: 12, background: "rgba(255,255,255,.035)" }}>
-            <h2 style={{ display: "flex", alignItems: "center", gap: 8, margin: "0 0 15px", fontSize: 14 }}>
-              <span aria-hidden="true">{section.icon}</span>{section.category}
-            </h2>
-            <div style={{ display: "grid", gap: 12 }}>
-              {section.skills.map(skill => (
-                <div key={skill.name}>
-                  <div style={{ display: "flex", justifyContent: "space-between", gap: 10, marginBottom: 6, fontSize: 11 }}>
-                    <span>{skill.name}</span>
-                    <span style={{ color: colors.textMuted }}>{skill.level}%</span>
-                  </div>
-                  <div style={{ height: 5, overflow: "hidden", borderRadius: 999, background: "rgba(255,255,255,.08)" }}>
-                    <div style={{ width: `${skill.level}%`, height: "100%", borderRadius: 999, background: `linear-gradient(90deg, ${section.color}, ${section.color}99)` }} />
-                  </div>
-                </div>
+      <div className="evidence-skill-grid">
+        {GROUPS.map(group => (
+          <section key={group.title}>
+            <div className="evidence-skill-heading">
+              <h2>{group.title}</h2>
+              <p>{group.note}</p>
+            </div>
+            <div>
+              {group.items.map(([name, proof]) => (
+                <article key={name}>
+                  <strong>{name}</strong>
+                  <span>{proof}</span>
+                </article>
               ))}
             </div>
           </section>
         ))}
       </div>
+
+      <p className="evidence-skill-note" style={{ color: colors.textMuted }}>
+        For role-specific requirements, use Ask About Me to compare the requested stack with portfolio evidence.
+      </p>
     </div>
   );
 }

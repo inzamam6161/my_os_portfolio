@@ -1,52 +1,70 @@
-import { EXPERIENCE, PROFILE, SKILL_SECTIONS } from "../../data/profile";
-import { colors, font } from "../../styles/tokens";
+import { EXPERIENCE, PROFILE } from "../../data/profile";
+import { MOBILE_PROJECTS, WEB_PROJECTS } from "../../data/projects";
+import { font } from "../../styles/tokens";
+
+const FEATURED = ["lifeos", "signalops-mobile", "pulseboard", "signaldesk-ai"]
+  .map(id => [...MOBILE_PROJECTS, ...WEB_PROJECTS].find(project => project.id === id))
+  .filter(Boolean);
 
 export default function ResumeApp() {
   return (
-    <div style={{ fontFamily: font.family }}>
-      <header className="resume-header" style={{ marginBottom: 24 }}>
+    <div className="resume-document" style={{ fontFamily: font.family }}>
+      <header className="resume-header" style={{ marginBottom: 22 }}>
         <div>
-          <h1 style={{ margin: "0 0 5px", fontSize: 24 }}>{PROFILE.name}</h1>
-          <p style={{ color: colors.cyan, fontSize: 12 }}>{PROFILE.title}</p>
-          <p style={{ marginTop: 6, color: colors.textMuted, fontSize: 11 }}>{PROFILE.location} · {PROFILE.email}</p>
+          <h1 style={{ margin: "0 0 5px", fontSize: 26 }}>{PROFILE.name}</h1>
+          <p className="resume-role">{PROFILE.title}</p>
+          <p className="resume-meta">{PROFILE.location} · {PROFILE.email} · {PROFILE.phone}</p>
         </div>
-        <a href={`mailto:${PROFILE.email}?subject=Software%20Engineering%20Opportunity`} style={{ padding: "9px 12px", border: colors.borderFocused, borderRadius: 8, background: colors.accentSubtle, color: "#d1d0ff", textDecoration: "none", fontSize: 11, fontWeight: 700 }}>Request résumé</a>
+        <div className="resume-actions">
+          <button type="button" onClick={() => window.print()}>Print / Save PDF</button>
+          <a href={`mailto:${PROFILE.email}?subject=Software%20Engineering%20Opportunity`}>Email</a>
+        </div>
       </header>
 
-      <section style={{ marginBottom: 25 }}>
-        <h2 style={sectionHeading}>Professional Summary</h2>
-        <p style={bodyStyle}>{PROFILE.bio[0]}</p>
+      <section className="resume-section">
+        <h2>Professional Summary</h2>
+        {PROFILE.bio.map(item => <p key={item}>{item}</p>)}
       </section>
 
-      <section style={{ marginBottom: 25 }}>
-        <h2 style={sectionHeading}>Experience</h2>
-        <div style={{ display: "grid", gap: 10 }}>
+      <section className="resume-section">
+        <h2>Experience</h2>
+        <div className="resume-experience-list">
           {EXPERIENCE.map(item => (
-            <article key={`${item.role}-${item.period}`} style={{ display: "grid", gridTemplateColumns: "12px 1fr", gap: 11, padding: 15, border: colors.border, borderRadius: 10, background: "rgba(255,255,255,.025)" }}>
-              <span style={{ width: 9, height: 9, marginTop: 4, borderRadius: "50%", background: item.dot, boxShadow: `0 0 0 4px ${item.dot}22` }} />
-              <div>
-                <div className="experience-title">
-                  <div><strong style={{ fontSize: 13 }}>{item.role}</strong><span style={{ marginLeft: 7, color: colors.textMuted, fontSize: 11 }}>· {item.company}</span></div>
-                  <span style={{ color: colors.textMuted, fontSize: 10 }}>{item.period}</span>
-                </div>
-                <p style={{ ...bodyStyle, marginTop: 8, fontSize: 11 }}>{item.desc}</p>
-              </div>
+            <article key={`${item.role}-${item.period}`}>
+              <div><strong>{item.role}</strong><span>{item.company}</span></div>
+              <time>{item.period}</time>
+              <p>{item.desc}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section>
-        <h2 style={sectionHeading}>Core Capabilities</h2>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
-          {SKILL_SECTIONS.flatMap(section => section.skills).map(skill => (
-            <span key={skill.name} style={{ padding: "5px 8px", border: colors.border, borderRadius: 6, background: "rgba(255,255,255,.04)", color: colors.textSecondary, fontSize: 10 }}>{skill.name}</span>
+      <section className="resume-section">
+        <h2>Selected Engineering Work</h2>
+        <div className="resume-project-list">
+          {FEATURED.map(project => (
+            <article key={project.id}>
+              <strong>{project.title}</strong>
+              <span>{project.category}</span>
+              <p>{project.desc}</p>
+            </article>
           ))}
         </div>
       </section>
+
+      <section className="resume-section">
+        <h2>Core Technologies</h2>
+        <p>
+          React Native · TypeScript · JavaScript · Redux Toolkit · React · Swift · SwiftUI ·
+          SQLite / SQLCipher · REST APIs · Node.js · Git / GitHub · CI/CD
+        </p>
+      </section>
+
+      <footer className="resume-footer">
+        <a href={PROFILE.github} target="_blank" rel="noreferrer">GitHub</a>
+        <a href={PROFILE.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href={PROFILE.portfolio} target="_blank" rel="noreferrer">Portfolio</a>
+      </footer>
     </div>
   );
 }
-
-const sectionHeading = { margin: "0 0 11px", color: colors.textPrimary, fontSize: 12, letterSpacing: ".1em", textTransform: "uppercase" };
-const bodyStyle = { margin: 0, color: colors.textSecondary, fontSize: 12, lineHeight: 1.7 };

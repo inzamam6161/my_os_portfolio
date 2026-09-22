@@ -11,7 +11,7 @@
 import { APPS } from "./apps";
 export const PROFILE = {
   name:     "Inzamamul Haque",
-  title:    "React Native Developer | Mobile & Frontend Engineer",
+  title:    "React Native Engineer | Mobile & Frontend",
   location: "Al Ain, UAE",
   email:    "inzamam6161@gmail.com",
   phone:    "+971 52 144 1657",
@@ -19,7 +19,7 @@ export const PROFILE = {
   github:   "https://github.com/inzamam6161",
   linkedin: "https://www.linkedin.com/in/inzamamul-haque-099207113/",
   bio: [
-    "React Native developer with 5 years of software development experience across mobile and web applications, specializing in React Native, JavaScript, React.js, Android, iOS, and Node.js.",
+    "React Native engineer with 5 years of software development experience across mobile and web applications, with the strongest focus on React Native, JavaScript / TypeScript, React, mobile architecture and product delivery.",
     "Experienced across the complete application lifecycle—from UI development and API integration to testing, deployment, and publishing on Google Play and the Apple App Store. Based in the UAE and open to React Native, mobile, and frontend opportunities."
   ],
   badges: []
@@ -75,7 +75,7 @@ export const SKILL_SECTIONS = [
 
 export const EXPERIENCE = [
   { role: "Admin / Helpdesk Operator", company: "Etihad International Hospitality", period: "Sep 2025 — Present", desc: "Provide day-to-day administrative and technical support while continuing professional software development and upskilling.", dot: "#30D158" },
-  { role: "Software Developer", company: "India", period: "5 years", desc: "Built and maintained mobile and web applications using React Native, React.js, Android, iOS, JavaScript, and Node.js, including store-release workflows.", dot: "#5E5CE6" },
+  { role: "Software Developer — Mobile & Web", company: "India", period: "5 years", desc: "Built and maintained cross-platform mobile and web applications across React Native, React, Android and iOS; integrated APIs and persistent state; supported testing, deployment and app-store release workflows.", dot: "#5E5CE6" },
 ];
 
 // export const WALLPAPERS = [
@@ -229,7 +229,7 @@ export const NOTIFICATIONS_INIT = [
 export const TERMINAL_LINES = [
   { t: 0, text: "Welcome to Inzamamul Haque's developer portfolio", color: "rgba(255,255,255,0.4)" },
   { t: 300, text: "inzamam@portfolio ~ % whoami", color: "#30D158" },
-  { t: 600, text: "React Native developer · mobile & frontend engineer", color: "rgba(255,255,255,0.85)" },
+  { t: 600, text: "React Native engineer · mobile & frontend", color: "rgba(255,255,255,0.85)" },
   { t: 900, text: "inzamam@portfolio ~ % cat skills.txt", color: "#30D158" },
   { t: 1200, text: "React Native · JavaScript · React.js", color: "#5E5CE6" },
   { t: 1450, text: "Android · Kotlin/Java · iOS · Swift", color: "#5E5CE6" },

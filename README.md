@@ -1,59 +1,53 @@
 # Inzamamul Haque — Developer Portfolio
 
-A macOS-inspired portfolio presenting my professional mobile-engineering experience, selected projects and technical strengths.
+A recruiter-first, macOS-inspired engineering portfolio focused on React Native, mobile, native iOS and frontend work.
 
 [View the live portfolio](https://inzamam-dev.vercel.app/)
 
 ## Highlights
 
-- Desktop-style window management
-- Projects, experience, skills, resume and contact applications
-- Spotlight search and keyboard interactions
-- Mission Control and notification-center interfaces
-- Responsive mobile experience
-- Centralized project and profile data for maintainable content updates
+- Glassmorphism macOS-inspired desktop experience
+- Recruiter-first homepage with four flagship case studies
+- Embedded **Ask About Me** assistant grounded in portfolio data
+- Full recruiter chat for experience, projects, skills and role-fit questions
+- Evidence-based skills instead of arbitrary proficiency percentages
+- Printable résumé view with browser **Save as PDF**
+- Projects, mobile work, experience, contact, Spotlight and Mission Control
+- Responsive desktop / tablet / mobile layouts
+- Centralized project/profile data
+
+## Featured work
+
+- **LifeOS** — React Native offline-first personal intelligence platform
+- **SignalOps Mobile** — React Native incident-response command center
+- **PulseBoard** — native iOS focus-performance application
+- **SignalDesk** — React / TypeScript customer-intelligence web application
+
+LumaHome and Nexora AI Lab remain available in the broader project portfolio.
 
 ## Technology
 
 - React 19
 - JavaScript
-- CSS design tokens and responsive layouts
-- Create React App
-- React Testing Library foundation
+- Responsive CSS / glass design system
+- React Testing Library
+- GitHub Actions
+- Vercel deployment
 
-## Project structure
-
-```text
-src/
-├── components/
-│   ├── apps/       # Portfolio applications
-│   ├── overlays/   # Spotlight, Mission Control and notifications
-│   └── ui/         # Dock, menu bar, wallpaper and windows
-├── data/           # Profile, project and application content
-├── hooks/          # Keyboard, time and window behavior
-└── styles/         # Shared design tokens
-```
-
-## Run locally
+## Local development
 
 ```bash
-npm install
+npm ci
 npm start
 ```
 
-Create a production build:
+Quality checks:
 
 ```bash
+npm test -- --watchAll=false
 npm run build
 ```
 
-Run tests:
+## Recruiter positioning
 
-```bash
-npm test
-```
-
-## Purpose
-
-This portfolio is designed for recruiters and engineering teams evaluating me for Senior React Native, Senior Mobile and React/frontend roles in the UAE.
-
+This portfolio is designed for teams evaluating Inzamamul for React Native, mobile and frontend engineering opportunities in the UAE. Claims in the project case studies and recruiter assistant are intentionally scoped to the evidence available in the portfolio.

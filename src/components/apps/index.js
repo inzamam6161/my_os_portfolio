@@ -8,6 +8,7 @@ import ResumeApp from "./ResumeApp";
 import SignalDeskApp from "./SignalDeskApp";
 import SkillsApp from "./SkillsApp";
 import TerminalApp from "./TerminalApp";
+import RecruiterAssistantApp from "./RecruiterAssistantApp";
 
 const APP_COMPONENTS = {
   finder: FinderApp,
@@ -20,6 +21,7 @@ const APP_COMPONENTS = {
   resume: ResumeApp,
   terminal: TerminalApp,
   contact: ContactApp,
+  assistant: RecruiterAssistantApp,
 };
 
 export default APP_COMPONENTS;
