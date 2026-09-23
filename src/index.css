@@ -687,3 +687,424 @@ code {
   .ref-questions{grid-template-columns:1fr}.ref-project-grid{grid-template-columns:1fr}.ref-project-img{height:145px}.ref-skill-grid{grid-template-columns:1fr 1fr}
   .ref-dock{max-width:calc(100vw - 14px);overflow-x:auto}.ref-dock-button{width:36px;height:36px;flex:0 0 36px}
 }
+
+/* ===== EXPANDABLE HOME PANELS ===== */
+.ref-projects,
+.ref-skills,
+.ref-assistant {
+  cursor: zoom-in;
+}
+
+.ref-projects button,
+.ref-skills button,
+.ref-assistant button,
+.ref-assistant input {
+  cursor: pointer;
+}
+
+.ref-assistant input {
+  cursor: text;
+}
+
+.ref-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ref-card-actions > button {
+  border: 0;
+  background: transparent;
+  color: #92ebff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 7px;
+}
+
+.ref-expand-button {
+  padding: 5px 7px !important;
+  border: 1px solid rgba(188,226,255,.13) !important;
+  border-radius: 7px !important;
+  background: rgba(255,255,255,.035) !important;
+  color: rgba(232,245,253,.72) !important;
+}
+
+.ref-assistant-head {
+  position: relative;
+}
+
+.ref-assistant-expand {
+  position: absolute;
+  right: -1px;
+  bottom: -37px;
+  z-index: 4;
+  width: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(192,227,255,.13) !important;
+  border-radius: 7px !important;
+  background: rgba(3,14,24,.46) !important;
+  color: rgba(239,248,255,.72) !important;
+  font-size: 12px !important;
+  backdrop-filter: blur(10px);
+}
+
+.ref-focus-backdrop {
+  position: fixed;
+  inset: 42px 0 0;
+  z-index: 1450;
+  border: 0;
+  background: rgba(1, 7, 13, .72);
+  backdrop-filter: blur(12px) saturate(90%);
+  -webkit-backdrop-filter: blur(12px) saturate(90%);
+  cursor: default;
+}
+
+.ref-focus-panel {
+  position: fixed !important;
+  z-index: 1500 !important;
+  left: 50% !important;
+  top: 50% !important;
+  width: min(1220px, calc(100vw - 90px)) !important;
+  height: min(720px, calc(100vh - 126px)) !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 24px !important;
+  box-sizing: border-box !important;
+  transform: translate(-50%, -50%) !important;
+  border-radius: 26px !important;
+  border-color: rgba(202,234,255,.28) !important;
+  background:
+    linear-gradient(145deg, rgba(16, 41, 65, .90), rgba(3, 14, 26, .91)) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.10),
+    0 42px 120px rgba(0,0,0,.55) !important;
+  backdrop-filter: blur(30px) saturate(135%) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(135%) !important;
+  overflow: auto !important;
+  cursor: default !important;
+  animation: refPanelIn .18s ease-out;
+}
+
+@keyframes refPanelIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.ref-focus-assistant {
+  width: min(1260px, calc(100vw - 90px)) !important;
+}
+
+.ref-focus-assistant .ref-assistant-head {
+  grid-template-columns: auto minmax(0,1fr) auto;
+  gap: 16px;
+  padding-bottom: 18px;
+}
+
+.ref-focus-assistant .ref-assistant-logo {
+  width: 62px;
+  height: 62px;
+  border-radius: 17px;
+  font-size: 28px;
+}
+
+.ref-focus-assistant .ref-assistant-title h2 {
+  font-size: 28px;
+}
+
+.ref-focus-assistant .ref-assistant-title span {
+  font-size: 10px;
+  padding: 4px 7px;
+}
+
+.ref-focus-assistant .ref-assistant-heading > p,
+.ref-focus-assistant .ref-assistant-status > small {
+  font-size: 12px;
+}
+
+.ref-focus-assistant .ref-online {
+  font-size: 11px;
+  padding: 9px 12px;
+}
+
+.ref-focus-assistant .ref-assistant-expand {
+  right: 0;
+  top: 0;
+  bottom: auto;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px !important;
+  font-size: 21px !important;
+}
+
+.ref-focus-assistant .ref-assistant-status {
+  padding-right: 52px;
+}
+
+.ref-focus-assistant .ref-assistant-body {
+  grid-template-columns: 29% minmax(0, 1fr);
+  height: calc(100% - 82px);
+  min-height: 0;
+  padding-top: 18px;
+}
+
+.ref-focus-assistant .ref-questions {
+  padding-right: 18px;
+}
+
+.ref-focus-assistant .ref-questions > strong {
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.ref-focus-assistant .ref-questions button {
+  min-height: 58px;
+  margin-bottom: 9px;
+  padding: 9px 12px;
+  grid-template-columns: 22px 1fr;
+  border-radius: 12px;
+}
+
+.ref-focus-assistant .ref-questions button span {
+  font-size: 15px;
+}
+
+.ref-focus-assistant .ref-questions button em {
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.ref-focus-assistant .ref-chat {
+  padding-left: 20px;
+}
+
+.ref-focus-assistant .ref-thread {
+  min-height: 0;
+  height: calc(100% - 72px);
+  padding: 4px 3px 12px;
+  align-content: end;
+}
+
+.ref-focus-assistant .ref-message {
+  grid-template-columns: 42px minmax(0,1fr);
+  gap: 11px;
+}
+
+.ref-focus-assistant .ref-message > i {
+  width: 42px;
+  height: 42px;
+  font-size: 17px;
+}
+
+.ref-focus-assistant .ref-message p {
+  padding: 14px 16px;
+  border-radius: 14px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.ref-focus-assistant .ref-message.user p {
+  max-width: 78%;
+}
+
+.ref-focus-assistant .ref-chat-actions {
+  gap: 8px;
+  margin-top: 9px;
+}
+
+.ref-focus-assistant .ref-chat-actions button {
+  padding: 7px 10px;
+  font-size: 10px;
+}
+
+.ref-focus-assistant .ref-composer {
+  grid-template-columns: 1fr 48px;
+  gap: 9px;
+  padding-top: 11px;
+}
+
+.ref-focus-assistant .ref-composer input {
+  height: 48px;
+  padding: 0 14px;
+  border-radius: 11px;
+  font-size: 12px;
+}
+
+.ref-focus-assistant .ref-composer button {
+  border-radius: 11px;
+  font-size: 17px;
+}
+
+.ref-focus-assistant .ref-full-chat {
+  margin-top: 7px;
+  font-size: 10px;
+}
+
+.ref-focus-projects .ref-card-head,
+.ref-focus-skills .ref-card-head {
+  margin-bottom: 20px;
+}
+
+.ref-focus-projects .ref-card-icon,
+.ref-focus-skills .ref-card-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  font-size: 18px;
+}
+
+.ref-focus-projects .ref-card-title h2,
+.ref-focus-skills .ref-card-title h2 {
+  font-size: 23px;
+}
+
+.ref-focus-projects .ref-card-title small,
+.ref-focus-skills .ref-card-title small {
+  margin-top: 4px;
+  font-size: 11px;
+}
+
+.ref-focus-projects .ref-card-actions > button,
+.ref-focus-skills .ref-card-actions > button {
+  font-size: 11px;
+}
+
+.ref-focus-projects .ref-project-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.ref-focus-projects .ref-project {
+  border-radius: 14px;
+}
+
+.ref-focus-projects .ref-project-img {
+  height: 190px !important;
+}
+
+.ref-focus-projects .ref-project-open {
+  top: 10px;
+  right: 10px;
+  width: 29px;
+  height: 29px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.ref-focus-projects .ref-project-copy {
+  padding: 14px;
+}
+
+.ref-focus-projects .ref-project-copy > em {
+  min-height: 22px;
+  font-size: 9px;
+}
+
+.ref-focus-projects .ref-project-copy > strong {
+  font-size: 16px;
+}
+
+.ref-focus-projects .ref-project-copy > p {
+  height: auto;
+  min-height: 66px;
+  margin: 9px 0 12px;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.ref-focus-projects .ref-project-copy small {
+  padding: 5px 7px;
+  border-radius: 6px;
+  font-size: 8px;
+}
+
+.ref-focus-skills {
+  width: min(1080px, calc(100vw - 90px)) !important;
+}
+
+.ref-focus-skills .ref-skill-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 14px;
+}
+
+.ref-focus-skills .ref-skill-grid button {
+  min-height: 190px !important;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 14px;
+}
+
+.ref-focus-skills .ref-skill-grid i {
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  font-size: 15px;
+}
+
+.ref-focus-skills .ref-skill-grid strong {
+  font-size: 15px;
+}
+
+.ref-focus-skills .ref-skill-grid small {
+  max-width: none;
+  overflow: visible;
+  font-size: 10px;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.4;
+}
+
+@media (max-width: 900px) {
+  .ref-focus-panel,
+  .ref-focus-assistant,
+  .ref-focus-skills {
+    width: calc(100vw - 24px) !important;
+    height: calc(100vh - 74px) !important;
+    padding: 18px !important;
+    top: calc(50% + 10px) !important;
+  }
+
+  .ref-focus-projects .ref-project-grid,
+  .ref-focus-skills .ref-skill-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .ref-focus-assistant .ref-assistant-body {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .ref-focus-assistant .ref-questions {
+    grid-template-columns: 1fr 1fr;
+    padding: 0 0 14px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,.09);
+  }
+
+  .ref-focus-assistant .ref-chat {
+    padding: 16px 0 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .ref-focus-projects .ref-project-grid,
+  .ref-focus-skills .ref-skill-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .ref-focus-assistant .ref-questions {
+    grid-template-columns: 1fr;
+  }
+
+  .ref-focus-projects .ref-project-img {
+    height: 180px !important;
+  }
+}

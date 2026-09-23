@@ -11,7 +11,13 @@ const DISPLAY_QUESTIONS = [
   "How can I contact him?",
 ];
 
-export default function HomeAssistantPanel({ onOpenApp, onOpenProject }) {
+export default function HomeAssistantPanel({
+  onOpenApp,
+  onOpenProject,
+  expanded = false,
+  onExpand,
+  onClose,
+}) {
   const initial = useMemo(() => getPortfolioAnswer(DEFAULT), []);
 
   const [messages, setMessages] = useState([
@@ -55,8 +61,18 @@ export default function HomeAssistantPanel({ onOpenApp, onOpenProject }) {
     if (action.appId) onOpenApp?.(action.appId);
   };
 
+  const handleContainerClick = event => {
+    if (expanded) return;
+    if (event.target.closest("button, a, input, textarea, select, form, [role='button']")) return;
+    onExpand?.();
+  };
+
   return (
-    <section className="ref-glass ref-assistant" aria-label="Ask About Me">
+    <section
+      className={`ref-glass ref-assistant ${expanded ? "ref-focus-panel ref-focus-assistant" : ""}`}
+      aria-label="Ask About Me"
+      onClick={handleContainerClick}
+    >
       <header className="ref-assistant-head">
         <div className="ref-assistant-logo">✦</div>
 
@@ -72,6 +88,15 @@ export default function HomeAssistantPanel({ onOpenApp, onOpenProject }) {
           <div className="ref-online"><span /> Online</div>
           <small>Ask anything — projects, skills, experience, or vision.</small>
         </div>
+
+        <button
+          type="button"
+          className="ref-assistant-expand"
+          onClick={expanded ? onClose : onExpand}
+          aria-label={expanded ? "Close expanded Ask About Me" : "Expand Ask About Me"}
+        >
+          {expanded ? "×" : "⤢"}
+        </button>
       </header>
 
       <div className="ref-assistant-body">
@@ -88,7 +113,7 @@ export default function HomeAssistantPanel({ onOpenApp, onOpenProject }) {
 
         <div className="ref-chat">
           <div className="ref-thread">
-            {messages.slice(-2).map(message => (
+            {messages.slice(expanded ? -6 : -2).map(message => (
               <div className={`ref-message ${message.role}`} key={message.id}>
                 {message.role === "assistant" && <i>✦</i>}
 

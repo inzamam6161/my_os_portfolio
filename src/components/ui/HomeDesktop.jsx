@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { MOBILE_PROJECTS, WEB_PROJECTS } from "../../data/projects";
 import { PROFILE } from "../../data/profile";
 import HomeAssistantPanel from "./HomeAssistantPanel";
@@ -37,13 +38,52 @@ const IMPACT = [
   ["UAE", "Based in"],
 ];
 
+const isInteractiveTarget = target =>
+  Boolean(target.closest("button, a, input, textarea, select, form, [role='button']"));
+
 export default function HomeDesktop({ onOpenProject, onOpenApp }) {
+  const [expandedPanel, setExpandedPanel] = useState(null);
+
+  useEffect(() => {
+    if (!expandedPanel) return undefined;
+
+    const handleKey = event => {
+      if (event.key === "Escape") setExpandedPanel(null);
+    };
+
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [expandedPanel]);
+
+  const expandFromContainer = (panel, event) => {
+    if (expandedPanel || isInteractiveTarget(event.target)) return;
+    setExpandedPanel(panel);
+  };
+
+  const openProject = (projectId, appId) => {
+    setExpandedPanel(null);
+    onOpenProject(projectId, appId);
+  };
+
+  const openApp = appId => {
+    setExpandedPanel(null);
+    onOpenApp(appId);
+  };
+
   return (
-    <main className="ref-home">
+    <main className={`ref-home ${expandedPanel ? "has-expanded-panel" : ""}`}>
+      {expandedPanel && (
+        <button
+          type="button"
+          className="ref-focus-backdrop"
+          aria-label="Close expanded panel"
+          onClick={() => setExpandedPanel(null)}
+        />
+      )}
+
       <section className="ref-top">
         <section className="ref-hero" aria-label="Portfolio introduction">
           <p className="ref-kicker">BUILDING A MORE CONNECTED TOMORROW</p>
-
           <h1>{PROFILE.name}</h1>
 
           <div className="ref-role">
@@ -61,15 +101,11 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
           </p>
 
           <div className="ref-actions">
-            <button
-              className="primary"
-              type="button"
-              onClick={() => onOpenApp("resume")}
-            >
+            <button className="primary" type="button" onClick={() => openApp("resume")}>
               <span>⇩</span> View Résumé
             </button>
 
-            <button type="button" onClick={() => onOpenApp("contact")}>
+            <button type="button" onClick={() => openApp("contact")}>
               Let&apos;s Connect <span>→</span>
             </button>
           </div>
@@ -91,13 +127,20 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
         </section>
 
         <HomeAssistantPanel
-          onOpenApp={onOpenApp}
-          onOpenProject={onOpenProject}
+          onOpenApp={openApp}
+          onOpenProject={openProject}
+          expanded={expandedPanel === "assistant"}
+          onExpand={() => setExpandedPanel("assistant")}
+          onClose={() => setExpandedPanel(null)}
         />
       </section>
 
       <section className="ref-bottom">
-        <section className="ref-glass ref-projects">
+        <section
+          className={`ref-glass ref-projects ${expandedPanel === "projects" ? "ref-focus-panel ref-focus-projects" : ""}`}
+          onClick={event => expandFromContainer("projects", event)}
+          aria-label="Featured Projects panel"
+        >
           <header className="ref-card-head">
             <div className="ref-card-title-wrap">
               <b className="ref-card-icon">▣</b>
@@ -107,9 +150,20 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
               </div>
             </div>
 
-            <button type="button" onClick={() => onOpenApp("projects")}>
-              View All <span>→</span>
-            </button>
+            <div className="ref-card-actions">
+              <button
+                type="button"
+                className="ref-expand-button"
+                onClick={() => setExpandedPanel(expandedPanel === "projects" ? null : "projects")}
+                aria-label={expandedPanel === "projects" ? "Close expanded projects" : "Expand Featured Projects"}
+              >
+                {expandedPanel === "projects" ? "× Close" : "⤢ Expand"}
+              </button>
+
+              <button type="button" onClick={() => openApp("projects")}>
+                View All <span>→</span>
+              </button>
+            </div>
           </header>
 
           <div className="ref-project-grid">
@@ -122,7 +176,7 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
                   type="button"
                   aria-label={`Open ${project.title} case study`}
                   key={project.id}
-                  onClick={() => onOpenProject(project.id, project.appId)}
+                  onClick={() => openProject(project.id, project.appId)}
                 >
                   <div className={`ref-project-img ${project.previewType === "phone" ? "phone" : ""}`}>
                     {image ? <img src={image.src} alt="" /> : project.icon}
@@ -146,7 +200,11 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
           </div>
         </section>
 
-        <section className="ref-glass ref-skills">
+        <section
+          className={`ref-glass ref-skills ${expandedPanel === "skills" ? "ref-focus-panel ref-focus-skills" : ""}`}
+          onClick={event => expandFromContainer("skills", event)}
+          aria-label="Skills and Tools panel"
+        >
           <header className="ref-card-head">
             <div className="ref-card-title-wrap">
               <b className="ref-card-icon">▥</b>
@@ -156,14 +214,25 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
               </div>
             </div>
 
-            <button type="button" onClick={() => onOpenApp("skills")}>
-              View All <span>→</span>
-            </button>
+            <div className="ref-card-actions">
+              <button
+                type="button"
+                className="ref-expand-button"
+                onClick={() => setExpandedPanel(expandedPanel === "skills" ? null : "skills")}
+                aria-label={expandedPanel === "skills" ? "Close expanded skills" : "Expand Skills and Tools"}
+              >
+                {expandedPanel === "skills" ? "× Close" : "⤢ Expand"}
+              </button>
+
+              <button type="button" onClick={() => openApp("skills")}>
+                View All <span>→</span>
+              </button>
+            </div>
           </header>
 
           <div className="ref-skill-grid">
             {SKILLS.map(([icon, name, proof]) => (
-              <button type="button" key={name} onClick={() => onOpenApp("skills")}>
+              <button type="button" key={name} onClick={() => openApp("skills")}>
                 <i>{icon}</i>
                 <strong>{name}</strong>
                 <small>{proof}</small>
@@ -194,8 +263,8 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
           </div>
 
           <div className="ref-impact-actions">
-            <button type="button" onClick={() => onOpenApp("resume")}>Résumé</button>
-            <button type="button" onClick={() => onOpenApp("contact")}>Contact →</button>
+            <button type="button" onClick={() => openApp("resume")}>Résumé</button>
+            <button type="button" onClick={() => openApp("contact")}>Contact →</button>
           </div>
         </section>
       </section>
