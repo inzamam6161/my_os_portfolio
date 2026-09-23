@@ -126,6 +126,7 @@ export default function App() {
         onNotifications={() => setNotifOpen(v => !v)}
         notifCount={unreadCount}
         onWallpaper={() => setWallpaperOpen(true)}
+        onOpenApp={openApp}
       />
 
       {/* ── Layer 3: Recruiter-first homepage ── */}
