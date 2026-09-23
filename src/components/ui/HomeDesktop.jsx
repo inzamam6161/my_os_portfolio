@@ -6,7 +6,12 @@ const ALL = [
   ...MOBILE_PROJECTS.map(project => ({ ...project, appId: "mobile" })),
   ...WEB_PROJECTS.map(project => ({
     ...project,
-    appId: project.id === "signaldesk-ai" ? "signaldesk" : project.id === "nexora-ai-lab" ? "nexora" : "projects",
+    appId:
+      project.id === "signaldesk-ai"
+        ? "signaldesk"
+        : project.id === "nexora-ai-lab"
+          ? "nexora"
+          : "projects",
   })),
 ];
 
@@ -18,59 +23,99 @@ const SKILLS = [
   ["RN", "React Native", "LifeOS · SignalOps"],
   ["TS", "TypeScript", "Mobile + Web"],
   ["JS", "JavaScript", "React ecosystem"],
-  ["SW", "Swift / SwiftUI", "PulseBoard · LumaHome"],
+  ["SW", "SwiftUI", "PulseBoard · LumaHome"],
+  ["RE", "React", "SignalDesk · Nexora"],
   ["ND", "Node.js", "API integration"],
-  ["DB", "SQLite / SQLCipher", "Offline-first"],
+  ["DB", "SQLite", "Offline-first"],
+  ["GH", "GitHub", "Tests · CI"],
 ];
 
-const PROFILE_STATS = [
-  ["6", "Portfolio case studies"],
-  ["2", "React Native projects"],
-  ["2", "Native iOS projects"],
-  ["UAE", "Current location"],
+const IMPACT = [
+  ["6", "Case studies"],
+  ["2", "React Native"],
+  ["2", "Native iOS"],
+  ["UAE", "Based in"],
 ];
 
 export default function HomeDesktop({ onOpenProject, onOpenApp }) {
   return (
     <main className="ref-home">
       <section className="ref-top">
-        <section className="ref-hero">
+        <section className="ref-hero" aria-label="Portfolio introduction">
           <p className="ref-kicker">BUILDING A MORE CONNECTED TOMORROW</p>
+
           <h1>{PROFILE.name}</h1>
-          <h2>React Native Engineer <span>•</span> Mobile Engineer <span>•</span> Frontend</h2>
+
+          <div className="ref-role">
+            <span>React Native Engineer</span>
+            <i>•</i>
+            <span>Mobile Engineer</span>
+            <i>•</i>
+            <span>Product Builder</span>
+          </div>
+
           <p className="ref-intro">
-            I design and build high-performance, user-focused mobile applications with clean architecture,
-            thoughtful UX, reliable offline behaviour, testing and production-minded delivery.
+            I design and build high-performance, user-focused mobile applications using React Native
+            and modern technologies. I turn ideas into scalable products with clean architecture,
+            reliable offline behaviour and thoughtful user experiences.
           </p>
 
           <div className="ref-actions">
-            <button className="primary" type="button" onClick={() => onOpenApp("resume")}>⇩ &nbsp;View Résumé</button>
-            <button type="button" onClick={() => onOpenApp("contact")}>Let&apos;s Connect &nbsp;→</button>
+            <button
+              className="primary"
+              type="button"
+              onClick={() => onOpenApp("resume")}
+            >
+              <span>⇩</span> View Résumé
+            </button>
+
+            <button type="button" onClick={() => onOpenApp("contact")}>
+              Let&apos;s Connect <span>→</span>
+            </button>
           </div>
 
           <div className="ref-proof">
             <div><strong>5 years</strong><span>Software development</span></div>
-            <div><strong>React Native</strong><span>Primary specialization</span></div>
+            <div><strong>6</strong><span>Portfolio case studies</span></div>
             <div><strong>iOS + Android</strong><span>Cross-platform delivery</span></div>
             <div><strong>UAE</strong><span>Open to opportunities</span></div>
           </div>
 
-          <div className="ref-note" aria-hidden="true">Good<br/>Apps<br/>Brighter<br/>Products</div>
+          <div className="ref-note" aria-hidden="true">
+            <span>Good</span>
+            <span>Apps</span>
+            <span>Brighter</span>
+            <span>Products</span>
+            <b />
+          </div>
         </section>
 
-        <HomeAssistantPanel onOpenApp={onOpenApp} onOpenProject={onOpenProject} />
+        <HomeAssistantPanel
+          onOpenApp={onOpenApp}
+          onOpenProject={onOpenProject}
+        />
       </section>
 
       <section className="ref-bottom">
         <section className="ref-glass ref-projects">
           <header className="ref-card-head">
-            <div><b>▣</b><span><h2>Featured Projects</h2><small>Four projects for a fast technical review</small></span></div>
-            <button type="button" onClick={() => onOpenApp("projects")}>View All →</button>
+            <div className="ref-card-title-wrap">
+              <b className="ref-card-icon">▣</b>
+              <div className="ref-card-title">
+                <h2>Featured Projects</h2>
+                <small>Selected engineering work</small>
+              </div>
+            </div>
+
+            <button type="button" onClick={() => onOpenApp("projects")}>
+              View All <span>→</span>
+            </button>
           </header>
 
           <div className="ref-project-grid">
             {FEATURED.map(project => {
               const image = project.screenshots?.[0];
+
               return (
                 <button
                   className="ref-project"
@@ -79,12 +124,21 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
                   key={project.id}
                   onClick={() => onOpenProject(project.id, project.appId)}
                 >
-                  <div className="ref-project-img">{image ? <img src={image.src} alt="" /> : project.icon}</div>
+                  <div className={`ref-project-img ${project.previewType === "phone" ? "phone" : ""}`}>
+                    {image ? <img src={image.src} alt="" /> : project.icon}
+                    <span className="ref-project-open">↗</span>
+                  </div>
+
                   <div className="ref-project-copy">
                     <em style={{ color: project.color }}>{project.category}</em>
-                    <strong>{project.title}<span>↗</span></strong>
+                    <strong>{project.title}</strong>
                     <p>{project.desc}</p>
-                    <div>{(project.tags || []).slice(0, 3).map(tag => <small key={tag}>{tag}</small>)}</div>
+
+                    <div>
+                      {(project.tags || []).slice(0, 3).map(tag => (
+                        <small key={tag}>{tag}</small>
+                      ))}
+                    </div>
                   </div>
                 </button>
               );
@@ -94,14 +148,25 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
 
         <section className="ref-glass ref-skills">
           <header className="ref-card-head">
-            <div><b>▥</b><span><strong>Skills & Tools</strong><small>Evidence-backed stack</small></span></div>
-            <button type="button" onClick={() => onOpenApp("skills")}>View All →</button>
+            <div className="ref-card-title-wrap">
+              <b className="ref-card-icon">▥</b>
+              <div className="ref-card-title">
+                <h2>Skills &amp; Tools</h2>
+                <small>Evidence-backed stack</small>
+              </div>
+            </div>
+
+            <button type="button" onClick={() => onOpenApp("skills")}>
+              View All <span>→</span>
+            </button>
           </header>
 
           <div className="ref-skill-grid">
             {SKILLS.map(([icon, name, proof]) => (
               <button type="button" key={name} onClick={() => onOpenApp("skills")}>
-                <i>{icon}</i><strong>{name}</strong><small>{proof}</small>
+                <i>{icon}</i>
+                <strong>{name}</strong>
+                <small>{proof}</small>
               </button>
             ))}
           </div>
@@ -109,12 +174,22 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
 
         <section className="ref-glass ref-impact">
           <header className="ref-card-head">
-            <div><b>↗</b><span><strong>Profile</strong><small>Verified portfolio scope</small></span></div>
+            <div className="ref-card-title-wrap">
+              <b className="ref-card-icon">↗</b>
+              <div className="ref-card-title">
+                <h2>Impact</h2>
+                <small>Verified portfolio scope</small>
+              </div>
+            </div>
           </header>
 
           <div className="ref-impact-list">
-            {PROFILE_STATS.map(([value, label]) => (
-              <div key={label}><strong>{value}</strong><span>{label}</span><i><b /></i></div>
+            {IMPACT.map(([value, label], index) => (
+              <div key={label}>
+                <strong>{value}</strong>
+                <span>{label}</span>
+                <i><b style={{ width: `${86 - index * 8}%` }} /></i>
+              </div>
             ))}
           </div>
 
@@ -124,6 +199,18 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
           </div>
         </section>
       </section>
+
+      <blockquote className="ref-footer-quote">
+        “Better software experiences<br />for a brighter tomorrow.”
+        <cite>— Inzamamul Haque</cite>
+      </blockquote>
+
+      <div className="ref-footer-note" aria-hidden="true">
+        <span>Code</span>
+        <span>Create</span>
+        <span>Move Forward</span>
+        <b />
+      </div>
     </main>
   );
 }

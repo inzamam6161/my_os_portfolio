@@ -10,6 +10,7 @@ export default function MenuBar({
   onOpenApp,
 }) {
   const time = useTime();
+
   const formattedTime = new Intl.DateTimeFormat("en-AE", {
     weekday: "short",
     hour: "numeric",
@@ -27,7 +28,15 @@ export default function MenuBar({
   return (
     <header className="ref-menubar" style={{ fontFamily: font.family }}>
       <div className="ref-menu-left">
-        <button className="ref-apple" type="button" onClick={onWallpaper}>●</button>
+        <button
+          className="ref-apple"
+          type="button"
+          onClick={onWallpaper}
+          aria-label="Change wallpaper"
+        >
+          
+        </button>
+
         {nav.map(([label, id]) => (
           <button
             key={label}
@@ -42,13 +51,36 @@ export default function MenuBar({
       </div>
 
       <div className="ref-menu-right">
-        <button className="ref-search" type="button" aria-label="Open Spotlight search" onClick={onSpotlight}>
-          <span>⌕</span><em>Search anything...</em><kbd>⌘ K</kbd>
+        <button
+          className="ref-search"
+          type="button"
+          aria-label="Open Spotlight search"
+          onClick={onSpotlight}
+        >
+          <span>⌕</span>
+          <em>Search anything...</em>
+          <kbd>⌘ K</kbd>
         </button>
-        <button className="ref-menu-icon" type="button" onClick={onNotifications}>
-          ♢{notifCount > 0 && <span>{notifCount}</span>}
+
+        <button
+          className="ref-menu-icon"
+          type="button"
+          aria-label="Notifications"
+          onClick={onNotifications}
+        >
+          ♧
+          {notifCount > 0 && <span>{notifCount}</span>}
         </button>
-        <button className="ref-menu-icon" type="button" onClick={onWallpaper}>☼</button>
+
+        <button
+          className="ref-menu-icon"
+          type="button"
+          aria-label="Appearance"
+          onClick={onWallpaper}
+        >
+          ☼
+        </button>
+
         <time>{formattedTime}</time>
       </div>
     </header>
