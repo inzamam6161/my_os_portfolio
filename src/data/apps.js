@@ -32,13 +32,14 @@ export const WINDOW_TITLES = {
   signaldesk: "SignalDesk",
   nexora: "Nexora AI Lab",
   skills: "Skills",
-  resume: "Resume",
+  resume: "Experience",
   terminal: "Terminal",
   contact: "Contact",
   assistant: "Ask About Me",
 };
 
 export const WIDE_WINDOWS = [
+  "about",
   "mobile",
   "resume",
   "finder",

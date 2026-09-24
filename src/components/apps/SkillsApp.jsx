@@ -1,40 +1,56 @@
-import { SKILL_GROUPS } from "../../data/skills";
-import { colors, font } from "../../styles/tokens";
+import { HOME_SKILLS, SKILL_GROUPS } from "../../data/skills";
+import { font } from "../../styles/tokens";
 
 export default function SkillsApp() {
   return (
-    <div className="evidence-skills" style={{ fontFamily: font.family }}>
-      <div className="evidence-skills-head">
-        <p>ENGINEERING SKILLS</p>
-        <h1>Evidence over percentages.</h1>
-        <span>
-          Skills are grouped by where they are demonstrated rather than arbitrary proficiency scores.
-        </span>
-      </div>
+    <div className="skills-workspace" style={{ fontFamily: font.family }}>
+      <header className="skills-workspace-hero">
+        <div>
+          <p className="portfolio-app-kicker">ENGINEERING CAPABILITIES</p>
+          <h1>Skills &amp; Tools</h1>
+          <p>
+            Evidence-backed capabilities grouped by where they are demonstrated in real portfolio work,
+            rather than arbitrary percentage scores.
+          </p>
+        </div>
+        <div className="skills-workspace-proof">
+          <strong>4</strong><span>Capability areas</span><small>Mobile · Native · Web · Delivery</small>
+        </div>
+      </header>
 
-      <div className="evidence-skill-grid">
-        {SKILL_GROUPS.map(group => (
-          <section key={group.title}>
-            <div className="evidence-skill-heading">
-              <h2>{group.title}</h2>
-              <p>{group.note}</p>
-            </div>
+      <section className="skills-quick-grid" aria-label="Core stack">
+        {HOME_SKILLS.map(([icon, name, proof]) => (
+          <article key={name}>
+            <i>{icon}</i>
+            <div><strong>{name}</strong><span>{proof}</span></div>
+          </article>
+        ))}
+      </section>
 
-            <div>
+      <section className="skills-group-grid">
+        {SKILL_GROUPS.map((group, index) => (
+          <article className="skills-group-card" key={group.title}>
+            <header>
+              <span className="skills-group-icon">{group.icon}</span>
+              <div>
+                <small>0{index + 1}</small>
+                <h2>{group.title}</h2>
+                <p>{group.note}</p>
+              </div>
+            </header>
+            <div className="skills-group-items">
               {group.items.map(([name, proof]) => (
-                <article key={name}>
-                  <strong>{name}</strong>
-                  <span>{proof}</span>
-                </article>
+                <div key={name}><strong>{name}</strong><span>{proof}</span></div>
               ))}
             </div>
-          </section>
+          </article>
         ))}
-      </div>
+      </section>
 
-      <p className="evidence-skill-note" style={{ color: colors.textMuted }}>
-        For role-specific requirements, use Ask About Me to compare the requested stack with portfolio evidence.
-      </p>
+      <footer className="skills-workspace-footer">
+        <span>Portfolio evidence:</span>
+        LifeOS · SignalOps Mobile · PulseBoard · LumaHome · SignalDesk · Nexora AI Lab
+      </footer>
     </div>
   );
 }
