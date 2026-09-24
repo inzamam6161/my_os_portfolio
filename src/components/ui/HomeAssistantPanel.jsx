@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import { getPortfolioAnswer } from "../../data/recruiterKnowledge";
+import Icon from "./Icon";
 
 const DEFAULT = "What makes him a strong fit for a mobile engineering role?";
 
@@ -78,7 +79,7 @@ export default function HomeAssistantPanel({
       onClick={handleContainerClick}
     >
       <header className="ref-assistant-head">
-        <div className="ref-assistant-logo">✦</div>
+        <div className="ref-assistant-logo"><Icon name="sparkles" size={22} /></div>
 
         <div className="ref-assistant-heading">
           <div className="ref-assistant-title">
@@ -99,7 +100,7 @@ export default function HomeAssistantPanel({
           onClick={expanded ? onClose : onExpand}
           aria-label={expanded ? "Close expanded Ask About Me" : "Expand Ask About Me"}
         >
-          {expanded ? "×" : "⤢"}
+          {expanded ? <Icon name="close" size={16} /> : <Icon name="expand" size={16} />}
         </button>
       </header>
 
@@ -109,7 +110,7 @@ export default function HomeAssistantPanel({
 
           {DISPLAY_QUESTIONS.map(question => (
             <button type="button" key={question} onClick={() => ask(question)}>
-              <span>⌕</span>
+              <span><Icon name="search" size={13} /></span>
               <em>{question}</em>
             </button>
           ))}
@@ -119,7 +120,7 @@ export default function HomeAssistantPanel({
           <div className="ref-thread">
             {messages.slice(expanded ? -6 : -2).map(message => (
               <div className={`ref-message ${message.role}`} key={message.id}>
-                {message.role === "assistant" && <i>✦</i>}
+                {message.role === "assistant" && <i><Icon name="sparkles" size={15} /></i>}
 
                 <div>
                   <p>{message.text}</p>
@@ -132,7 +133,7 @@ export default function HomeAssistantPanel({
                           key={`${action.label}-${action.projectId || ""}`}
                           onClick={() => runAction(action)}
                         >
-                          {action.label} →
+                          {action.label} <Icon name="arrowRight" size={11} />
                         </button>
                       ))}
                     </div>
@@ -155,7 +156,7 @@ export default function HomeAssistantPanel({
               placeholder="Ask your question..."
               aria-label="Ask about Inzamamul"
             />
-            <button type="submit" disabled={!input.trim()} aria-label="Send question">➤</button>
+            <button type="submit" disabled={!input.trim()} aria-label="Send question"><Icon name="send" size={16} /></button>
           </form>
 
           <button

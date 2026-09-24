@@ -1,5 +1,24 @@
 import { HOME_SKILLS, SKILL_GROUPS } from "../../data/skills";
 import { font } from "../../styles/tokens";
+import Icon from "../ui/Icon";
+
+const SKILL_ICON_MAP = {
+  RN: "smartphone",
+  TS: "code",
+  JS: "code",
+  SW: "apple",
+  RE: "layers",
+  ND: "server",
+  DB: "database",
+  GH: "git",
+};
+
+const GROUP_ICON_MAP = {
+  Primary: "target",
+  "Native Mobile": "smartphone",
+  "Frontend & Product": "layers",
+  "Data, Backend & Delivery": "server",
+};
 
 export default function SkillsApp() {
   return (
@@ -21,7 +40,7 @@ export default function SkillsApp() {
       <section className="skills-quick-grid" aria-label="Core stack">
         {HOME_SKILLS.map(([icon, name, proof]) => (
           <article key={name}>
-            <i>{icon}</i>
+            <i><Icon name={SKILL_ICON_MAP[icon]} size={18} /></i>
             <div><strong>{name}</strong><span>{proof}</span></div>
           </article>
         ))}
@@ -31,7 +50,7 @@ export default function SkillsApp() {
         {SKILL_GROUPS.map((group, index) => (
           <article className="skills-group-card" key={group.title}>
             <header>
-              <span className="skills-group-icon">{group.icon}</span>
+              <span className="skills-group-icon"><Icon name={GROUP_ICON_MAP[group.title]} size={21} /></span>
               <div>
                 <small>0{index + 1}</small>
                 <h2>{group.title}</h2>

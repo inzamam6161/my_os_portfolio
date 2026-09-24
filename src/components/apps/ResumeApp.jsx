@@ -2,6 +2,7 @@ import { EXPERIENCE, PROFILE } from "../../data/profile";
 import { MOBILE_PROJECTS, WEB_PROJECTS } from "../../data/projects";
 import { SKILL_GROUPS } from "../../data/skills";
 import { font } from "../../styles/tokens";
+import Icon from "../ui/Icon";
 
 const ALL_PROJECTS = [...MOBILE_PROJECTS, ...WEB_PROJECTS];
 const FEATURED = ["lifeos", "signalops-mobile", "pulseboard", "signaldesk-ai"]
@@ -20,23 +21,23 @@ export default function ResumeApp() {
         </div>
 
         <div className="career-actions">
-          <button type="button" onClick={() => window.print()}>Print / Save PDF</button>
-          <a href={`mailto:${PROFILE.email}?subject=Software%20Engineering%20Opportunity`}>Contact me</a>
+          <button type="button" onClick={() => window.print()}><Icon name="download" size={15} /> Print / Save PDF</button>
+          <a href={`mailto:${PROFILE.email}?subject=Software%20Engineering%20Opportunity`}><Icon name="mail" size={15} /> Contact me</a>
         </div>
       </header>
 
       <section className="career-metrics">
-        <article><strong>5 years</strong><span>Software development</span></article>
-        <article><strong>{ALL_PROJECTS.length}</strong><span>Public case studies</span></article>
-        <article><strong>iOS + Android</strong><span>Mobile delivery</span></article>
-        <article><strong>UAE</strong><span>Current location</span></article>
+        <article><Icon name="briefcase" size={18} /><div><strong>5 years</strong><span>Software development</span></div></article>
+        <article><Icon name="layers" size={18} /><div><strong>{ALL_PROJECTS.length}</strong><span>Public case studies</span></div></article>
+        <article><Icon name="smartphone" size={18} /><div><strong>iOS + Android</strong><span>Mobile delivery</span></div></article>
+        <article><Icon name="location" size={18} /><div><strong>UAE</strong><span>Current location</span></div></article>
       </section>
 
       <section className="career-layout">
         <div className="career-main">
           <section className="career-card">
             <div className="career-section-heading">
-              <span>01</span>
+              <span><Icon name="user" size={15} /></span>
               <div><h2>Professional Summary</h2><p>Mobile-first engineering profile</p></div>
             </div>
             <div className="career-summary-copy">
@@ -46,7 +47,7 @@ export default function ResumeApp() {
 
           <section className="career-card">
             <div className="career-section-heading">
-              <span>02</span>
+              <span><Icon name="briefcase" size={15} /></span>
               <div><h2>Experience</h2><p>Professional timeline</p></div>
             </div>
             <div className="career-timeline">
@@ -67,7 +68,7 @@ export default function ResumeApp() {
 
           <section className="career-card">
             <div className="career-section-heading">
-              <span>03</span>
+              <span><Icon name="layers" size={15} /></span>
               <div><h2>Selected Engineering Work</h2><p>Projects that best represent the current portfolio</p></div>
             </div>
             <div className="career-project-grid">
@@ -86,7 +87,7 @@ export default function ResumeApp() {
         <aside className="career-side">
           <section className="career-card">
             <div className="career-section-heading">
-              <span>04</span>
+              <span><Icon name="code" size={15} /></span>
               <div><h2>Core Technologies</h2><p>Evidence-backed stack</p></div>
             </div>
             <div className="career-skill-list">
@@ -101,14 +102,14 @@ export default function ResumeApp() {
 
           <section className="career-card">
             <div className="career-section-heading">
-              <span>05</span>
+              <span><Icon name="link" size={15} /></span>
               <div><h2>Links</h2><p>Recruiter shortcuts</p></div>
             </div>
             <div className="career-link-list">
-              <a href={PROFILE.github} target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
-              <a href={PROFILE.linkedin} target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a>
-              <a href={PROFILE.portfolio} target="_blank" rel="noreferrer">Portfolio <span>↗</span></a>
-              <a href={`mailto:${PROFILE.email}`}>Email <span>→</span></a>
+              <a href={PROFILE.github} target="_blank" rel="noreferrer"><span><Icon name="code" size={14} /> GitHub</span><Icon name="external" size={14} /></a>
+              <a href={PROFILE.linkedin} target="_blank" rel="noreferrer"><span><Icon name="link" size={14} /> LinkedIn</span><Icon name="external" size={14} /></a>
+              <a href={PROFILE.portfolio} target="_blank" rel="noreferrer"><span><Icon name="globe" size={14} /> Portfolio</span><Icon name="external" size={14} /></a>
+              <a href={`mailto:${PROFILE.email}`}><span><Icon name="mail" size={14} /> Email</span><Icon name="arrowRight" size={14} /></a>
             </div>
           </section>
         </aside>

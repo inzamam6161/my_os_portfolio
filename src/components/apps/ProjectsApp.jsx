@@ -1,14 +1,15 @@
 import { useMemo, useState } from "react";
 import { MOBILE_PROJECTS, WEB_PROJECTS } from "../../data/projects";
 import { font } from "../../styles/tokens";
+import Icon from "../ui/Icon";
 
 const ALL_PROJECTS = [...MOBILE_PROJECTS, ...WEB_PROJECTS];
 
 const FILTERS = [
-  ["all", "All", ALL_PROJECTS.length],
-  ["react-native", "React Native", MOBILE_PROJECTS.filter(project => project.category.includes("React Native")).length],
-  ["native-ios", "Native iOS", MOBILE_PROJECTS.filter(project => project.platform === "Native iOS").length],
-  ["web", "Web", WEB_PROJECTS.length],
+  ["all", "All", "layers", ALL_PROJECTS.length],
+  ["react-native", "React Native", "smartphone", MOBILE_PROJECTS.filter(project => project.category.includes("React Native")).length],
+  ["native-ios", "Native iOS", "apple", MOBILE_PROJECTS.filter(project => project.platform === "Native iOS").length],
+  ["web", "Web", "globe", WEB_PROJECTS.length],
 ];
 
 function projectGroup(project) {
@@ -62,14 +63,16 @@ export default function ProjectsApp({ fixedProjectId }) {
       </header>
 
       <nav className="portfolio-project-filters" aria-label="Project filters">
-        {FILTERS.map(([id, label, count]) => (
+        {FILTERS.map(([id, label, icon, count]) => (
           <button
             type="button"
             key={id}
             className={filter === id ? "active" : ""}
             onClick={() => setFilter(id)}
           >
-            {label}<span>{count}</span>
+            <Icon name={icon} size={14} />
+            <span className="portfolio-filter-label">{label}</span>
+            <span>{count}</span>
           </button>
         ))}
       </nav>
@@ -94,7 +97,7 @@ export default function ProjectsApp({ fixedProjectId }) {
               <div className="portfolio-project-tile-copy">
                 <div className="portfolio-project-tile-top">
                   <span style={{ color: project.color }}>{project.category}</span>
-                  <b>↗</b>
+                  <b><Icon name="external" size={15} /></b>
                 </div>
 
                 <h2>{project.title}</h2>
@@ -117,7 +120,7 @@ function ProjectDetail({ project, onBack }) {
     <div className="project-showcase project-showcase--polished" style={{ fontFamily: font.family }}>
       {onBack && (
         <button type="button" className="portfolio-back-button" onClick={onBack}>
-          ← All projects
+          <Icon name="arrowLeft" size={14} /> All projects
         </button>
       )}
 
@@ -137,7 +140,7 @@ function ProjectDetail({ project, onBack }) {
               className="project-showcase__primary"
               style={{ background: project.color, boxShadow: `0 10px 28px ${project.color}33` }}
             >
-              Open Live App ↗
+              <Icon name="external" size={14} /> Open Live App
             </a>
           )}
           <a
@@ -147,7 +150,7 @@ function ProjectDetail({ project, onBack }) {
             className="project-showcase__secondary"
             style={{ borderColor: `${project.color}66`, color: project.color }}
           >
-            GitHub ↗
+            <Icon name="code" size={14} /> GitHub
           </a>
         </div>
       </header>

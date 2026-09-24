@@ -1,5 +1,6 @@
 import { useTime } from "../../hooks/useTime";
 import { font } from "../../styles/tokens";
+import Icon from "./Icon";
 
 export default function MenuBar({
   activeApp,
@@ -68,7 +69,7 @@ export default function MenuBar({
           aria-label="Open Spotlight search"
           onClick={onSpotlight}
         >
-          <span>⌕</span>
+          <Icon name="search" size={14} />
           <em>Search anything...</em>
           <kbd>⌘ K</kbd>
         </button>
@@ -79,7 +80,7 @@ export default function MenuBar({
           aria-label="Notifications"
           onClick={onNotifications}
         >
-          ♧
+          <Icon name="bell" size={16} />
           {notifCount > 0 && <span>{notifCount}</span>}
         </button>
 
@@ -89,7 +90,7 @@ export default function MenuBar({
           aria-label="Appearance"
           onClick={onWallpaper}
         >
-          ☼
+          <Icon name="sun" size={16} />
         </button>
 
         <time>{formattedTime}</time>

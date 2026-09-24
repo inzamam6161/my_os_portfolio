@@ -2,6 +2,7 @@ import { EXPERIENCE, PROFILE } from "../../data/profile";
 import { MOBILE_PROJECTS, WEB_PROJECTS } from "../../data/projects";
 import { HOME_SKILLS } from "../../data/skills";
 import { font } from "../../styles/tokens";
+import Icon from "../ui/Icon";
 
 const ALL_PROJECTS = [...MOBILE_PROJECTS, ...WEB_PROJECTS];
 
@@ -33,27 +34,27 @@ export default function AboutApp() {
           </p>
         </div>
         <div className="about-workspace-status">
-          <span><i /> Open to opportunities</span>
+          <span><i /><Icon name="check" size={14} /> Open to opportunities</span>
           <small>React Native · Mobile · Frontend</small>
         </div>
       </header>
 
       <section className="about-metrics">
-        <article><strong>5 years</strong><span>Software development</span></article>
-        <article><strong>{ALL_PROJECTS.length}</strong><span>Public case studies</span></article>
-        <article><strong>2</strong><span>React Native projects</span></article>
-        <article><strong>2</strong><span>Native iOS projects</span></article>
+        <article><Icon name="briefcase" size={18} /><div><strong>5 years</strong><span>Software development</span></div></article>
+        <article><Icon name="layers" size={18} /><div><strong>{ALL_PROJECTS.length}</strong><span>Public case studies</span></div></article>
+        <article><Icon name="smartphone" size={18} /><div><strong>2</strong><span>React Native projects</span></div></article>
+        <article><Icon name="apple" size={18} /><div><strong>2</strong><span>Native iOS projects</span></div></article>
       </section>
 
       <section className="about-workspace-grid">
         <div className="about-workspace-main">
           <section className="about-card">
-            <header><span>01</span><div><h2>Profile</h2><p>Who I am and what I build</p></div></header>
+            <header><span><Icon name="user" size={15} /></span><div><h2>Profile</h2><p>Who I am and what I build</p></div></header>
             <div className="about-profile-copy">{PROFILE.bio.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div>
           </section>
 
           <section className="about-card">
-            <header><span>02</span><div><h2>Engineering Focus</h2><p>Where the portfolio is strongest</p></div></header>
+            <header><span><Icon name="target" size={15} /></span><div><h2>Engineering Focus</h2><p>Where the portfolio is strongest</p></div></header>
             <div className="about-focus-grid">
               {FOCUS.map(([title, detail]) => (
                 <article key={title}><strong>{title}</strong><p>{detail}</p></article>
@@ -62,7 +63,7 @@ export default function AboutApp() {
           </section>
 
           <section className="about-card">
-            <header><span>03</span><div><h2>How I Work</h2><p>Engineering principles reflected in the projects</p></div></header>
+            <header><span><Icon name="layers" size={15} /></span><div><h2>How I Work</h2><p>Engineering principles reflected in the projects</p></div></header>
             <div className="about-principles">
               {PRINCIPLES.map(([title, detail], index) => (
                 <article key={title}>
@@ -76,7 +77,7 @@ export default function AboutApp() {
 
         <aside className="about-workspace-side">
           <section className="about-card">
-            <header><span>04</span><div><h2>Core Stack</h2><p>Current portfolio evidence</p></div></header>
+            <header><span><Icon name="code" size={15} /></span><div><h2>Core Stack</h2><p>Current portfolio evidence</p></div></header>
             <div className="about-stack-list">
               {HOME_SKILLS.map(([icon, name, proof]) => (
                 <div key={name}><i>{icon}</i><div><strong>{name}</strong><span>{proof}</span></div></div>
@@ -85,7 +86,7 @@ export default function AboutApp() {
           </section>
 
           <section className="about-card">
-            <header><span>05</span><div><h2>Career Snapshot</h2><p>Current professional context</p></div></header>
+            <header><span><Icon name="briefcase" size={15} /></span><div><h2>Career Snapshot</h2><p>Current professional context</p></div></header>
             <div className="about-career-list">
               {EXPERIENCE.map(item => (
                 <article key={`${item.role}-${item.period}`}>
@@ -96,12 +97,12 @@ export default function AboutApp() {
           </section>
 
           <section className="about-card">
-            <header><span>06</span><div><h2>Connect</h2><p>Professional links</p></div></header>
+            <header><span><Icon name="link" size={15} /></span><div><h2>Connect</h2><p>Professional links</p></div></header>
             <div className="about-link-grid">
-              <a href={PROFILE.github} target="_blank" rel="noreferrer">GitHub ↗</a>
-              <a href={PROFILE.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a>
-              <a href={`mailto:${PROFILE.email}`}>Email →</a>
-              <a href={PROFILE.portfolio} target="_blank" rel="noreferrer">Portfolio ↗</a>
+              <a href={PROFILE.github} target="_blank" rel="noreferrer"><Icon name="code" size={14} /> GitHub <Icon name="external" size={13} /></a>
+              <a href={PROFILE.linkedin} target="_blank" rel="noreferrer"><Icon name="link" size={14} /> LinkedIn <Icon name="external" size={13} /></a>
+              <a href={`mailto:${PROFILE.email}`}><Icon name="mail" size={14} /> Email <Icon name="arrowRight" size={13} /></a>
+              <a href={PROFILE.portfolio} target="_blank" rel="noreferrer"><Icon name="globe" size={14} /> Portfolio <Icon name="external" size={13} /></a>
             </div>
           </section>
         </aside>

@@ -3,6 +3,7 @@ import { MOBILE_PROJECTS, WEB_PROJECTS } from "../../data/projects";
 import { PROFILE } from "../../data/profile";
 import { HOME_SKILLS } from "../../data/skills";
 import HomeAssistantPanel from "./HomeAssistantPanel";
+import Icon from "./Icon";
 
 const ALL = [
   ...MOBILE_PROJECTS.map(project => ({ ...project, appId: "mobile" })),
@@ -134,11 +135,11 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
 
           <div className="ref-actions">
             <button className="primary" type="button" onClick={() => openApp("resume")}>
-              <span>⇩</span> View Résumé
+              <Icon name="download" size={15} /> View Résumé
             </button>
 
             <button type="button" onClick={() => openApp("contact")}>
-              Let&apos;s Connect <span>→</span>
+              Let&apos;s Connect <Icon name="arrowRight" size={15} />
             </button>
           </div>
 
@@ -179,7 +180,7 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
         >
           <header className="ref-card-head">
             <div className="ref-card-title-wrap">
-              <b className="ref-card-icon">▣</b>
+              <b className="ref-card-icon"><Icon name="folder" size={16} /></b>
               <div className="ref-card-title">
                 <h2 id="featured-projects-title">Featured Projects</h2>
                 <small>Selected engineering work</small>
@@ -193,11 +194,11 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
                 onClick={() => setExpandedPanel(expandedPanel === "projects" ? null : "projects")}
                 aria-label={expandedPanel === "projects" ? "Close expanded projects" : "Expand Featured Projects"}
               >
-                {expandedPanel === "projects" ? "× Close" : "⤢ Expand"}
+                {expandedPanel === "projects" ? <><Icon name="close" size={12} /> Close</> : <><Icon name="expand" size={12} /> Expand</>}
               </button>
 
               <button type="button" onClick={() => openApp("projects")}>
-                View All <span>→</span>
+                View All <Icon name="arrowRight" size={12} />
               </button>
             </div>
           </header>
@@ -216,7 +217,7 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
                 >
                   <div className={`ref-project-img ${project.previewType === "phone" ? "phone" : ""}`}>
                     {image ? <img src={image.src} alt="" /> : project.icon}
-                    <span className="ref-project-open">↗</span>
+                    <span className="ref-project-open"><Icon name="external" size={12} /></span>
                   </div>
 
                   <div className="ref-project-copy">
@@ -247,7 +248,7 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
         >
           <header className="ref-card-head">
             <div className="ref-card-title-wrap">
-              <b className="ref-card-icon">▥</b>
+              <b className="ref-card-icon"><Icon name="layers" size={16} /></b>
               <div className="ref-card-title">
                 <h2 id="skills-tools-title">Skills &amp; Tools</h2>
                 <small>Evidence-backed stack</small>
@@ -261,11 +262,11 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
                 onClick={() => setExpandedPanel(expandedPanel === "skills" ? null : "skills")}
                 aria-label={expandedPanel === "skills" ? "Close expanded skills" : "Expand Skills and Tools"}
               >
-                {expandedPanel === "skills" ? "× Close" : "⤢ Expand"}
+                {expandedPanel === "skills" ? <><Icon name="close" size={12} /> Close</> : <><Icon name="expand" size={12} /> Expand</>}
               </button>
 
               <button type="button" onClick={() => openApp("skills")}>
-                View All <span>→</span>
+                View All <Icon name="arrowRight" size={12} />
               </button>
             </div>
           </header>
@@ -284,7 +285,7 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
         <section className="ref-glass ref-impact">
           <header className="ref-card-head">
             <div className="ref-card-title-wrap">
-              <b className="ref-card-icon">↗</b>
+              <b className="ref-card-icon"><Icon name="chart" size={16} /></b>
               <div className="ref-card-title">
                 <h2>Impact</h2>
                 <small>Verified portfolio scope</small>
@@ -304,7 +305,7 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
 
           <div className="ref-impact-actions">
             <button type="button" onClick={() => openApp("resume")}>Résumé</button>
-            <button type="button" onClick={() => openApp("contact")}>Contact →</button>
+            <button type="button" onClick={() => openApp("contact")}>Contact <Icon name="arrowRight" size={12} /></button>
           </div>
         </section>
       </section>
