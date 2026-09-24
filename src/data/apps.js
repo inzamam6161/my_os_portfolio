@@ -45,4 +45,6 @@ export const WIDE_WINDOWS = [
   "projects",
   "signaldesk",
   "nexora",
+  "skills",
+  "assistant",
 ];

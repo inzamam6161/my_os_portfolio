@@ -71,6 +71,10 @@ export default function HomeAssistantPanel({
     <section
       className={`ref-glass ref-assistant ${expanded ? "ref-focus-panel ref-focus-assistant" : ""}`}
       aria-label="Ask About Me"
+      role={expanded ? "dialog" : undefined}
+      aria-modal={expanded ? "true" : undefined}
+      aria-labelledby={expanded ? "ask-about-me-title" : undefined}
+      tabIndex={expanded ? -1 : undefined}
       onClick={handleContainerClick}
     >
       <header className="ref-assistant-head">
@@ -78,10 +82,10 @@ export default function HomeAssistantPanel({
 
         <div className="ref-assistant-heading">
           <div className="ref-assistant-title">
-            <h2>Ask About Me</h2>
+            <h2 id="ask-about-me-title">Ask About Me</h2>
             <span>BETA</span>
           </div>
-          <p>Your AI-style portfolio assistant to know more about Inzamamul.</p>
+          <p>Your portfolio assistant for projects, skills, experience and role fit.</p>
         </div>
 
         <div className="ref-assistant-status">

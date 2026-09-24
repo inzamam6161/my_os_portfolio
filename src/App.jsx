@@ -77,6 +77,7 @@ export default function App() {
 
   // ── Keyboard shortcuts ────────────────────────────────────────
   useKeyboard({
+    "cmd+k": () => setSpotlightOpen(v => !v),
     "cmd+f": () => setSpotlightOpen(v => !v),
     "cmd+m": () => setMissionCtrlOpen(v => !v),
     "Escape": closeAllOverlays,
@@ -99,6 +100,15 @@ export default function App() {
     setSelectedProjectId(projectId);
     openApp(appId);
   }, [openApp]);
+
+  const handleHome = useCallback(() => {
+    windows.forEach(windowItem => closeApp(windowItem.id));
+    setSpotlightOpen(false);
+    setNotifOpen(false);
+    setMissionCtrlOpen(false);
+    setWallpaperOpen(false);
+    setContextMenu(null);
+  }, [windows, closeApp]);
 
   // ──────────────────────────────────────────────────────────────
   return (
@@ -127,6 +137,7 @@ export default function App() {
         notifCount={unreadCount}
         onWallpaper={() => setWallpaperOpen(true)}
         onOpenApp={openApp}
+        onHome={handleHome}
       />
 
       {/* ── Layer 3: Recruiter-first homepage ── */}

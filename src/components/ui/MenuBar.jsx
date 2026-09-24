@@ -8,6 +8,7 @@ export default function MenuBar({
   notifCount,
   onWallpaper,
   onOpenApp,
+  onHome,
 }) {
   const time = useTime();
 
@@ -18,7 +19,7 @@ export default function MenuBar({
   }).format(time);
 
   const nav = [
-    ["Portfolio", null],
+    ["Portfolio", "home"],
     ["Projects", "projects"],
     ["Skills", "skills"],
     ["Experience", "resume"],
@@ -42,8 +43,18 @@ export default function MenuBar({
             key={label}
             type="button"
             aria-label={id ? `Open ${label} navigation` : label}
-            className={activeApp === label ? "active" : ""}
-            onClick={() => id && onOpenApp?.(id)}
+            className={
+              (id === "home" && !activeApp) || activeApp === label
+                ? "active"
+                : ""
+            }
+            onClick={() => {
+              if (id === "home") {
+                onHome?.();
+                return;
+              }
+              onOpenApp?.(id);
+            }}
           >
             {label}
           </button>

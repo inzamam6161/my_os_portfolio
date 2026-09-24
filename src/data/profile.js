@@ -26,53 +26,6 @@ export const PROFILE = {
   // badges: ["Open Source Contributor", "Conference Speaker", "4x App Store Featured", "3x Startup Founder"],
 };
 
-export const SKILL_SECTIONS = [
-  {
-    category: "Mobile Development",
-    icon:     "📱",
-    color:    "#5E5CE6",
-    skills: [
-      { name: "React Native",            level: 92 },
-      { name: "Android / Kotlin / Java", level: 82 },
-      { name: "iOS / Swift",             level: 78 },
-      { name: "App Store & Play Store",  level: 88 },
-    ],
-  },
-  {
-    category: "Web & Frontend",
-    icon:     "🌐",
-    color:    "#30D158",
-    skills: [
-      { name: "JavaScript",              level: 92 },
-      { name: "React.js",                level: 86 },
-      { name: "HTML / CSS",              level: 84 },
-      { name: "Responsive UI",           level: 86 },
-    ],
-  },
-  {
-    category: "Backend & Systems",
-    icon:     "⚙️",
-    color:    "#FF9F0A",
-    skills: [
-      { name: "Node.js",                 level: 80 },
-      { name: "REST API Integration",    level: 90 },
-      { name: "MongoDB",                 level: 74 },
-      { name: "Firebase",                level: 78 },
-    ],
-  },
-  {
-    category: "Cloud & DevOps",
-    icon:     "☁️",
-    color:    "#FF6B6B",
-    skills: [
-      { name: "Git / GitHub",             level: 86 },
-      { name: "CI/CD",                    level: 72 },
-      { name: "App Deployment",           level: 88 },
-      { name: "Technical Support",        level: 82 },
-    ],
-  },
-];
-
 export const EXPERIENCE = [
   { role: "Admin / Helpdesk Operator", company: "Etihad International Hospitality", period: "Sep 2025 — Present", desc: "Provide day-to-day administrative and technical support while continuing professional software development and upskilling.", dot: "#30D158" },
   { role: "Software Developer — Mobile & Web", company: "India", period: "5 years", desc: "Built and maintained cross-platform mobile and web applications across React Native, React, Android and iOS; integrated APIs and persistent state; supported testing, deployment and app-store release workflows.", dot: "#5E5CE6" },

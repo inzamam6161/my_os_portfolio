@@ -8,13 +8,14 @@ A recruiter-first, macOS-inspired engineering portfolio focused on React Native,
 
 - Glassmorphism macOS-inspired desktop experience
 - Recruiter-first homepage with four flagship case studies
-- Embedded **Ask About Me** assistant grounded in portfolio data
+- Embedded **Ask About Me** portfolio assistant grounded in portfolio data
 - Full recruiter chat for experience, projects, skills and role-fit questions
 - Evidence-based skills instead of arbitrary proficiency percentages
+- Expandable focus views for Ask About Me, Projects and Skills
 - Printable résumé view with browser **Save as PDF**
 - Projects, mobile work, experience, contact, Spotlight and Mission Control
 - Responsive desktop / tablet / mobile layouts
-- Centralized project/profile data
+- Centralized project, profile and skill-evidence data
 
 ## Featured work
 

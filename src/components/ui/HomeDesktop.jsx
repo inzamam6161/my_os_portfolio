@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { MOBILE_PROJECTS, WEB_PROJECTS } from "../../data/projects";
 import { PROFILE } from "../../data/profile";
+import { HOME_SKILLS } from "../../data/skills";
 import HomeAssistantPanel from "./HomeAssistantPanel";
 
 const ALL = [
@@ -20,17 +21,6 @@ const FEATURED = ["lifeos", "signalops-mobile", "pulseboard", "signaldesk-ai"]
   .map(id => ALL.find(project => project.id === id))
   .filter(Boolean);
 
-const SKILLS = [
-  ["RN", "React Native", "LifeOS · SignalOps"],
-  ["TS", "TypeScript", "Mobile + Web"],
-  ["JS", "JavaScript", "React ecosystem"],
-  ["SW", "SwiftUI", "PulseBoard · LumaHome"],
-  ["RE", "React", "SignalDesk · Nexora"],
-  ["ND", "Node.js", "API integration"],
-  ["DB", "SQLite", "Offline-first"],
-  ["GH", "GitHub", "Tests · CI"],
-];
-
 const IMPACT = [
   ["6", "Case studies"],
   ["2", "React Native"],
@@ -43,17 +33,59 @@ const isInteractiveTarget = target =>
 
 export default function HomeDesktop({ onOpenProject, onOpenApp }) {
   const [expandedPanel, setExpandedPanel] = useState(null);
+  const previousFocusRef = useState(() => ({ current: null }))[0];
 
   useEffect(() => {
     if (!expandedPanel) return undefined;
 
+    previousFocusRef.current = document.activeElement;
+
+    const panel = document.querySelector(".ref-focus-panel");
+    const focusableSelector =
+      'button:not([disabled]), a[href], input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    requestAnimationFrame(() => {
+      const firstFocusable = panel?.querySelector(focusableSelector);
+      (firstFocusable || panel)?.focus?.();
+    });
+
     const handleKey = event => {
-      if (event.key === "Escape") setExpandedPanel(null);
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setExpandedPanel(null);
+        return;
+      }
+
+      if (event.key !== "Tab" || !panel) return;
+
+      const focusable = [...panel.querySelectorAll(focusableSelector)]
+        .filter(element => !element.hasAttribute("disabled"));
+
+      if (!focusable.length) {
+        event.preventDefault();
+        panel.focus();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
 
     window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
-  }, [expandedPanel]);
+
+    return () => {
+      window.removeEventListener("keydown", handleKey);
+      requestAnimationFrame(() => previousFocusRef.current?.focus?.());
+    };
+  }, [expandedPanel, previousFocusRef]);
 
   const expandFromContainer = (panel, event) => {
     if (expandedPanel || isInteractiveTarget(event.target)) return;
@@ -140,12 +172,16 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
           className={`ref-glass ref-projects ${expandedPanel === "projects" ? "ref-focus-panel ref-focus-projects" : ""}`}
           onClick={event => expandFromContainer("projects", event)}
           aria-label="Featured Projects panel"
+          role={expandedPanel === "projects" ? "dialog" : undefined}
+          aria-modal={expandedPanel === "projects" ? "true" : undefined}
+          aria-labelledby={expandedPanel === "projects" ? "featured-projects-title" : undefined}
+          tabIndex={expandedPanel === "projects" ? -1 : undefined}
         >
           <header className="ref-card-head">
             <div className="ref-card-title-wrap">
               <b className="ref-card-icon">▣</b>
               <div className="ref-card-title">
-                <h2>Featured Projects</h2>
+                <h2 id="featured-projects-title">Featured Projects</h2>
                 <small>Selected engineering work</small>
               </div>
             </div>
@@ -204,12 +240,16 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
           className={`ref-glass ref-skills ${expandedPanel === "skills" ? "ref-focus-panel ref-focus-skills" : ""}`}
           onClick={event => expandFromContainer("skills", event)}
           aria-label="Skills and Tools panel"
+          role={expandedPanel === "skills" ? "dialog" : undefined}
+          aria-modal={expandedPanel === "skills" ? "true" : undefined}
+          aria-labelledby={expandedPanel === "skills" ? "skills-tools-title" : undefined}
+          tabIndex={expandedPanel === "skills" ? -1 : undefined}
         >
           <header className="ref-card-head">
             <div className="ref-card-title-wrap">
               <b className="ref-card-icon">▥</b>
               <div className="ref-card-title">
-                <h2>Skills &amp; Tools</h2>
+                <h2 id="skills-tools-title">Skills &amp; Tools</h2>
                 <small>Evidence-backed stack</small>
               </div>
             </div>
@@ -231,7 +271,7 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
           </header>
 
           <div className="ref-skill-grid">
-            {SKILLS.map(([icon, name, proof]) => (
+            {HOME_SKILLS.map(([icon, name, proof]) => (
               <button type="button" key={name} onClick={() => openApp("skills")}>
                 <i>{icon}</i>
                 <strong>{name}</strong>
