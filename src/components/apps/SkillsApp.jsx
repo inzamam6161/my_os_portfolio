@@ -67,8 +67,17 @@ export default function SkillsApp() {
       </section>
 
       <footer className="skills-workspace-footer">
-        <span>Portfolio evidence:</span>
-        LifeOS · SignalOps Mobile · PulseBoard · LumaHome · SignalDesk · Nexora AI Lab
+        <div>
+          <span>Portfolio evidence:</span>
+          LifeOS · SignalOps Mobile · PulseBoard · LumaHome · SignalDesk · Nexora AI Lab
+        </div>
+        <a
+          href="https://github.com/inzamam6161/mobile-engineering-labs"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Engineering Labs <Icon name="external" size={12} />
+        </a>
       </footer>
     </div>
   );

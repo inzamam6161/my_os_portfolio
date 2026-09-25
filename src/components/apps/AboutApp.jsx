@@ -96,6 +96,21 @@ export default function AboutApp() {
             </div>
           </section>
 
+          <section className="about-card about-labs-card">
+            <header><span><Icon name="code" size={15} /></span><div><h2>Engineering Labs</h2><p>Focused technical depth</p></div></header>
+            <p className="about-labs-copy">
+              Performance, rendering, state normalization, testing, concurrency, caching and offline synchronization experiments that complement the product case studies.
+            </p>
+            <a
+              className="about-labs-link"
+              href="https://github.com/inzamam6161/mobile-engineering-labs"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Review Mobile Engineering Labs <Icon name="external" size={13} />
+            </a>
+          </section>
+
           <section className="about-card">
             <header><span><Icon name="link" size={15} /></span><div><h2>Connect</h2><p>Professional links</p></div></header>
             <div className="about-link-grid">

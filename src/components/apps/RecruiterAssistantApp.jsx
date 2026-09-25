@@ -85,6 +85,11 @@ export default function RecruiterAssistantApp({
   };
 
   const handleAction = action => {
+    if (action.href) {
+      window.open(action.href, "_blank", "noopener,noreferrer");
+      return;
+    }
+
     if (action.projectId && action.appId) {
       if (onOpenProject) {
         onOpenProject(action.projectId, action.appId);
@@ -196,7 +201,7 @@ export default function RecruiterAssistantApp({
                 <div className="recruiter-message-actions">
                   {message.actions.map(action => (
                     <button
-                      key={`${action.label}-${action.appId}-${action.projectId || ""}`}
+                      key={`${action.label}-${action.appId || ""}-${action.projectId || ""}-${action.href || ""}`}
                       type="button"
                       onClick={() => handleAction(action)}
                     >

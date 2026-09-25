@@ -54,6 +54,11 @@ export default function HomeAssistantPanel({
   };
 
   const runAction = action => {
+    if (action.href) {
+      window.open(action.href, "_blank", "noopener,noreferrer");
+      return;
+    }
+
     if (action.projectId && action.appId) {
       onOpenProject?.(action.projectId, action.appId);
       return;
@@ -130,7 +135,7 @@ export default function HomeAssistantPanel({
                       {message.actions.slice(0, 3).map(action => (
                         <button
                           type="button"
-                          key={`${action.label}-${action.projectId || ""}`}
+                          key={`${action.label}-${action.projectId || ""}-${action.href || ""}`}
                           onClick={() => runAction(action)}
                         >
                           {action.label} <Icon name="arrowRight" size={11} />

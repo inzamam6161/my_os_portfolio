@@ -9,6 +9,7 @@ export const ASSISTANT_SUGGESTIONS = [
   "Which projects should I review first?",
   "What native iOS work has he done?",
   "How does he approach offline-first apps?",
+  "What engineering depth does he show beyond product UI?",
   "Is he a good fit for my role?",
 ];
 
@@ -20,6 +21,7 @@ const pulseboard = byId("pulseboard");
 const lumahome = byId("lumahome");
 const signaldesk = byId("signaldesk-ai");
 const nexora = byId("nexora-ai-lab");
+const ENGINEERING_LABS_URL = "https://github.com/inzamam6161/mobile-engineering-labs";
 
 const actionFor = (project, label) =>
   project
@@ -214,6 +216,19 @@ export function getPortfolioAnswer(question, { lastTopic } = {}) {
         "LifeOS is the clearest offline-first case study: SQLite-backed source of truth, repository boundaries, migrations, SQLCipher, local domain workflows, deterministic assistant commands and optional on-device GGUF / local retrieval foundations.",
       sources: ["LifeOS"],
       actions: clean([actionFor(lifeos)]),
+    };
+  }
+
+  if (contains(q, ["engineering labs", "performance", "rendering", "state normalization", "concurrency", "caching", "architecture trade-off", "architecture tradeoff"])) {
+    return {
+      topic: "engineering-labs",
+      text:
+        "Mobile Engineering Labs is the supplemental technical-depth repository. It documents focused experiments around React Native performance, rendering, state normalization, testing, concurrency, caching and offline synchronization. It complements the six product case studies rather than replacing them.",
+      sources: ["Mobile Engineering Labs", "Skills"],
+      actions: [
+        { label: "Open Engineering Labs", href: ENGINEERING_LABS_URL },
+        { label: "Open Skills", appId: "skills" },
+      ],
     };
   }
 
