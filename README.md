@@ -2,8 +2,7 @@
 
 [![Portfolio quality](https://github.com/inzamam6161/my_os_portfolio/actions/workflows/portfolio.yml/badge.svg)](https://github.com/inzamam6161/my_os_portfolio/actions/workflows/portfolio.yml)
 
-The portfolio is designed for Software Engineer, React Native, mobile, native iOS and frontend engineering opportunities in the UAE and international markets. It highlights cross-platform and native development, software architecture, reliable delivery, and ongoing interest in AI integration. Project claims and recruiter-assistant answers are grounded in evidence available in the portfolio and linked repositories rather than unsupported proficiency scores or production claims.
-**Live portfolio:** https://inzamam-dev.vercel.app/
+A recruiter-first, macOS-inspired engineering portfolio focused on React Native, mobile architecture, native iOS and modern frontend work.
 
 ## Recruiter tour
 
@@ -81,4 +80,4 @@ npm start
 
 ## Recruiter positioning
 
-The portfolio is intentionally optimized for React Native, mobile and frontend engineering opportunities in the UAE. Project claims and recruiter-assistant answers are scoped to evidence available in the portfolio and linked repositories rather than unsupported proficiency scores or production claims.
+The portfolio is designed for Software Engineer, React Native, mobile, native iOS and frontend engineering opportunities in the UAE and international markets. It highlights cross-platform and native development, software architecture, reliable delivery, and ongoing interest in AI integration. Project claims and recruiter-assistant answers are grounded in evidence available in the portfolio and linked repositories rather than unsupported proficiency scores or production claims.
