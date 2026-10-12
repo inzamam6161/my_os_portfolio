@@ -1,9 +1,8 @@
-# Inzamamul Haque — React Native Engineer | Mobile & Frontend
+# Inzamamul Haque — Software Engineer | React Native, iOS & Android | React, TypeScript & Node.js | UAE
 
 [![Portfolio quality](https://github.com/inzamam6161/my_os_portfolio/actions/workflows/portfolio.yml/badge.svg)](https://github.com/inzamam6161/my_os_portfolio/actions/workflows/portfolio.yml)
 
-A recruiter-first, macOS-inspired engineering portfolio focused on React Native, mobile architecture, native iOS and modern frontend work.
-
+The portfolio is designed for Software Engineer, React Native, mobile, native iOS and frontend engineering opportunities in the UAE and international markets. It highlights cross-platform and native development, software architecture, reliable delivery, and ongoing interest in AI integration. Project claims and recruiter-assistant answers are grounded in evidence available in the portfolio and linked repositories rather than unsupported proficiency scores or production claims.
 **Live portfolio:** https://inzamam-dev.vercel.app/
 
 ## Recruiter tour
