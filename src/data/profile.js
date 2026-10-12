@@ -14,7 +14,6 @@ export const PROFILE = {
   title:    "Software Engineer | React Native, iOS & Android | React, TypeScript & Node.js | UAE",
   location: "Al Ain, UAE",
   email:    "inzamam6161@gmail.com",
-  phone:    "+971 52 144 1657",
   portfolio:"https://inzamam-dev.vercel.app/",
   github:   "https://github.com/inzamam6161",
   linkedin: "https://www.linkedin.com/in/inzamamul-haque-dev",

@@ -25,7 +25,6 @@ export default function ContactApp() {
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))", gap: 10, marginTop: 15 }}>
         <ContactCard label="Email" value={PROFILE.email} symbol="@" href={`mailto:${PROFILE.email}`} />
-        <ContactCard label="Phone" value={PROFILE.phone} symbol="☎" href={`tel:${PROFILE.phone.replace(/\s/g, "")}`} />
         <ContactCard label="LinkedIn" value="Connect professionally" symbol="in" href={PROFILE.linkedin} />
         <ContactCard label="GitHub" value="View public projects" symbol="⌘" href={PROFILE.github} />
       </div>
