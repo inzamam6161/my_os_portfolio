@@ -11,7 +11,7 @@
 import { APPS } from "./apps";
 export const PROFILE = {
   name:     "Inzamamul Haque",
-  title:    "React Native Engineer | Mobile & Frontend",
+  title:    "Software Engineer | React Native, iOS & Android | React, TypeScript & Node.js | UAE",
   location: "Al Ain, UAE",
   email:    "inzamam6161@gmail.com",
   phone:    "+971 52 144 1657",

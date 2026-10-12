@@ -120,7 +120,7 @@ export default function HomeDesktop({ onOpenProject, onOpenApp }) {
           <h1>{PROFILE.name}</h1>
 
           <div className="ref-role">
-            <span>React Native Engineer</span>
+            <span>Software Engineer</span>
             <i>•</i>
             <span>Mobile Engineer</span>
             <i>•</i>
