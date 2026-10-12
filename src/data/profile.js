@@ -17,7 +17,7 @@ export const PROFILE = {
   phone:    "+971 52 144 1657",
   portfolio:"https://inzamam-dev.vercel.app/",
   github:   "https://github.com/inzamam6161",
-  linkedin: "https://www.linkedin.com/in/inzamamul-haque-099207113/",
+  linkedin: "https://www.linkedin.com/in/inzamamul-haque-dev",
   bio: [
     "React Native engineer with 5 years of software development experience across mobile and web applications, with the strongest focus on React Native, JavaScript / TypeScript, React, mobile architecture and product delivery.",
     "Experienced across the complete application lifecycle—from UI development and API integration to testing, deployment, and publishing on Google Play and the Apple App Store. Based in the UAE and open to React Native, mobile, and frontend opportunities."
