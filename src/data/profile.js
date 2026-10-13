@@ -181,7 +181,7 @@ export const NOTIFICATIONS_INIT = [
 export const TERMINAL_LINES = [
   { t: 0, text: "Welcome to Inzamamul Haque's developer portfolio", color: "rgba(255,255,255,0.4)" },
   { t: 300, text: "inzamam@portfolio ~ % whoami", color: "#30D158" },
-  { t: 600, text: "React Native engineer · mobile & frontend", color: "rgba(255,255,255,0.85)" },
+  { t: 600, text: "Software Engineer · mobile & web", color: "rgba(255,255,255,0.85)" },
   { t: 900, text: "inzamam@portfolio ~ % cat skills.txt", color: "#30D158" },
   { t: 1200, text: "React Native · JavaScript · React.js", color: "#5E5CE6" },
   { t: 1450, text: "Android · Kotlin/Java · iOS · Swift", color: "#5E5CE6" },
