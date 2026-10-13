@@ -20,7 +20,7 @@ export default function ContactApp() {
       <div style={{ padding: 20, border: colors.border, borderRadius: 14, background: "linear-gradient(145deg, rgba(94,92,230,.17), rgba(100,210,255,.05))" }}>
         <p style={{ color: colors.cyan, fontSize: 10, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase" }}>Open to opportunities</p>
         <h1 style={{ margin: "8px 0 9px", fontSize: 24 }}>Let’s build something useful.</h1>
-        <p style={{ maxWidth: 520, color: colors.textSecondary, fontSize: 12, lineHeight: 1.7 }}>For React Native, mobile, and frontend engineering opportunities in the UAE, email me directly or connect on LinkedIn.</p>
+        <p style={{ maxWidth: 520, color: colors.textSecondary, fontSize: 12, lineHeight: 1.7 }}>For Software Engineer, mobile, native iOS/Android, and frontend opportunities in the UAE and internationally, email me directly or connect on LinkedIn.</p>
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))", gap: 10, marginTop: 15 }}>

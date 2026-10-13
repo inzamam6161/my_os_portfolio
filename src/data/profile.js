@@ -18,8 +18,8 @@ export const PROFILE = {
   github:   "https://github.com/inzamam6161",
   linkedin: "https://www.linkedin.com/in/inzamamul-haque-dev",
   bio: [
-    "React Native engineer with 5 years of software development experience across mobile and web applications, with the strongest focus on React Native, JavaScript / TypeScript, React, mobile architecture and product delivery.",
-    "Experienced across the complete application lifecycle—from UI development and API integration to testing, deployment, and publishing on Google Play and the Apple App Store. Based in the UAE and open to React Native, mobile, and frontend opportunities."
+       "Software Engineer with 5+ years of professional experience building mobile and web applications across React Native, native iOS, native Android, React, and Node.js.",
+      "Experienced across the application lifecycle, from UI development and API integration to testing, deployment, and release. Based in Al Ain, UAE, and open to Software Engineer, mobile, native iOS/Android, and frontend opportunities in the UAE and internationally. Currently exploring practical AI integration in software products."
   ],
   badges: []
   // badges: ["Open Source Contributor", "Conference Speaker", "4x App Store Featured", "3x Startup Founder"],
